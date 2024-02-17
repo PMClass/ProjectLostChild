@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     private Vector2 moveInput;
     private Rigidbody2D rb;
-
+    private float grav;
 
     // Start is called before the first frame update
 
@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     {
         pInput = new PlayerInputActions();
         rb = GetComponent<Rigidbody2D>();
+
+        grav = Physics2D.gravity.y / -6;
     }
 
     private void OnEnable()
@@ -45,9 +47,9 @@ public class PlayerController : MonoBehaviour
             moveInput = pInput.Player.Move.ReadValue<Vector2>();
 
         if (pInput.Player.Jump.triggered && isGrounded)
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        if (!pInput.Player.Jump.IsPressed() && rb.velocity.y > 0)
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.AddForce(Vector2.up * jumpForce * grav, ForceMode2D.Impulse);
+        //if (!pInput.Player.Jump.IsPressed() && rb.velocity.y > 0)
+        //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
     }
 
     private void FixedUpdate()

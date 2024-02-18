@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f27e9f745e97dbf40a59b74f7b0913ee
+guid: 5fd318384d8c0064cbe0e9e8278a002d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,4 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: 
   wrapperClassName: 
-  wrapperCodeNamespace: 
+  wrapperCodeNamespace: TarodevController

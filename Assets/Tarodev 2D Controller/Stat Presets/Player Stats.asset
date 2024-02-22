@@ -19,8 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 776
   CharacterSize:
-    Height: 2
-    Width: 1
+    Height: 1.9
+    Width: 0.9
     StepHeight: 0.6
     CrouchHeight: 0.8
     RayInset: 0.1
@@ -29,14 +29,14 @@ MonoBehaviour:
   PositionCorrectionMode: 0
   BaseSpeed: 5
   Acceleration: 100
-  Friction: 70
+  Friction: 90
   AirFrictionMultiplier: 0.5
   DirectionCorrectionMultiplier: 3
   MaxWalkableSlope: 46
   ExtraConstantGravity: 40
   BufferedJumpTime: 0.15
   CoyoteTime: 0.15
-  JumpPower: 20
+  JumpPower: 15
   EndJumpEarlyExtraForceMultiplier: 3
   MaxAirJumps: 0
   AllowDash: 0

@@ -638,8 +638,28 @@ namespace TarodevController
         {
             if (!Stats.AllowCrouching) return;
 
+            // Toggle crouching after crouch button is pressed and released.
+            // Original behavior: crouch while crouch button is held.
+
+            /*
+             * if
+             * not crouching
+             * and crouch button pressed
+             * and character grounded
+             * then try crouching
+             * 
+             * else
+             * 
+             * if crouching
+             * and either
+             * crouch button pressed (original: crouch button not pressed)
+             * or character not grounded
+             * then try uncrouching
+             */
+
             if (!Crouching && CrouchPressed && _grounded) ToggleCrouching(true);
-            else if (Crouching && (!CrouchPressed || !_grounded)) ToggleCrouching(false);
+            else if (Crouching && (CrouchPressed || !_grounded)) ToggleCrouching(false);
+
         }
 
         private void ToggleCrouching(bool shouldCrouch)

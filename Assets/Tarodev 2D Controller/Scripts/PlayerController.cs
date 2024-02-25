@@ -7,6 +7,8 @@ namespace TarodevController
     [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(CapsuleCollider2D))]
     public class PlayerController : MonoBehaviour, IPlayerController, IPhysicsObject
     {
+       
+        
         #region References
 
         private BoxCollider2D _collider;
@@ -94,7 +96,7 @@ namespace TarodevController
         {
             _delta = delta;
             _time = time;
-
+           
             GatherInput();
         }
 

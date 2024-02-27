@@ -63,15 +63,15 @@ MonoBehaviour:
   WallDetectorRange: 0.15
   AllowLadders: 1
   LadderCooldownTime: 0.15
-  AutoAttachToLadders: 1
+  AutoAttachToLadders: 0
   SnapToLadders: 1
   LadderLayer:
     serializedVersion: 2
     m_Bits: 512
   LadderSnapTime: 0.05
-  LadderPopForce: 5
-  LadderClimbSpeed: 8
-  LadderSlideSpeed: 12
-  LadderShimmySpeedMultiplier: 0.1
+  LadderPopForce: 0
+  LadderClimbSpeed: 4
+  LadderSlideSpeed: 4
+  LadderShimmySpeedMultiplier: 0.05
   NegativeYVelocityNegation: 0.2
   ExternalVelocityDecayRate: 0.5

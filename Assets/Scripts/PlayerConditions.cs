@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerConditions : MonoBehaviour
 {
+    [field: SerializeField] public bool PlayerHurt { get; private set; } = false;
+    
     // Start is called before the first frame update
     void Start()
     {

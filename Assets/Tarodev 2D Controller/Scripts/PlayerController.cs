@@ -7,6 +7,8 @@ namespace TarodevController
     [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(CapsuleCollider2D))]
     public class PlayerController : MonoBehaviour, IPlayerController, IPhysicsObject
     {
+       
+        
         #region References
 
         private BoxCollider2D _collider;
@@ -14,6 +16,7 @@ namespace TarodevController
         private ConstantForce2D _constantForce;
         private Rigidbody2D _rb;
         private PlayerInput _playerInput;
+        private PlayerConditions _playerC;
 
         #endregion
 
@@ -94,7 +97,7 @@ namespace TarodevController
         {
             _delta = delta;
             _time = time;
-
+           
             GatherInput();
         }
 
@@ -140,6 +143,8 @@ namespace TarodevController
         {
             _character = Stats.CharacterSize.GenerateCharacterSize();
             _cachedQueryMode = Physics2D.queriesStartInColliders;
+
+            _playerC = GetComponent<PlayerConditions>();
 
             _wallDetectionBounds = new Bounds(
                 new Vector3(0, _character.Height / 2),
@@ -628,6 +633,8 @@ namespace TarodevController
         #region Crouching
 
         private float _timeStartedCrouching;
+
+        //private bool CrouchDelay => _time - _timeStartedCrouching > .5f;
         private bool CrouchPressed => _frameInput.Move.y < -Stats.VerticalDeadZoneThreshold;
 
         private bool CanStand => IsStandingPosClear(_rb.position + _character.StandingColliderCenter);
@@ -638,8 +645,8 @@ namespace TarodevController
         {
             if (!Stats.AllowCrouching) return;
 
-            // Toggle crouching after crouch button is pressed and released.
-            // Original behavior: crouch while crouch button is held.
+            //if (!Crouching && CrouchPressed && _grounded) ToggleCrouching(true);
+            //else if (Crouching && (!CrouchPressed || !_grounded)) ToggleCrouching(false);
 
             /*
              * if
@@ -657,8 +664,8 @@ namespace TarodevController
              * then try uncrouching
              */
 
-            if (!Crouching && CrouchPressed && _grounded) ToggleCrouching(true);
-            else if (Crouching && (CrouchPressed || !_grounded)) ToggleCrouching(false);
+            if (!Crouching && (CrouchPressed || _playerC.PlayerHurt) && _grounded) ToggleCrouching(true);
+            else if (Crouching && !_grounded) ToggleCrouching(false);
 
         }
 

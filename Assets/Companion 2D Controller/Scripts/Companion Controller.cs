@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using TarodevController;
 using TreeEditor;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class CompanionController : MonoBehaviour
 {
+
     private PlayerInputActions _actions;
     private InputAction _move;
 
     public Rigidbody2D rb;
     public CircleCollider2D circleCollider;
 
-    //public GameObject companion;
     public GameObject player;
+   
+    [SerializeField] private float speed = 1.0f;
     
- 
-    public float rotationSpeed = 5.0f;
-    [SerializeField] public float speed = 1.0f;
-    public Transform myTransform;
     private void Awake()
     {
         _actions = new PlayerInputActions();
@@ -33,20 +32,8 @@ public class CompanionController : MonoBehaviour
 
     private void OnDisable() => _actions.Disable();
 
-
-    
-        
-    
-
-
-
     private void Start()
     {
-     
-       
-        //myTransform = player.transform;
-
-       Cursor.lockState = CursorLockMode.Confined;
        
     }
 
@@ -63,7 +50,7 @@ public class CompanionController : MonoBehaviour
 
         // FollowPlayer();
         ControlCompanion();
-        
+   
         
     }
 
@@ -76,10 +63,9 @@ public class CompanionController : MonoBehaviour
 
    private void ControlCompanion()
     {
-        Vector2 inputValue = _move.ReadValue<Vector2>().normalized;
-        Vector3 input3 = new Vector3(inputValue.x, inputValue.y, 0f);
-        transform.position += input3;
-        rb.AddForce(inputValue, ForceMode2D.Force);
+        Vector2 inputValue = _move.ReadValue<Vector2>();
+        inputValue.Normalize();
+        rb.velocity = new Vector2(inputValue.x * speed, inputValue.y * speed);
     }
 
 

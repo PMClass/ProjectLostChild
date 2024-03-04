@@ -10,28 +10,39 @@ using UnityEngine.InputSystem;
 public class CompanionController : MonoBehaviour
 {
 
-    private PlayerInputActions _actions;
+    private PlayerInputActions _actions, _switch;
     private InputAction _move;
 
     public Rigidbody2D rb;
     public CircleCollider2D circleCollider;
 
     public GameObject player;
-   
+    public Transform followPoint;
     [SerializeField] private float speed = 1.0f;
-    
+    public float hoverSpeed = 2.0f;
+    [SerializeField] private bool isControlled;
     private void Awake()
     {
+        isControlled = false;
         _actions = new PlayerInputActions();
         _move = _actions.Player.Move;
 
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnEnable() => _actions.Enable();
+    private void OnEnable()
+    {
+        _actions.Enable();
+        _switch.Enable();
+    }  
 
-    private void OnDisable() => _actions.Disable();
+    private void OnDisable()
+    {
+        _actions.Disable();
+        _switch.Disable();
+    }  
 
+    
     private void Start()
     {
        
@@ -48,7 +59,24 @@ public class CompanionController : MonoBehaviour
         // Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         // this.gameObject.GetComponent<Rigidbody2D>().MovePosition(mousePos);
 
-        // FollowPlayer();
+        /* if (_switch.Player.Switch.IsPressed())
+         {
+             isControlled = true;
+         }
+         else
+         {
+             isControlled = false;
+         }
+
+         if (!isControlled)
+         {
+             FollowPlayer();
+         }
+         else
+         {
+             ControlCompanion();
+         } */
+
         ControlCompanion();
    
         
@@ -56,9 +84,8 @@ public class CompanionController : MonoBehaviour
 
     private void FollowPlayer()
     {
-        Vector3 offset = player.transform.position;
-        offset += new Vector3(3, 3, 0);
-        transform.position = Vector2.MoveTowards(transform.position, offset, speed);
+        
+        transform.position = Vector2.MoveTowards(transform.position, followPoint.position, hoverSpeed);
     }
 
    private void ControlCompanion()
@@ -68,5 +95,17 @@ public class CompanionController : MonoBehaviour
         rb.velocity = new Vector2(inputValue.x * speed, inputValue.y * speed);
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("MoveablePlatform"))
+        {
+            Debug.Log("The collision is " + collision.gameObject);
+        }
+        else
+        {
+            Debug.Log("Nothing is changing");
+        }
+    } 
 
 }

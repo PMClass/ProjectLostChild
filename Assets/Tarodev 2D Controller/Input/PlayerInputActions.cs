@@ -73,6 +73,15 @@ namespace TarodevController
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b128080-3fc9-41cc-b025-3579a44af814"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,6 +326,17 @@ namespace TarodevController
                     ""action"": ""ExampleAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c813c53-a2b5-48e4-9516-de7ace9b293e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -391,6 +411,7 @@ namespace TarodevController
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
             m_Player_ExampleAction = m_Player.FindAction("ExampleAction", throwIfNotFound: true);
+            m_Player_Switch = m_Player.FindAction("Switch", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -457,6 +478,7 @@ namespace TarodevController
         private readonly InputAction m_Player_Dash;
         private readonly InputAction m_Player_Attack;
         private readonly InputAction m_Player_ExampleAction;
+        private readonly InputAction m_Player_Switch;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -466,6 +488,7 @@ namespace TarodevController
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
             public InputAction @ExampleAction => m_Wrapper.m_Player_ExampleAction;
+            public InputAction @Switch => m_Wrapper.m_Player_Switch;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -490,6 +513,9 @@ namespace TarodevController
                 @ExampleAction.started += instance.OnExampleAction;
                 @ExampleAction.performed += instance.OnExampleAction;
                 @ExampleAction.canceled += instance.OnExampleAction;
+                @Switch.started += instance.OnSwitch;
+                @Switch.performed += instance.OnSwitch;
+                @Switch.canceled += instance.OnSwitch;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -509,6 +535,9 @@ namespace TarodevController
                 @ExampleAction.started -= instance.OnExampleAction;
                 @ExampleAction.performed -= instance.OnExampleAction;
                 @ExampleAction.canceled -= instance.OnExampleAction;
+                @Switch.started -= instance.OnSwitch;
+                @Switch.performed -= instance.OnSwitch;
+                @Switch.canceled -= instance.OnSwitch;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -578,6 +607,7 @@ namespace TarodevController
             void OnDash(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
             void OnExampleAction(InputAction.CallbackContext context);
+            void OnSwitch(InputAction.CallbackContext context);
         }
     }
 }

@@ -15,8 +15,8 @@ TagManager:
   - Player
   - Climbable
   - Ladders
-  - 
-  - 
+  - CompanionInteract
+  - MoveablePlatform
   - 
   - 
   - 

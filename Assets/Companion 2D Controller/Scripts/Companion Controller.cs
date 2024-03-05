@@ -21,7 +21,7 @@ public class CompanionController : MonoBehaviour
     public Transform player;
     public Transform followPoint;
     public  float moveSpeed = 2.0f;
-    [SerializeField] private bool isControlled;
+    [SerializeField] public bool isControlled;
     public Vector2 moveInput;
     private void Awake()
     {

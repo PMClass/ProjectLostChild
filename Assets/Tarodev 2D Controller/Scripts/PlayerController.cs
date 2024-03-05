@@ -41,6 +41,8 @@ namespace TarodevController
         public int WallDirection { get; private set; }
         public bool ClimbingLadder { get; private set; }
 
+        [field: SerializeField] public float JumpHeightReduction { get; private set; } = 0.2f;
+
         public void AddFrameForce(Vector2 force, bool resetVelocity = false)
         {
             if (resetVelocity) SetVelocity(Vector2.zero);
@@ -553,11 +555,13 @@ namespace TarodevController
             _lastJumpExecutedTime = _time;
             _currentStepDownLength = 0;
             if (ClimbingLadder) ToggleClimbingLadder(false);
-
+            
+            float _jumpPower = (Crouching || _playerC.PlayerHurt) ? Stats.JumpPower*JumpHeightReduction : Stats.JumpPower;
+            
             if (jumpType is JumpType.Jump or JumpType.Coyote)
             {
-                _coyoteUsable = false;
-                AddFrameForce(new Vector2(0, Stats.JumpPower));
+                _coyoteUsable = false;   
+                AddFrameForce(new Vector2(0, _jumpPower));
             }
             else if (jumpType is JumpType.AirJump)
             {

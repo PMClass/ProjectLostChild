@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Stats>k__BackingField: {fileID: 11400000, guid: 894dfe33661263b42a8e1490d64c0424, type: 2}
+  <JumpHeightReduction>k__BackingField: 0.2
   _drawGizmos: 1
 --- !u!50 &3054942120541986088
 Rigidbody2D:
@@ -378,6 +379,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PlayerHurt>k__BackingField: 0
+  <PlayerDead>k__BackingField: 0
+  <RecoverDelay>k__BackingField: 2
 --- !u!1 &3054942120714206832
 GameObject:
   m_ObjectHideFlags: 0

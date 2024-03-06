@@ -560,8 +560,14 @@ namespace TarodevController
             
             if (jumpType is JumpType.Jump or JumpType.Coyote)
             {
-                _coyoteUsable = false;   
-                AddFrameForce(new Vector2(0, _jumpPower));
+                // Call _playerC's PlayerRecover function.
+                if (_playerC.PlayerHurt) _playerC.PlayerTryRecover();
+                
+                if (!_playerC.PlayerHurt)
+                {
+                    _coyoteUsable = false;
+                    AddFrameForce(new Vector2(0, _jumpPower));
+                }
             }
             else if (jumpType is JumpType.AirJump)
             {
@@ -895,6 +901,14 @@ namespace TarodevController
 
         #endregion
 
+        #region GameFunctions
+
+        public void HurtKnockback()
+        {
+            AddFrameForce(new(0f,10f), true);
+        }
+
+        #endregion
 
         private void SaveCharacterState()
         {

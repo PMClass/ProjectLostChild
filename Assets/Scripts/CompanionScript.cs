@@ -31,7 +31,7 @@ public class CompanionScript : MonoBehaviour
 
     void Update()
     {
-        if (tia.Player.Switch.IsPressed()) isControlled = true;
+      /*  if (tia.Player.Switch.IsPressed()) isControlled = true;
         else isControlled = false;
         
         
@@ -53,6 +53,6 @@ public class CompanionScript : MonoBehaviour
             transform.Translate(new Vector2(moveInput.x, moveInput.y) * moveSpeed * Time.deltaTime);
             transform.position = new Vector2(Mathf.Clamp(transform.position.x , _player.position.x - 3, _player.position.x + 3),
                 Mathf.Clamp(transform.position.y, _player.position.y - 3, _player.position.y + 3));
-        }
+        } */
     }
 }

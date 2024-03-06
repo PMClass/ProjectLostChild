@@ -86,7 +86,7 @@ namespace TarodevController
         private void Awake()
         {
             companionCTRL = FindObjectOfType<CompanionController>();
-
+            
             if (!TryGetComponent(out _playerInput)) _playerInput = gameObject.AddComponent<PlayerInput>();
             if (!TryGetComponent(out _constantForce)) _constantForce = gameObject.AddComponent<ConstantForce2D>();
 
@@ -677,7 +677,6 @@ namespace TarodevController
              * or character not grounded
              * then try uncrouching
              */
-
             if (!companionCTRL.isControlled)
             {
                 if (!Crouching && (CrouchPressed || _playerC.PlayerHurt) && _grounded) ToggleCrouching(true);

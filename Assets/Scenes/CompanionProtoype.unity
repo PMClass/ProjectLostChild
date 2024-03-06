@@ -1237,16 +1237,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   circleCollider: {fileID: 0}
-  player: {fileID: 1928264047}
+  player: {fileID: 1928264060}
   followPoint: {fileID: 889541584}
-  speed: 5.04
-  hoverSpeed: 2
+  moveSpeed: 2
   isControlled: 0
---- !u!1 &1928264047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3054942120541986084, guid: a758f4c47c8e05242aa9c708a1c99374, type: 3}
-  m_PrefabInstance: {fileID: 518251343}
-  m_PrefabAsset: {fileID: 0}
+  moveInput: {x: 0, y: 0}
 --- !u!4 &1928264060 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3054942120541986095, guid: a758f4c47c8e05242aa9c708a1c99374, type: 3}

@@ -7,8 +7,8 @@ namespace TarodevController
     [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(CapsuleCollider2D))]
     public class PlayerController : MonoBehaviour, IPlayerController, IPhysicsObject
     {
-       
-        
+
+
         #region References
 
         private BoxCollider2D _collider;
@@ -40,6 +40,8 @@ namespace TarodevController
         public Vector2 Velocity { get; private set; }
         public int WallDirection { get; private set; }
         public bool ClimbingLadder { get; private set; }
+
+        [field: SerializeField] public float JumpHeightReduction { get; private set; } = 0.2f;
 
         public void AddFrameForce(Vector2 force, bool resetVelocity = false)
         {
@@ -74,6 +76,8 @@ namespace TarodevController
         #endregion
 
         [SerializeField] private bool _drawGizmos = true;
+        [SerializeField] private bool isControlled;
+        CompanionController companionCTRL;
 
         #region Loop
 
@@ -81,6 +85,8 @@ namespace TarodevController
 
         private void Awake()
         {
+            companionCTRL = FindObjectOfType<CompanionController>();
+
             if (!TryGetComponent(out _playerInput)) _playerInput = gameObject.AddComponent<PlayerInput>();
             if (!TryGetComponent(out _constantForce)) _constantForce = gameObject.AddComponent<ConstantForce2D>();
 
@@ -97,7 +103,7 @@ namespace TarodevController
         {
             _delta = delta;
             _time = time;
-           
+
             GatherInput();
         }
 
@@ -159,7 +165,7 @@ namespace TarodevController
             _collider.hideFlags = HideFlags.NotEditable;
             _collider.sharedMaterial = _rb.sharedMaterial;
             _collider.enabled = true;
-            
+
             // Airborne collider
             _airborneCollider = GetComponent<CapsuleCollider2D>();
             _airborneCollider.hideFlags = HideFlags.NotEditable;
@@ -554,10 +560,18 @@ namespace TarodevController
             _currentStepDownLength = 0;
             if (ClimbingLadder) ToggleClimbingLadder(false);
 
+            float _jumpPower = (Crouching || _playerC.PlayerHurt) ? Stats.JumpPower * JumpHeightReduction : Stats.JumpPower;
+
             if (jumpType is JumpType.Jump or JumpType.Coyote)
             {
-                _coyoteUsable = false;
-                AddFrameForce(new Vector2(0, Stats.JumpPower));
+                // Call _playerC's PlayerRecover function.
+                if (_playerC.PlayerHurt) _playerC.PlayerTryRecover();
+
+                if (!_playerC.PlayerHurt)
+                {
+                    _coyoteUsable = false;
+                    AddFrameForce(new Vector2(0, _jumpPower));
+                }
             }
             else if (jumpType is JumpType.AirJump)
             {
@@ -663,7 +677,6 @@ namespace TarodevController
              * or character not grounded
              * then try uncrouching
              */
-
             if (!Crouching && (CrouchPressed || _playerC.PlayerHurt) && _grounded) ToggleCrouching(true);
             else if (Crouching && !_grounded) ToggleCrouching(false);
 
@@ -891,6 +904,14 @@ namespace TarodevController
 
         #endregion
 
+        #region GameFunctions
+
+        public void HurtKnockback()
+        {
+            AddFrameForce(new(0f, 10f), true);
+        }
+
+        #endregion
 
         private void SaveCharacterState()
         {

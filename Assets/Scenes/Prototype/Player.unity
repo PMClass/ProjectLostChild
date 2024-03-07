@@ -361,11 +361,55 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.95
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3054942120541986090, guid: a758f4c47c8e05242aa9c708a1c99374, type: 3}
+    - {fileID: 1719448746146970087, guid: a758f4c47c8e05242aa9c708a1c99374, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3054942120541986084, guid: a758f4c47c8e05242aa9c708a1c99374, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 562711240}
+    - targetCorrespondingSourceObject: {fileID: 3054942120541986084, guid: a758f4c47c8e05242aa9c708a1c99374, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 562711239}
   m_SourcePrefab: {fileID: 100100000, guid: a758f4c47c8e05242aa9c708a1c99374, type: 3}
+--- !u!1 &562711230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054942120541986084, guid: a758f4c47c8e05242aa9c708a1c99374, type: 3}
+  m_PrefabInstance: {fileID: 518251343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &562711239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562711230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c31944470c32a84f82140f84a1cf040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Stats>k__BackingField: {fileID: 11400000, guid: 894dfe33661263b42a8e1490d64c0424, type: 2}
+  <JumpHeightReduction>k__BackingField: 0.2
+  _drawGizmos: 1
+  isControlled: 0
+--- !u!114 &562711240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562711230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a6e6795ca7d134da160a8d0634b1d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <PlayerHurt>k__BackingField: 0
+  <PlayerDead>k__BackingField: 0
+  <RecoverDelay>k__BackingField: 2
 --- !u!1 &640119484
 GameObject:
   m_ObjectHideFlags: 0

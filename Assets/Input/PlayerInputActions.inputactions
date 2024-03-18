@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ExampleAction",
-                    "type": "Button",
-                    "id": "fac85392-9cd4-4c47-a8da-8911e5b74689",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Switch",
                     "type": "Button",
                     "id": "5b128080-3fc9-41cc-b025-3579a44af814",
@@ -195,17 +186,6 @@
                 },
                 {
                     "name": "",
-                    "id": "9d168e6e-7713-4ae3-b372-87fc73a539cc",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "19f4a3a7-3e3d-4e43-bccb-dbbfe723a1ae",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -229,7 +209,7 @@
                 {
                     "name": "",
                     "id": "087be7d0-bbe5-437a-b100-34ab76f1b45a",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -251,7 +231,7 @@
                 {
                     "name": "",
                     "id": "33a4f931-eec9-4f9d-a47f-b933ce13a61d",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -294,19 +274,19 @@
                 },
                 {
                     "name": "",
-                    "id": "13f43569-8981-4c2d-83eb-cbf0c247c466",
-                    "path": "<Keyboard>/e",
+                    "id": "454af231-87bf-42c5-8c2d-3d31558d322e",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "ExampleAction",
+                    "groups": "",
+                    "action": "Switch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "1c813c53-a2b5-48e4-9516-de7ace9b293e",
-                    "path": "<Mouse>/leftButton",
+                    "id": "25864321-2c59-4bc4-8f3b-0964535319b9",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

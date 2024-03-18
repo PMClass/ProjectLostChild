@@ -18,6 +18,11 @@ namespace TarodevController
         private PlayerInput _playerInput;
         private PlayerConditions _playerC;
 
+        private GameObject _coObject;
+        private CompanionController _coCtrl;
+
+        private bool isCompanionControlled;
+
         #endregion
 
         #region Interface
@@ -42,6 +47,7 @@ namespace TarodevController
         public bool ClimbingLadder { get; private set; }
 
         [field: SerializeField] public float JumpHeightReduction { get; private set; } = 0.2f;
+        [field: SerializeField] public GameObject CompanionPrefab;
 
         public void AddFrameForce(Vector2 force, bool resetVelocity = false)
         {
@@ -76,8 +82,7 @@ namespace TarodevController
         #endregion
 
         [SerializeField] private bool _drawGizmos = true;
-        [SerializeField] private bool isControlled;
-        CompanionController companionCTRL;
+        
 
         #region Loop
 
@@ -85,8 +90,6 @@ namespace TarodevController
 
         private void Awake()
         {
-            companionCTRL = FindObjectOfType<CompanionController>();
-
             if (!TryGetComponent(out _playerInput)) _playerInput = gameObject.AddComponent<PlayerInput>();
             if (!TryGetComponent(out _constantForce)) _constantForce = gameObject.AddComponent<ConstantForce2D>();
 
@@ -120,17 +123,28 @@ namespace TarodevController
             CalculateCollisions();
             CalculateDirection();
 
-            CalculateWalls();
-            CalculateLadders();
-            CalculateJump();
-            CalculateDash();
+            if (!isCompanionControlled) // do not calculate any input if companion is being controlled
+            {
+                CalculateWalls();
+                CalculateLadders();
+                CalculateJump();
+                CalculateDash();
+            }
+
+            // continue to calculate the player character's velocity from actions and platforms
 
             CalculateExternalModifiers();
-
+            
             TraceGround();
             Move();
 
-            CalculateCrouch();
+            // begin forwarding input data to companion character if controllled
+            if (isCompanionControlled)
+            {
+
+            }
+
+            if (!isCompanionControlled) CalculateCrouch(); // do not calculate crouch if companion is being controlled
 
             CleanFrameData();
 
@@ -150,7 +164,24 @@ namespace TarodevController
             _character = Stats.CharacterSize.GenerateCharacterSize();
             _cachedQueryMode = Physics2D.queriesStartInColliders;
 
+            // Get PlayerConditions
             _playerC = GetComponent<PlayerConditions>();
+
+            // Create Companion character (TODO load prefab)
+            if (CompanionPrefab != null)
+            {
+                _coObject = GameObject.Find("Companion");
+                if (_coObject == null)
+                {
+                    Debug.Log("hmmmm, must make my own companion");
+                    _coObject = Instantiate(CompanionPrefab, null);
+                    _coObject.name = ("Companion");
+                }
+                _coCtrl = _coObject.GetComponent<CompanionController>();
+                Debug.Log("I did it! I found the companion!");
+            } else { Debug.LogWarning("oops, I can't find the companion prefab. cannot instantiate!"); }
+            
+            isCompanionControlled = false;
 
             _wallDetectionBounds = new Bounds(
                 new Vector3(0, _character.Height / 2),
@@ -186,7 +217,6 @@ namespace TarodevController
         {
             _frameInput = _playerInput.Gather();
 
-
             if (_frameInput.JumpDown)
             {
                 _jumpToConsume = true;
@@ -196,6 +226,12 @@ namespace TarodevController
             if (_frameInput.DashDown)
             {
                 _dashToConsume = true;
+            }
+
+            if (_frameInput.SwitchToggle)
+            {
+                Debug.Log("we are switching");
+                isCompanionControlled = !isCompanionControlled;
             }
         }
 
@@ -215,7 +251,7 @@ namespace TarodevController
             Right = new Vector2(Up.y, -Up.x);
             _framePosition = _rb.position;
 
-            _hasInputThisFrame = _frameInput.Move.x != 0;
+            _hasInputThisFrame = _frameInput.Move.x != 0 && !isCompanionControlled; // do not move if companion is controlled
 
             Velocity = _rb.velocity;
             _trimmedFrameVelocity = new Vector2(Velocity.x, 0);
@@ -658,25 +694,15 @@ namespace TarodevController
         private void CalculateCrouch()
         {
             if (!Stats.AllowCrouching) return;
-
-            //if (!Crouching && CrouchPressed && _grounded) ToggleCrouching(true);
-            //else if (Crouching && (!CrouchPressed || !_grounded)) ToggleCrouching(false);
-
-            /*
-             * if
-             * not crouching
-             * and crouch button pressed
-             * and character grounded
-             * then try crouching
-             * 
-             * else
-             * 
-             * if crouching
-             * and either
-             * crouch button pressed (original: crouch button not pressed)
-             * or character not grounded
-             * then try uncrouching
-             */
+            /* if the following conditions are met:
+                - i am not crouching, and
+                - either the player pressed crouch button or i am hurt, and
+                - i am currently touching ground 
+               then i should try crouching.
+               otherwise, if these conditions are met:
+                - i am crouching, and
+                - i am no longer touching ground
+                then i should try uncrouching (force uncrouch because i am not on ground)*/
             if (!Crouching && (CrouchPressed || _playerC.PlayerHurt) && _grounded) ToggleCrouching(true);
             else if (Crouching && !_grounded) ToggleCrouching(false);
 
@@ -906,7 +932,7 @@ namespace TarodevController
 
         #region GameFunctions
 
-        public void HurtKnockback()
+        public void HurtKnockback() // function to call when an enemy hurts the player
         {
             AddFrameForce(new(0f, 10f), true);
         }

@@ -1,21 +1,29 @@
 using TarodevController;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class CompanionController : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public  float moveSpeed = 2.0f;
+    private PlayerController _plObject;
+    private GameObject _coObject;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        if (!TryGetComponent(out _plObject)) Debug.LogWarning("Oops, I cannot find the PlayerController! Where is it?!");
+        else
+        {
+            if (_plObject.CompanionPrefab != null)
+            {
+                _coObject = Instantiate(_plObject.CompanionPrefab, null);
+                _coObject.name = ("Companion");
+                Debug.Log("Companion object created!");
+            } else Debug.LogWarning("The Companion Prefab inspector value has not been set!");
+        }
+        
     }
     
     private void Start()
     {
-       
+
     }
 
     private void Update()

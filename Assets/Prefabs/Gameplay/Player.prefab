@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 617016810852657990}
   - component: {fileID: 521048897393678133}
   - component: {fileID: 3456040428955191254}
+  - component: {fileID: 3971971876313853525}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -303,7 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Stats>k__BackingField: {fileID: 11400000, guid: 894dfe33661263b42a8e1490d64c0424, type: 2}
   <JumpHeightReduction>k__BackingField: 0.2
-  CompanionPrefab: {fileID: 0}
+  CompanionPrefab: {fileID: 7088320392140969151, guid: e28d892c24f1ff34dac540428e1f5bb2, type: 3}
   _drawGizmos: 1
 --- !u!50 &8253052480652464512
 Rigidbody2D:
@@ -616,3 +617,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3971971876313853525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7273550153823935342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07be57d7784f24b43baeef3930a80c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

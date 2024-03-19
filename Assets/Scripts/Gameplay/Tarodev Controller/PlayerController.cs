@@ -8,7 +8,6 @@ namespace TarodevController
     public class PlayerController : MonoBehaviour, IPlayerController, IPhysicsObject
     {
 
-
         #region References
 
         private BoxCollider2D _collider;
@@ -18,7 +17,6 @@ namespace TarodevController
         private PlayerInput _playerInput;
         private PlayerConditions _playerC;
 
-        private GameObject _coObject;
         private CompanionController _coCtrl;
 
         private bool isCompanionControlled;
@@ -82,7 +80,6 @@ namespace TarodevController
         #endregion
 
         [SerializeField] private bool _drawGizmos = true;
-        
 
         #region Loop
 
@@ -92,6 +89,8 @@ namespace TarodevController
         {
             if (!TryGetComponent(out _playerInput)) _playerInput = gameObject.AddComponent<PlayerInput>();
             if (!TryGetComponent(out _constantForce)) _constantForce = gameObject.AddComponent<ConstantForce2D>();
+
+            if (!TryGetComponent(out _coCtrl)) Debug.LogWarning("Oops, I cannot find the CompanionController! Set it up first!");
 
             SetupCharacter();
 
@@ -166,20 +165,6 @@ namespace TarodevController
 
             // Get PlayerConditions
             _playerC = GetComponent<PlayerConditions>();
-
-            // Create Companion character (TODO load prefab)
-            if (CompanionPrefab != null)
-            {
-                _coObject = GameObject.Find("Companion");
-                if (_coObject == null)
-                {
-                    Debug.Log("hmmmm, must make my own companion");
-                    _coObject = Instantiate(CompanionPrefab, null);
-                    _coObject.name = ("Companion");
-                }
-                _coCtrl = _coObject.GetComponent<CompanionController>();
-                Debug.Log("I did it! I found the companion!");
-            } else { Debug.LogWarning("oops, I can't find the companion prefab. cannot instantiate!"); }
             
             isCompanionControlled = false;
 

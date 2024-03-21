@@ -30,7 +30,7 @@ MonoBehaviour:
   BaseSpeed: 5
   Acceleration: 100
   Friction: 90
-  AirFrictionMultiplier: 0.5
+  AirFrictionMultiplier: 0.1
   DirectionCorrectionMultiplier: 3
   MaxWalkableSlope: 46
   ExtraConstantGravity: 40

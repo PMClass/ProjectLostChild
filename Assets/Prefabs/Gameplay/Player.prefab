@@ -288,8 +288,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PlayerHurt>k__BackingField: 0
+  <CanRecover>k__BackingField: 0
   <PlayerDead>k__BackingField: 0
+  <CurrentHealth>k__BackingField: 0
   <RecoverDelay>k__BackingField: 2
+  HeightHurtMin: 4
+  HeightDeathMin: 8
+  <UseNumericHealth>k__BackingField: 1
+  <PlayerHealth>k__BackingField: 3
 --- !u!114 &5829226864064178834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Stats>k__BackingField: {fileID: 11400000, guid: 894dfe33661263b42a8e1490d64c0424, type: 2}
+  <FallHeight>k__BackingField: 0
   <JumpHeightReduction>k__BackingField: 0.2
   CompanionPrefab: {fileID: 7088320392140969151, guid: e28d892c24f1ff34dac540428e1f5bb2, type: 3}
   _drawGizmos: 1

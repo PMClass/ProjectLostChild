@@ -44,6 +44,7 @@ namespace TarodevController
         public int WallDirection { get; private set; }
         public bool ClimbingLadder { get; private set; }
 
+        [field: SerializeField] public float FallHeight { get; private set; } = 0f;
         [field: SerializeField] public float JumpHeightReduction { get; private set; } = 0.2f;
         [field: SerializeField] public GameObject CompanionPrefab;
 
@@ -287,6 +288,8 @@ namespace TarodevController
 
         private Vector2 RayPoint => _framePosition + Up * (_character.StepHeight + SKIN_WIDTH);
 
+        private float _oldY = 0;
+
         private void CalculateCollisions()
         {
             Physics2D.queriesStartInColliders = false;
@@ -303,6 +306,9 @@ namespace TarodevController
                     if (isGroundedThisFrame) break;
                 }
             }
+
+            // this function runs before ToggleGrounded
+            if (!_grounded) GetFallHeight();
 
             if (isGroundedThisFrame && !_grounded) ToggleGrounded(true);
             else if (!isGroundedThisFrame && _grounded) ToggleGrounded(false);
@@ -333,11 +339,24 @@ namespace TarodevController
             }
         }
 
+        private void GetFallHeight()
+        {
+            var _current = transform.position.y;
+            var _dif = _current - _oldY;
+
+            // if the difference of current height and old height var is positive
+            // reset old height var to current height.
+            if (_dif > 0) _oldY = _current;
+            else FallHeight = Mathf.Floor(Mathf.Abs(_dif));
+        }
+
         private void ToggleGrounded(bool grounded)
         {
             _grounded = grounded;
-            if (grounded)
+            if (grounded) // this is where fall damage check should happen
             {
+                _playerC.PlayerCheckFall();
+                
                 GroundedChanged?.Invoke(true, _lastFrameY);
                 _rb.gravityScale = 0;
                 SetVelocity(_trimmedFrameVelocity);
@@ -349,8 +368,11 @@ namespace TarodevController
                 ResetAirJumps();
                 SetColliderMode(ColliderMode.Standard);
             }
-            else
+            else // reset fall height here, character is in air
             {
+                FallHeight = 0;
+                _oldY = transform.position.y;
+                
                 GroundedChanged?.Invoke(false, 0);
                 _timeLeftGrounded = _time;
                 _rb.gravityScale = GRAVITY_SCALE;
@@ -556,6 +578,11 @@ namespace TarodevController
         private bool CanAirJump => !_grounded && _airJumpsRemaining > 0;
         private bool CanWallJump => !_grounded && (_isOnWall || _wallDirThisFrame != 0) || (_wallJumpCoyoteUsable && _time < _timeLeftWall + Stats.WallCoyoteTime);
 
+        // (CalculateJump uses this variable first, so it's initialized here.)
+        private bool IsHurt => _playerC.GetPlayerHurt();
+        // (also including IsDead here, for future use)
+        private bool IsDead => _playerC.GetPlayerDead();
+
         private void CalculateJump()
         {
             if ((_jumpToConsume || HasBufferedJump) && CanStand)
@@ -580,20 +607,23 @@ namespace TarodevController
             _lastJumpExecutedTime = _time;
             _currentStepDownLength = 0;
             if (ClimbingLadder) ToggleClimbingLadder(false);
-
-            float _jumpPower = (Crouching || _playerC.PlayerHurt) ? Stats.JumpPower * JumpHeightReduction : Stats.JumpPower;
+            
+            // _jumpPower changes depending on whether player is crouching
+            // (also if hurt, which usually means crouching)
+            float _jumpPower = Crouching ? Stats.JumpPower * JumpHeightReduction : Stats.JumpPower;
 
             if (jumpType is JumpType.Jump or JumpType.Coyote)
             {
                 // Call _playerC's PlayerRecover function.
-                if (_playerC.PlayerHurt) _playerC.PlayerTryRecover();
-
-                if (!_playerC.PlayerHurt)
+                if (IsHurt) _playerC.PlayerTryRecover();
+                // Also check if not hurt so a "recovery" jump is performed in the same function call!
+                if (!IsHurt)
                 {
                     _coyoteUsable = false;
                     AddFrameForce(new Vector2(0, _jumpPower));
                 }
             }
+            // These jumps are not used in the game so... i didn't program them to check IsHurt.
             else if (jumpType is JumpType.AirJump)
             {
                 _airJumpsRemaining--;
@@ -688,7 +718,7 @@ namespace TarodevController
                 - i am crouching, and
                 - i am no longer touching ground
                 then i should try uncrouching (force uncrouch because i am not on ground)*/
-            if (!Crouching && (CrouchPressed || _playerC.PlayerHurt) && _grounded) ToggleCrouching(true);
+            if (!Crouching && (CrouchPressed || IsHurt) && _grounded) ToggleCrouching(true);
             else if (Crouching && !_grounded) ToggleCrouching(false);
 
         }
@@ -919,7 +949,7 @@ namespace TarodevController
 
         public void HurtKnockback() // function to call when an enemy hurts the player
         {
-            AddFrameForce(new(0f, 10f), true);
+            AddFrameForce(new(0f, -30f), true);
         }
 
         #endregion

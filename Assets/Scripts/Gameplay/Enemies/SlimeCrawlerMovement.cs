@@ -105,25 +105,25 @@ public class SlimeCrawlerMovement : MonoBehaviour
 
                 if(direction == 1)
                 {
-                    transform.position = new Vector2(transform.position.x - offset, transform.position.y + offset);
+                    transform.position = new Vector2(transform.position.x + offset, transform.position.y + offset);
                     hasTurn = true;
                     direction = 4;
                 }
                 else if(direction == 2)
                 {
-                    transform.position = new Vector2(transform.position.x + offset, transform.position.y + offset);
+                    transform.position = new Vector2(transform.position.x + offset, transform.position.y - offset);
                     hasTurn = true;
                     direction = 1;
                 }
                 else if(direction == 3)
                 {
-                    transform.position = new Vector2(transform.position.x + offset, transform.position.y - offset);
+                    transform.position = new Vector2(transform.position.x - offset, transform.position.y - offset);
                     hasTurn = true;
                     direction = 2;
                 }
                 else if(direction == 4)
                 {
-                    transform.position = new Vector2(transform.position.x - offset, transform.position.y - offset);
+                    transform.position = new Vector2(transform.position.x - offset, transform.position.y + offset);
                     hasTurn = true;
                     direction = 3;
 

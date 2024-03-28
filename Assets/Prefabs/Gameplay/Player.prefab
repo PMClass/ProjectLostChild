@@ -291,6 +291,7 @@ MonoBehaviour:
   <CanRecover>k__BackingField: 0
   <PlayerDead>k__BackingField: 0
   <CurrentHealth>k__BackingField: 0
+  <CurrentCheckpoint>k__BackingField: {fileID: 0}
   <RecoverDelay>k__BackingField: 2
   HeightHurtMin: 4
   HeightDeathMin: 8

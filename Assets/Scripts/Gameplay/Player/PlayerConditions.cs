@@ -15,6 +15,11 @@ public class PlayerConditions : MonoBehaviour
     [field: SerializeField] private bool PlayerDead { get; set; }
     // Numerical Health Value
     [field: SerializeField] private float CurrentHealth { get; set; }
+    // Player's current checkpoint
+    [field: SerializeField] private Transform CurrentCheckpoint { get; set; }
+
+    // --- Just Private Variables
+    private Vector2 InitialPos { get; set; }
     
     // --- Inspector Variables
     // RecoverDelay controls
@@ -27,6 +32,8 @@ public class PlayerConditions : MonoBehaviour
 
     private void Awake()
     {
+        InitialPos = transform.position;
+        
         if (!TryGetComponent(out _playerCtrl))
         {
             Debug.LogWarning("There is no PlayerController, PlayerConditions will not function!");
@@ -45,6 +52,7 @@ public class PlayerConditions : MonoBehaviour
     }
 
     // --- Game Functions
+    [ContextMenu("Give Player Die")]
     public void PlayerDie()
     {
         Debug.Log("ow, i am dead");
@@ -52,12 +60,33 @@ public class PlayerConditions : MonoBehaviour
         PlayerHurt = true;
         if (UseNumericHealth) CurrentHealth = 0f;
     }
+    [ContextMenu("Respawn Player")]
     public void PlayerSpawn()
-    {
+    {   
         CanRecover = true;
+        PlayerHurt = false;
         PlayerDead = false;
 
+        Vector2 toRespawn = (CurrentCheckpoint != null) ? CurrentCheckpoint.position : InitialPos;
+
+        _playerCtrl.RepositionImmediately(toRespawn, true);
+        _playerCtrl.ResetStates();
+
         if (UseNumericHealth) CurrentHealth = PlayerHealth;
+    }
+
+    public void PlayerSetCheckpoint(Transform check)
+    {
+        if (check != null)
+        {
+            if (check != CurrentCheckpoint)
+            {
+                CurrentCheckpoint = check;
+                Debug.Log("New checkpoint set.");
+            }
+            else Debug.Log("Checkpoint is the same!!");
+        }
+        
     }
 
     // PlayerTryRecover is called by the PlayerController to see if jumping is okay

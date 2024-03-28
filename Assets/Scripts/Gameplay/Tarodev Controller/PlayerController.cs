@@ -46,7 +46,7 @@ namespace TarodevController
 
         [field: SerializeField] public float FallHeight { get; private set; } = 0f;
         [field: SerializeField] public float JumpHeightReduction { get; private set; } = 0.2f;
-        [field: SerializeField] public GameObject CompanionPrefab;
+        public GameObject CompanionPrefab;
 
         public void AddFrameForce(Vector2 force, bool resetVelocity = false)
         {
@@ -85,6 +85,7 @@ namespace TarodevController
         #region Loop
 
         private float _delta, _time;
+        private bool IsDead => _playerC.GetPlayerDead();
 
         private void Awake()
         {
@@ -107,7 +108,7 @@ namespace TarodevController
             _delta = delta;
             _time = time;
 
-            GatherInput();
+            if (!IsDead) GatherInput();
         }
 
         public void TickFixedUpdate(float delta)
@@ -123,18 +124,13 @@ namespace TarodevController
             CalculateCollisions();
             CalculateDirection();
 
-            if (!isCompanionControlled) // do not calculate any input if companion is being controlled
-            {
-                CalculateWalls();
-                CalculateLadders();
-                CalculateJump();
-                CalculateDash();
-            }
-
-            // continue to calculate the player character's velocity from actions and platforms
+            //CalculateWalls();
+            CalculateLadders();
+            if (!isCompanionControlled) CalculateJump();
+            //CalculateDash();
 
             CalculateExternalModifiers();
-            
+
             TraceGround();
             Move();
 
@@ -144,7 +140,7 @@ namespace TarodevController
 
             }
 
-            if (!isCompanionControlled) CalculateCrouch(); // do not calculate crouch if companion is being controlled
+            if (!isCompanionControlled) CalculateCrouch();
 
             CleanFrameData();
 
@@ -237,7 +233,7 @@ namespace TarodevController
             Right = new Vector2(Up.y, -Up.x);
             _framePosition = _rb.position;
 
-            _hasInputThisFrame = _frameInput.Move.x != 0 && !isCompanionControlled; // do not move if companion is controlled
+            _hasInputThisFrame = _frameInput.Move.x != 0 && !isCompanionControlled && !IsDead; // do not move if companion is controlled
 
             Velocity = _rb.velocity;
             _trimmedFrameVelocity = new Vector2(Velocity.x, 0);
@@ -580,8 +576,6 @@ namespace TarodevController
 
         // (CalculateJump uses this variable first, so it's initialized here.)
         private bool IsHurt => _playerC.GetPlayerHurt();
-        // (also including IsDead here, for future use)
-        private bool IsDead => _playerC.GetPlayerDead();
 
         private void CalculateJump()
         {
@@ -718,7 +712,8 @@ namespace TarodevController
                 - i am crouching, and
                 - i am no longer touching ground
                 then i should try uncrouching (force uncrouch because i am not on ground)*/
-            if (!Crouching && (CrouchPressed || IsHurt) && _grounded) ToggleCrouching(true);
+            if (!Crouching && (CrouchPressed || IsHurt) && _grounded)
+                ToggleCrouching(true);
             else if (Crouching && !_grounded) ToggleCrouching(false);
 
         }
@@ -952,6 +947,13 @@ namespace TarodevController
             AddFrameForce(new(0f, -30f), true);
         }
 
+        public void ResetStates() // it just sets IsCompanionControlled to false
+        {
+            isCompanionControlled = false;
+            FallHeight = 0;
+            _oldY = transform.position.y;
+        }
+
         #endregion
 
         private void SaveCharacterState()
@@ -976,6 +978,15 @@ namespace TarodevController
         {
             if (other.TryGetComponent(out ISpeedModifier modifier)) _modifiers.Add(modifier);
             else if (other.TryGetComponent(out IPhysicsMover mover) && !mover.RequireGrounding) _activatedMovers.Add(mover);
+
+            // do the checkpoint checkup check <(._.<)
+            if (!IsDead)
+            {
+                if (other.gameObject.CompareTag("Checkpoint"))
+                {
+                    _playerC.PlayerSetCheckpoint(other.gameObject.transform);
+                }
+            }
         }
 
         private void OnTriggerExit2D(Collider2D other)

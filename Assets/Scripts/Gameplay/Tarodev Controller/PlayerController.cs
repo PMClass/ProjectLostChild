@@ -135,10 +135,7 @@ namespace TarodevController
             Move();
 
             // begin forwarding input data to companion character if controllled
-            if (isCompanionControlled)
-            {
-
-            }
+            CalculateCMovement();
 
             if (!isCompanionControlled) CalculateCrouch();
 
@@ -178,6 +175,7 @@ namespace TarodevController
             _collider.hideFlags = HideFlags.NotEditable;
             _collider.sharedMaterial = _rb.sharedMaterial;
             _collider.enabled = true;
+            _collider.excludeLayers = LayerMask.GetMask("CompImpass");
 
             // Airborne collider
             _airborneCollider = GetComponent<CapsuleCollider2D>();
@@ -185,6 +183,7 @@ namespace TarodevController
             _airborneCollider.size = new Vector2(_character.Width - SKIN_WIDTH * 2, _character.Height - SKIN_WIDTH * 2);
             _airborneCollider.offset = new Vector2(0, _character.Height / 2);
             _airborneCollider.sharedMaterial = _rb.sharedMaterial;
+            _airborneCollider.excludeLayers = LayerMask.GetMask("CompImpass");
 
             SetColliderMode(ColliderMode.Airborne);
         }
@@ -222,6 +221,7 @@ namespace TarodevController
         #region Frame Data
 
         private bool _hasInputThisFrame;
+        private bool _hasAnyMovement;
         private Vector2 _trimmedFrameVelocity;
         private Vector2 _framePosition;
         private Bounds _wallDetectionBounds;
@@ -234,6 +234,8 @@ namespace TarodevController
             _framePosition = _rb.position;
 
             _hasInputThisFrame = _frameInput.Move.x != 0 && !isCompanionControlled && !IsDead; // do not move if companion is controlled
+            _hasAnyMovement = _frameInput.Move.x != 0 || _frameInput.Move.y != 0;
+
 
             Velocity = _rb.velocity;
             _trimmedFrameVelocity = new Vector2(Velocity.x, 0);
@@ -938,6 +940,23 @@ namespace TarodevController
             Velocity = newVel;
         }
 
+        #endregion
+
+        #region CompanionCall
+        private void CalculateCMovement()
+        {
+            if (isCompanionControlled)
+            {
+                _coCtrl.MoveCompanion(_frameInput.Move, false);
+            } else _coCtrl.MoveCompanion(new(0,0), true);
+
+        }
+
+        private void CalculateCInteract()
+        {
+
+        }
+        
         #endregion
 
         #region GameFunctions

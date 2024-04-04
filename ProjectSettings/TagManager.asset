@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Checkpoint
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -12,12 +13,12 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - CompImpass
   - Player
   - Climbable
   - Ladders
-  - CompanionInteract
-  - MoveablePlatform
+  - CompInteract
+  - 
   - 
   - 
   - 

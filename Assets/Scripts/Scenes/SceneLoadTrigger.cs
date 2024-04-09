@@ -15,7 +15,7 @@ public class SceneLoadTrigger : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("LoadingArea");
     }
    
     

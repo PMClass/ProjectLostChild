@@ -92,7 +92,7 @@ namespace TarodevController
             if (!TryGetComponent(out _playerInput)) _playerInput = gameObject.AddComponent<PlayerInput>();
             if (!TryGetComponent(out _constantForce)) _constantForce = gameObject.AddComponent<ConstantForce2D>();
 
-            if (!TryGetComponent(out _coCtrl)) Debug.LogWarning("Oops, I cannot find the CompanionController! Set it up first!");
+            if (!TryGetComponent(out _coCtrl)) Debug.LogWarning("No CompanionController!");
 
             SetupCharacter();
 
@@ -136,6 +136,7 @@ namespace TarodevController
 
             // begin forwarding input data to companion character if controllled
             CalculateCMovement();
+            CalculateCInteract();
 
             if (!isCompanionControlled) CalculateCrouch();
 
@@ -234,8 +235,7 @@ namespace TarodevController
             _framePosition = _rb.position;
 
             _hasInputThisFrame = _frameInput.Move.x != 0 && !isCompanionControlled && !IsDead; // do not move if companion is controlled
-            _hasAnyMovement = _frameInput.Move.x != 0 || _frameInput.Move.y != 0;
-
+            _hasAnyMovement = _frameInput.Move.magnitude > 0;
 
             Velocity = _rb.velocity;
             _trimmedFrameVelocity = new Vector2(Velocity.x, 0);
@@ -947,14 +947,17 @@ namespace TarodevController
         {
             if (isCompanionControlled)
             {
-                _coCtrl.MoveCompanion(_frameInput.Move, false);
-            } else _coCtrl.MoveCompanion(new(0,0), true);
-
+                _coCtrl.MoveCompanion(_frameInput.Move, !_hasAnyMovement);
+            } else _coCtrl.MoveCompanion(new(0,0), !_hasAnyMovement);
+            
         }
 
         private void CalculateCInteract()
         {
-
+            if (isCompanionControlled && _jumpToConsume)
+            {
+                _coCtrl.ToggleControlInteractable();
+            }
         }
         
         #endregion

@@ -3,13 +3,24 @@ using UnityEngine;
 
 public class CompanionController : MonoBehaviour
 {
+    #region References
     private PlayerController _plObject;
     private GameObject _coObject;
     private Rigidbody2D _coRigid;
     private CoSensor _coSense;
+    #endregion
 
-    [SerializeField] private GameObject InteractableTouched;
+    #region Private Members
+    private bool InControl = false;
+    private GameObject InteractableObject;
+    #endregion
 
+    #region Private Serialized
+    //[SerializeField] private GameObject InteractableTouched;
+    [SerializeField] private IObjInteractable InteractableControlled;
+    #endregion
+
+    #region Setup
     private void Awake()
     {
         if (!TryGetComponent(out _plObject))
@@ -32,13 +43,60 @@ public class CompanionController : MonoBehaviour
         }
         
     }
+    #endregion
+    
+    public void ToggleControlInteractable()
+    {
+        if (!InControl)
+        {
+            GameObject InteractableTouched = _coSense.GetInteractable();
+            if (InteractableTouched != null)
+            {
+                var tempMonoArray = InteractableTouched.GetComponents<MonoBehaviour>();
+
+                foreach (var monoBehaviour in tempMonoArray)
+                {
+                    var tempInteractable = monoBehaviour as IObjInteractable;
+
+                    if (monoBehaviour is IObjInteractable)
+                    {
+                        InteractableControlled = tempInteractable;
+                        InControl = true;
+                        InteractableObject = InteractableTouched;
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            InteractableControlled = null;
+            InControl = false;
+        }
+    }
+
+    public bool HasControllableObj() => InteractableControlled != null;
 
     public void MoveCompanion(Vector2 vel, bool noInput)
     {
-        //Vector2 limit = new(10, 10);
-        //Vector2 _vel = vel / limit;
+        if (InControl && HasControllableObj())
+        {
+            InteractableControlled.Interact(vel);
+            _coRigid.MovePosition(InteractableObject.transform.position);
+        }
+        else
+        {
+            if (!noInput) _coRigid.AddForce(vel, ForceMode2D.Impulse);
+            else
+            {
+                var InteractableObj = _coSense.GetInteractable();
+                if (InteractableObj != null)
+                {
+                    _coRigid.MovePosition(InteractableObj.transform.position);
+                }
+                _coRigid.velocity = new(0, 0);
 
-        if (!noInput) _coRigid.AddForce(vel, ForceMode2D.Impulse);
-        else _coRigid.velocity = new(0,0);
+            }
+        }
     }
 }

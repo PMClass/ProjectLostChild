@@ -1901,7 +1901,9 @@ GameObject:
   - component: {fileID: 949698814}
   - component: {fileID: 949698813}
   - component: {fileID: 949698812}
-  m_Layer: 10
+  - component: {fileID: 949698816}
+  - component: {fileID: 949698815}
+  m_Layer: 3
   m_Name: CInter_Platform
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -2020,6 +2022,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 3.079, z: 0}
+--- !u!114 &949698815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949698811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b4116f2e707d648bcac8cf8b0dac18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanMoveX: 1
+  CanMoveY: 1
+--- !u!50 &949698816
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949698811}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 999999
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &958416966
 GameObject:
   m_ObjectHideFlags: 0

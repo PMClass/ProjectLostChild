@@ -16,6 +16,11 @@ public class CoSensor : MonoBehaviour
         
     }
 
+    public GameObject GetInteractable()
+    {
+        return InteractableTouched;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collided = collision.gameObject;
@@ -24,12 +29,9 @@ public class CoSensor : MonoBehaviour
         {
             if (collided.CompareTag("Interactable"))
             {
-                Debug.Log("oh hi there");
                 InteractableTouched = collided;
             }
         }
-
-        Debug.Log("I'm touching something");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -39,7 +41,6 @@ public class CoSensor : MonoBehaviour
         {
             if (collided.CompareTag("Interactable") && collided == InteractableTouched)
             {
-                Debug.Log("oh okay bye");
                 InteractableTouched = null;
             }
         }

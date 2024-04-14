@@ -57,7 +57,7 @@ namespace TarodevController
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""6030ad00-15b1-4c52-97de-bdf0f91de944"",
                     ""expectedControlType"": ""Button"",
@@ -266,11 +266,11 @@ namespace TarodevController
                 {
                     ""name"": """",
                     ""id"": ""0568f55d-4e6c-420d-84e7-9c855eddb769"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Attack"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -281,7 +281,7 @@ namespace TarodevController
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Attack"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -292,7 +292,7 @@ namespace TarodevController
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -389,7 +389,7 @@ namespace TarodevController
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-            m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+            m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
             m_Player_Switch = m_Player.FindAction("Switch", throwIfNotFound: true);
         }
 
@@ -455,7 +455,7 @@ namespace TarodevController
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Dash;
-        private readonly InputAction m_Player_Attack;
+        private readonly InputAction m_Player_Interact;
         private readonly InputAction m_Player_Switch;
         public struct PlayerActions
         {
@@ -464,7 +464,7 @@ namespace TarodevController
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
-            public InputAction @Attack => m_Wrapper.m_Player_Attack;
+            public InputAction @Interact => m_Wrapper.m_Player_Interact;
             public InputAction @Switch => m_Wrapper.m_Player_Switch;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -484,9 +484,9 @@ namespace TarodevController
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
                 @Switch.started += instance.OnSwitch;
                 @Switch.performed += instance.OnSwitch;
                 @Switch.canceled += instance.OnSwitch;
@@ -503,9 +503,9 @@ namespace TarodevController
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
-                @Attack.started -= instance.OnAttack;
-                @Attack.performed -= instance.OnAttack;
-                @Attack.canceled -= instance.OnAttack;
+                @Interact.started -= instance.OnInteract;
+                @Interact.performed -= instance.OnInteract;
+                @Interact.canceled -= instance.OnInteract;
                 @Switch.started -= instance.OnSwitch;
                 @Switch.performed -= instance.OnSwitch;
                 @Switch.canceled -= instance.OnSwitch;
@@ -576,7 +576,7 @@ namespace TarodevController
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
-            void OnAttack(InputAction.CallbackContext context);
+            void OnInteract(InputAction.CallbackContext context);
             void OnSwitch(InputAction.CallbackContext context);
         }
     }

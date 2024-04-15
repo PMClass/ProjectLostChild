@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/MainMenu.unity
     guid: 1e879e7b4d9fa5c42a7d0e49cef778f2
   - enabled: 1
-    path: Assets/Scenes/Level01.unity
+    path: Assets/Scenes/PauseScene.unity
     guid: 5f96ae537237ef047ab157e0eb4b26b3
+  - enabled: 1
+    path: Assets/Scenes/Room1.unity
+    guid: bbdc9c0c4ac796447bab1aa8a51a3738
+  - enabled: 1
+    path: Assets/Scenes/Levels/LevelLayout1 2.unity
+    guid: 2d634dd40d904c94282b779d14ec3140
   m_configObjects: {}

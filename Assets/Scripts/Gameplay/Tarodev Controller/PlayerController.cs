@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 namespace TarodevController
@@ -16,6 +17,8 @@ namespace TarodevController
         private Rigidbody2D _rb;
         private PlayerInput _playerInput;
         private PlayerConditions _playerC;
+        private PlayerInputActions playerInputAction;
+        [SerializeField] private bool isControlled;
 
         private CompanionController _coCtrl;
 
@@ -97,11 +100,30 @@ namespace TarodevController
             SetupCharacter();
 
             PhysicsSimulator.Instance.AddPlayer(this);
+
+            isControlled = false;
+
+            playerInputAction = new PlayerInputActions();
+        }
+
+        private void OnEnable()
+        {
+            playerInputAction.Enable();
+        }
+        private void OnDisable()
+        {
+            playerInputAction.Disable();
         }
 
         private void OnDestroy() => PhysicsSimulator.Instance.RemovePlayer(this);
 
         public void OnValidate() => SetupCharacter();
+
+        private void Update()
+        {
+            if (playerInputAction.Player.Switch.triggered) SwitchToggle();
+            
+        }
 
         public void TickUpdate(float delta, float time)
         {
@@ -143,6 +165,8 @@ namespace TarodevController
             CleanFrameData();
 
             SaveCharacterState();
+
+            
         }
 
         #endregion
@@ -152,6 +176,11 @@ namespace TarodevController
         private bool _cachedQueryMode, _cachedQueryTriggers;
         private GeneratedCharacterSize _character;
         private const float GRAVITY_SCALE = 1;
+
+        private void SwitchToggle()
+        {
+            isControlled = !isControlled;
+        }
 
         private void SetupCharacter()
         {
@@ -757,6 +786,7 @@ namespace TarodevController
         private const float SLOPE_ANGLE_FOR_EXACT_MOVEMENT = 0.7f;
         private IPhysicsMover _lastPlatform;
         private float _lastFrameY;
+        
 
         private void TraceGround()
         {
@@ -813,125 +843,131 @@ namespace TarodevController
 
         private void Move()
         {
-            if (_forceToApplyThisFrame != Vector2.zero)
+            if (!isControlled)
             {
-                _rb.velocity += AdditionalFrameVelocities();
-                _rb.AddForce(_forceToApplyThisFrame * _rb.mass, ForceMode2D.Impulse);
-
-                // Returning provides the crispest & most accurate jump experience
-                // Required for reliable slope jumps
-                return;
-            }
-
-            if (_dashing)
-            {
-                SetVelocity(_dashVel);
-                return;
-            }
-
-            if (_isOnWall)
-            {
-                _constantForce.force = Vector2.zero;
-
-                float wallVelocity;
-                if (_frameInput.Move.y != 0) wallVelocity = _frameInput.Move.y * Stats.WallClimbSpeed;
-                else wallVelocity = Mathf.MoveTowards(Mathf.Min(Velocity.y, 0), -Stats.WallClimbSpeed, Stats.WallFallAcceleration * _delta);
-
-                SetVelocity(new Vector2(_rb.velocity.x, wallVelocity));
-                return;
-            }
-
-            if (ClimbingLadder)
-            {
-                _constantForce.force = Vector2.zero;
-                _rb.gravityScale = 0;
-
-                var goalVelocity = Vector2.zero;
-                goalVelocity.y = _frameInput.Move.y * (_frameInput.Move.y > 0 ? Stats.LadderClimbSpeed : Stats.LadderSlideSpeed);
-
-                // Horizontal
-                float goalX;
-                if (Stats.SnapToLadders && _frameInput.Move.x == 0)
+                if (_forceToApplyThisFrame != Vector2.zero)
                 {
-                    var targetX = _ladderHit.transform.position.x;
-                    goalX = Mathf.SmoothDamp(_framePosition.x, targetX, ref _ladderSnapVel, Stats.LadderSnapTime);
+                    _rb.velocity += AdditionalFrameVelocities();
+                    _rb.AddForce(_forceToApplyThisFrame * _rb.mass, ForceMode2D.Impulse);
+
+                    // Returning provides the crispest & most accurate jump experience
+                    // Required for reliable slope jumps
+                    return;
+                }
+
+
+                if (_dashing)
+                {
+                    SetVelocity(_dashVel);
+                    return;
+                }
+
+                if (_isOnWall)
+                {
+                    _constantForce.force = Vector2.zero;
+
+                    float wallVelocity;
+                    if (_frameInput.Move.y != 0) wallVelocity = _frameInput.Move.y * Stats.WallClimbSpeed;
+                    else wallVelocity = Mathf.MoveTowards(Mathf.Min(Velocity.y, 0), -Stats.WallClimbSpeed, Stats.WallFallAcceleration * _delta);
+
+                    SetVelocity(new Vector2(_rb.velocity.x, wallVelocity));
+                    return;
+                }
+
+                if (ClimbingLadder)
+                {
+                    _constantForce.force = Vector2.zero;
+                    _rb.gravityScale = 0;
+
+                    var goalVelocity = Vector2.zero;
+                    goalVelocity.y = _frameInput.Move.y * (_frameInput.Move.y > 0 ? Stats.LadderClimbSpeed : Stats.LadderSlideSpeed);
+
+                    // Horizontal
+                    float goalX;
+                    if (Stats.SnapToLadders && _frameInput.Move.x == 0)
+                    {
+                        var targetX = _ladderHit.transform.position.x;
+                        goalX = Mathf.SmoothDamp(_framePosition.x, targetX, ref _ladderSnapVel, Stats.LadderSnapTime);
+                    }
+                    else
+                    {
+                        goalX = Mathf.MoveTowards(_framePosition.x, _framePosition.x + _frameInput.Move.x, Stats.Acceleration * Stats.LadderShimmySpeedMultiplier * _delta);
+                    }
+
+                    goalVelocity.x = (goalX - _framePosition.x) / _delta;
+
+                    SetVelocity(goalVelocity);
+
+                    return;
+                }
+
+                var extraForce = new Vector2(0, _grounded ? 0 : -Stats.ExtraConstantGravity * (_endedJumpEarly && Velocity.y > 0 ? Stats.EndJumpEarlyExtraForceMultiplier : 1));
+                _constantForce.force = extraForce * _rb.mass;
+
+                var targetSpeed = _hasInputThisFrame ? Stats.BaseSpeed : 0;
+
+                if (Crouching)
+                {
+                    var crouchPoint = Mathf.InverseLerp(0, Stats.CrouchSlowDownTime, _time - _timeStartedCrouching);
+                    targetSpeed *= Mathf.Lerp(1, Stats.CrouchSpeedModifier, crouchPoint);
+                }
+
+                var step = _hasInputThisFrame ? Stats.Acceleration : Stats.Friction;
+
+                var xDir = (_hasInputThisFrame ? _frameDirection : Velocity.normalized);
+
+                // Quicker direction change
+                if (Vector3.Dot(_trimmedFrameVelocity, _frameDirection) < 0) step *= Stats.DirectionCorrectionMultiplier;
+
+                Vector2 newVelocity;
+                step *= _delta;
+                if (_grounded)
+                {
+                    var speed = Mathf.MoveTowards(Velocity.magnitude, targetSpeed, step);
+
+                    // Blend the two approaches
+                    var targetVelocity = xDir * speed;
+
+                    // Calculate the new speed based on the current and target speeds
+                    var newSpeed = Mathf.MoveTowards(Velocity.magnitude, targetVelocity.magnitude, step);
+
+                    // TODO: Lets actually trace the ground direction automatically instead of direct
+                    var smoothed = Vector2.MoveTowards(Velocity, targetVelocity, step); // Smooth but potentially inaccurate
+                    var direct = targetVelocity.normalized * newSpeed; // Accurate but abrupt
+                    var slopePoint = Mathf.InverseLerp(0, SLOPE_ANGLE_FOR_EXACT_MOVEMENT, Mathf.Abs(_frameDirection.y)); // Blend factor
+
+                    // Calculate the blended velocity
+                    newVelocity = Vector2.Lerp(smoothed, direct, slopePoint);
                 }
                 else
                 {
-                    goalX = Mathf.MoveTowards(_framePosition.x, _framePosition.x + _frameInput.Move.x, Stats.Acceleration * Stats.LadderShimmySpeedMultiplier * _delta);
+                    step *= Stats.AirFrictionMultiplier;
+
+                    if (_wallJumpInputNerfPoint < 1 && (int)Mathf.Sign(xDir.x) == (int)Mathf.Sign(_wallDirectionForJump))
+                    {
+                        if (_time < _returnWallInputLossAfter) xDir.x = -_wallDirectionForJump;
+                        else xDir.x *= _wallJumpInputNerfPoint;
+                    }
+
+                    var targetX = Mathf.MoveTowards(_trimmedFrameVelocity.x, xDir.x * targetSpeed, step);
+                    newVelocity = new Vector2(targetX, _rb.velocity.y);
                 }
 
-                goalVelocity.x = (goalX - _framePosition.x) / _delta;
+                SetVelocity((newVelocity + AdditionalFrameVelocities()) * _currentFrameSpeedModifier);
 
-                SetVelocity(goalVelocity);
-
-                return;
-            }
-
-            var extraForce = new Vector2(0, _grounded ? 0 : -Stats.ExtraConstantGravity * (_endedJumpEarly && Velocity.y > 0 ? Stats.EndJumpEarlyExtraForceMultiplier : 1));
-            _constantForce.force = extraForce * _rb.mass;
-
-            var targetSpeed = _hasInputThisFrame ? Stats.BaseSpeed : 0;
-
-            if (Crouching)
-            {
-                var crouchPoint = Mathf.InverseLerp(0, Stats.CrouchSlowDownTime, _time - _timeStartedCrouching);
-                targetSpeed *= Mathf.Lerp(1, Stats.CrouchSpeedModifier, crouchPoint);
-            }
-
-            var step = _hasInputThisFrame ? Stats.Acceleration : Stats.Friction;
-
-            var xDir = (_hasInputThisFrame ? _frameDirection : Velocity.normalized);
-
-            // Quicker direction change
-            if (Vector3.Dot(_trimmedFrameVelocity, _frameDirection) < 0) step *= Stats.DirectionCorrectionMultiplier;
-
-            Vector2 newVelocity;
-            step *= _delta;
-            if (_grounded)
-            {
-                var speed = Mathf.MoveTowards(Velocity.magnitude, targetSpeed, step);
-
-                // Blend the two approaches
-                var targetVelocity = xDir * speed;
-
-                // Calculate the new speed based on the current and target speeds
-                var newSpeed = Mathf.MoveTowards(Velocity.magnitude, targetVelocity.magnitude, step);
-
-                // TODO: Lets actually trace the ground direction automatically instead of direct
-                var smoothed = Vector2.MoveTowards(Velocity, targetVelocity, step); // Smooth but potentially inaccurate
-                var direct = targetVelocity.normalized * newSpeed; // Accurate but abrupt
-                var slopePoint = Mathf.InverseLerp(0, SLOPE_ANGLE_FOR_EXACT_MOVEMENT, Mathf.Abs(_frameDirection.y)); // Blend factor
-
-                // Calculate the blended velocity
-                newVelocity = Vector2.Lerp(smoothed, direct, slopePoint);
-            }
-            else
-            {
-                step *= Stats.AirFrictionMultiplier;
-
-                if (_wallJumpInputNerfPoint < 1 && (int)Mathf.Sign(xDir.x) == (int)Mathf.Sign(_wallDirectionForJump))
+                Vector2 AdditionalFrameVelocities()
                 {
-                    if (_time < _returnWallInputLossAfter) xDir.x = -_wallDirectionForJump;
-                    else xDir.x *= _wallJumpInputNerfPoint;
+                    if (_immediateMove.sqrMagnitude > SKIN_WIDTH)
+                    {
+                        _rb.MovePosition(_framePosition + _immediateMove);
+                    }
+
+                    _totalTransientVelocityAppliedLastFrame = _frameTransientVelocity + _decayingTransientVelocity;
+                    return _totalTransientVelocityAppliedLastFrame;
                 }
 
-                var targetX = Mathf.MoveTowards(_trimmedFrameVelocity.x, xDir.x * targetSpeed, step);
-                newVelocity = new Vector2(targetX, _rb.velocity.y);
             }
 
-            SetVelocity((newVelocity + AdditionalFrameVelocities()) * _currentFrameSpeedModifier);
-
-            Vector2 AdditionalFrameVelocities()
-            {
-                if (_immediateMove.sqrMagnitude > SKIN_WIDTH)
-                {
-                    _rb.MovePosition(_framePosition + _immediateMove);
-                }
-
-                _totalTransientVelocityAppliedLastFrame = _frameTransientVelocity + _decayingTransientVelocity;
-                return _totalTransientVelocityAppliedLastFrame;
-            }
         }
 
         private void SetVelocity(Vector2 newVel)

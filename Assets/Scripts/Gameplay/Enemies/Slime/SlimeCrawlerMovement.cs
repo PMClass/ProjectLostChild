@@ -25,8 +25,11 @@ public class SlimeCrawlerMovement : MonoBehaviour
     private float offset;
     private float zAxisAdd;
     private int direction;
+
+    [SerializeField] private Animator animator;
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         slimeRb = GetComponent<Rigidbody2D>();
         hasTurn = false;
         direction = 1;
@@ -48,6 +51,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
 
     private void Movement()
     {
+        
         slimeRb.velocity = transform.right * moveSpeed;
     }
 

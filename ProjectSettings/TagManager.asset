@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Checkpoint
+  - Interactable
   - LoadingArea
   - Slime
   layers:
@@ -13,12 +15,12 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - CompImpass
   - Player
   - Climbable
   - Ladders
-  - CompanionInteract
-  - MoveablePlatform
+  - CompInteract
+  - 
   - 
   - 
   - 

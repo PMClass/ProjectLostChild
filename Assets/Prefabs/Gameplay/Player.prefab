@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c31944470c32a84f82140f84a1cf040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isControlled: 0
   <Stats>k__BackingField: {fileID: 11400000, guid: 894dfe33661263b42a8e1490d64c0424, type: 2}
   <FallHeight>k__BackingField: 0
   <JumpHeightReduction>k__BackingField: 0.2

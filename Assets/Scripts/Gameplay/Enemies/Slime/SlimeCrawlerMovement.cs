@@ -51,7 +51,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
 
     private void Movement()
     {
-        
+        animator.SetBool("hasTurn", false);
         slimeRb.velocity = transform.right * moveSpeed;
     }
 
@@ -64,6 +64,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
         {
             if (hasTurn == false)
             {
+                animator.SetBool("hasTrue", true);
                 zAxisAdd -= 90;
                 transform.eulerAngles = new Vector3(0, 0, zAxisAdd);
                 if (direction == 1)

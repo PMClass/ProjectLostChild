@@ -945,98 +945,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1590234286
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1590234289}
-  - component: {fileID: 1590234288}
-  - component: {fileID: 1590234287}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!81 &1590234287
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590234286}
-  m_Enabled: 1
---- !u!20 &1590234288
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590234286}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &1590234289
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590234286}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.65, y: 1.36, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1622479809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,8 +1154,8 @@ Transform:
   m_GameObject: {fileID: 1758097723}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.5425, y: 18.98, z: 0}
-  m_LocalScale: {x: 33.997547, y: 1.7526662, z: 1}
+  m_LocalPosition: {x: 16.6505, y: 18.98, z: 0}
+  m_LocalScale: {x: 50.21438, y: 1.7526662, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1307,6 +1215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1760087113}
   - component: {fileID: 1760087112}
+  - component: {fileID: 1760087114}
   m_Layer: 0
   m_Name: Static Ground (6)
   m_TagString: Untagged
@@ -1381,6 +1290,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1760087114
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760087111}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1820295757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4349106621026647703, guid: 491a6c3547ed74645910f61a2520b76e, type: 3}
@@ -1621,6 +1575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084786158}
   - component: {fileID: 2084786157}
+  - component: {fileID: 2084786159}
   m_Layer: 0
   m_Name: Static Ground (7)
   m_TagString: Untagged
@@ -1695,6 +1650,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!61 &2084786159
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084786156}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &487808038795766285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1746,6 +1746,10 @@ PrefabInstance:
     - target: {fileID: 7111998282633009869, guid: e4d44ac944a40e442b368b1b2de05c98, type: 3}
       propertyPath: m_Name
       value: Companion Interactable Button (On Off) Placeholder
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111998282633009869, guid: e4d44ac944a40e442b368b1b2de05c98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1804,6 +1808,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret Placeholder
       objectReference: {fileID: 0}
+    - target: {fileID: 6857318791800342108, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1820,6 +1828,10 @@ PrefabInstance:
     - target: {fileID: 1037115235365156088, guid: 45a7efcf1a9c83345931c7bfd885eeed, type: 3}
       propertyPath: m_Name
       value: Companion Interactable Button (Move) Placeholder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037115235365156088, guid: 45a7efcf1a9c83345931c7bfd885eeed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3281459678184262066, guid: 45a7efcf1a9c83345931c7bfd885eeed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1920,7 +1932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8676525561904594169, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1987,6 +1999,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Moving Platform (Vertical) Placeholder
       objectReference: {fileID: 0}
+    - target: {fileID: 9091118207597611986, guid: 84e0e5c813a5d9e4d91cc11050478316, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2047,6 +2063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exploding Enemy Start Point
       objectReference: {fileID: 0}
+    - target: {fileID: 8372314306331348086, guid: 4c797fe73efd376489b210480dab578f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2063,6 +2083,10 @@ PrefabInstance:
     - target: {fileID: 2825268270420588209, guid: b76b2cd2040c1be498b96a7d917fa8d8, type: 3}
       propertyPath: m_Name
       value: Button Triggered Moving Platform (Up Down)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825268270420588209, guid: b76b2cd2040c1be498b96a7d917fa8d8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8027312957461480751, guid: b76b2cd2040c1be498b96a7d917fa8d8, type: 3}
       propertyPath: m_LocalScale.x
@@ -2128,6 +2152,10 @@ PrefabInstance:
     - target: {fileID: 4349106621026647703, guid: 491a6c3547ed74645910f61a2520b76e, type: 3}
       propertyPath: m_Name
       value: Moving Platform (Horizontal) Placeholder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4349106621026647703, guid: 491a6c3547ed74645910f61a2520b76e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4362631296886797511, guid: 491a6c3547ed74645910f61a2520b76e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2197,6 +2225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime Placeholder
       objectReference: {fileID: 0}
+    - target: {fileID: 6674599958938427414, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7642329357053289961, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.92
@@ -2253,6 +2285,10 @@ PrefabInstance:
     - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_Name
       value: Static Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.x
@@ -2322,6 +2358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button Triggered Gate (Start On) Placeholder
       objectReference: {fileID: 0}
+    - target: {fileID: 615507926002807632, guid: b4d8e6311ea8f8343b97b2d39f82adbd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7775535253925432947, guid: b4d8e6311ea8f8343b97b2d39f82adbd, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.81641716
@@ -2379,7 +2419,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1590234289}
   - {fileID: 8243466749910672010}
   - {fileID: 4010209892426531002}
   - {fileID: 833268180}

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/GameScene.unity.meta
+guid: a0bd181c0c3dbe74781ef2608bb1ae0e
+========
+guid: c04e0311f02472345a1081716d5a9bcf
+folderAsset: yes
+>>>>>>>> PlayerCompanionRefactoring:Assets/Scenes/Levels.meta
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

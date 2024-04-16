@@ -8,6 +8,7 @@ TagManager:
   - Interactable
   - LoadingArea
   - Slime
+  - Companion
   layers:
   - Default
   - TransparentFX

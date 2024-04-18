@@ -25,7 +25,7 @@ public class CoSensor : MonoBehaviour
     {
         GameObject collided = collision.gameObject;
 
-        if (collided != null)
+        if (!collision.isTrigger && collided != null)
         {
             if (collided.CompareTag("Interactable"))
             {

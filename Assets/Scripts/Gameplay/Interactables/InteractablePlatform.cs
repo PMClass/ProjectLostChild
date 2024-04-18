@@ -1,33 +1,37 @@
 using UnityEngine;
+using TarodevController;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class InteractablePlatform : MonoBehaviour, IObjInteractable
+public class InteractablePlatform : PlatformBase, IObjInteractable
 {
     #region References
-    private Rigidbody2D _rb;
+
     #endregion
 
     #region Inspector Values
     public bool CanMoveX = true;
     public bool CanMoveY = true;
+    public float MoveSpeed = 5f;
     #endregion
 
-    void Awake()
+    #region Private Vars
+    private Vector2 _startPosition;
+    private Vector2 _offset;
+    #endregion
+
+    protected override void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        base.Awake();
+        _startPosition = Rb.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    bool inputDebounce = false;
 
+    protected override Vector2 Evaluate(float delta)
+    {
+        inputDebounce = false;
+        return Vector2.Lerp(transform.position, (Vector2)transform.position + _offset, delta*MoveSpeed);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void Interact()
     {
 
@@ -35,7 +39,12 @@ public class InteractablePlatform : MonoBehaviour, IObjInteractable
 
     public void Interact(Vector2 data)
     {
-        if (CanMoveX) _rb.AddForce(new(data.x*_rb.mass, 0), ForceMode2D.Impulse);
-        if (CanMoveY) _rb.AddForce(new(0, data.y*_rb.mass), ForceMode2D.Impulse);
+        _offset = Vector2.zero;
+        if (!inputDebounce)
+        {
+            inputDebounce = true;
+            if (CanMoveX) _offset += new Vector2(data.x, 0);
+            if (CanMoveY) _offset += new Vector2(0, data.y);
+        }
     }
 }

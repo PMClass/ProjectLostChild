@@ -159,8 +159,8 @@ namespace TarodevController
             // begin forwarding input data to companion character if controllled
             CalculateCMovement();
             CalculateCInteract();
-
-            if (!isCompanionControlled) CalculateCrouch();
+            
+            CalculateCrouch();
 
             CleanFrameData();
 
@@ -263,7 +263,7 @@ namespace TarodevController
             Right = new Vector2(Up.y, -Up.x);
             _framePosition = _rb.position;
 
-            _hasInputThisFrame = _frameInput.Move.x != 0 && !isCompanionControlled && !IsDead; // do not move if companion is controlled
+            _hasInputThisFrame = _frameInput.Move.x != 0 && !IsDead;
             _hasAnyMovement = _frameInput.Move.magnitude > 0;
 
             Velocity = _rb.velocity;
@@ -743,7 +743,7 @@ namespace TarodevController
                 - i am crouching, and
                 - i am no longer touching ground
                 then i should try uncrouching (force uncrouch because i am not on ground)*/
-            if (!Crouching && (CrouchPressed || IsHurt) && _grounded)
+            if (!Crouching && ((CrouchPressed && !isCompanionControlled) || IsHurt) && _grounded)
                 ToggleCrouching(true);
             else if (Crouching && !_grounded) ToggleCrouching(false);
 
@@ -843,8 +843,6 @@ namespace TarodevController
 
         private void Move()
         {
-            if (!isControlled)
-            {
                 if (_forceToApplyThisFrame != Vector2.zero)
                 {
                     _rb.velocity += AdditionalFrameVelocities();
@@ -854,7 +852,6 @@ namespace TarodevController
                     // Required for reliable slope jumps
                     return;
                 }
-
 
                 if (_dashing)
                 {
@@ -914,7 +911,7 @@ namespace TarodevController
 
                 var step = _hasInputThisFrame ? Stats.Acceleration : Stats.Friction;
 
-                var xDir = (_hasInputThisFrame ? _frameDirection : Velocity.normalized);
+                var xDir = (_hasInputThisFrame && !isCompanionControlled ? _frameDirection : Velocity.normalized);
 
                 // Quicker direction change
                 if (Vector3.Dot(_trimmedFrameVelocity, _frameDirection) < 0) step *= Stats.DirectionCorrectionMultiplier;
@@ -965,9 +962,6 @@ namespace TarodevController
                     _totalTransientVelocityAppliedLastFrame = _frameTransientVelocity + _decayingTransientVelocity;
                     return _totalTransientVelocityAppliedLastFrame;
                 }
-
-            }
-
         }
 
         private void SetVelocity(Vector2 newVel)

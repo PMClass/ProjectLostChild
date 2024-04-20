@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 6418317219939810848}
   - component: {fileID: 409503591225513501}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

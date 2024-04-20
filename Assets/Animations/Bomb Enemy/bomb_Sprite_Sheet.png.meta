@@ -1,0 +1,550 @@
+fileFormatVersion: 2
+guid: 68df7038bcfb42744861c3b387cf3924
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 814
+        width: 140
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82d3f2a1714eba24193c32c0dd6c0d32
+      internalID: -882394297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 814
+        width: 133
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d698ed9a734b654eb81d0bf991940e1
+      internalID: -825404549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 814
+        width: 140
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea394c86993a2bc43ad590a9c8435f5b
+      internalID: -1601696468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 814
+        width: 133
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75d58c414ab095b48a243ee32c605c87
+      internalID: 810903661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 814
+        width: 140
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dcf828ecce3eb74690d81d2c759ad11
+      internalID: 1671105779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 594
+        width: 140
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0507233645d47a544b6128ad3f66ea8b
+      internalID: 1006079795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 594
+        width: 140
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dcddb3f78e80a2488f5d35b1b522e3d
+      internalID: 20143529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 588
+        width: 149
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbd37b45e782b794ca889234b0dd9ad6
+      internalID: 1305610656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 589
+        width: 181
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd7a350e2fb429f43b57f4df1faeede3
+      internalID: 2126509885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 589
+        width: 181
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b1bea06e30a6dc49a02f60388f62368
+      internalID: -489034057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 364
+        width: 140
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31bfb2072297174419b5d17929b91f91
+      internalID: -2142106158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 364
+        width: 140
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0da6fdafac955174aaeb69f4b4de9622
+      internalID: 1796146579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 362
+        width: 133
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d63d2a034e72e4d893fbfa0c15d558
+      internalID: -668879248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 363
+        width: 139
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cab5becbbe07fab49a3c225739fd79d5
+      internalID: 765055433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 364
+        width: 140
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f065357899ce07f46ae0e2f56a962bcf
+      internalID: 271594882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 124
+        width: 140
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4d41ecf307ebd947af72b28195b1cdc
+      internalID: 396151018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 122
+        width: 132
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d29ab75018d54b4fab14f5eb839b681
+      internalID: 136006445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bomb_Sprite_Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 122
+        width: 132
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc63b44b3b6cc714b9bd13b814aff071
+      internalID: 1695056302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      bomb_Sprite_Sheet_0: 199801795
+      bomb_Sprite_Sheet_1: -981345107
+      bomb_Sprite_Sheet_10: 810903661
+      bomb_Sprite_Sheet_11: -1313329867
+      bomb_Sprite_Sheet_12: 1671105779
+      bomb_Sprite_Sheet_13: 907582784
+      bomb_Sprite_Sheet_14: -2100437516
+      bomb_Sprite_Sheet_15: -1577760429
+      bomb_Sprite_Sheet_16: -1817735237
+      bomb_Sprite_Sheet_17: 1006079795
+      bomb_Sprite_Sheet_18: 20143529
+      bomb_Sprite_Sheet_19: 1305610656
+      bomb_Sprite_Sheet_2: 770102745
+      bomb_Sprite_Sheet_20: -287536422
+      bomb_Sprite_Sheet_21: 2126509885
+      bomb_Sprite_Sheet_22: -489034057
+      bomb_Sprite_Sheet_23: 1493696309
+      bomb_Sprite_Sheet_24: -2050305981
+      bomb_Sprite_Sheet_25: -1657862541
+      bomb_Sprite_Sheet_26: 109545205
+      bomb_Sprite_Sheet_27: 686093700
+      bomb_Sprite_Sheet_28: -755288907
+      bomb_Sprite_Sheet_29: -328979373
+      bomb_Sprite_Sheet_3: -1264349846
+      bomb_Sprite_Sheet_30: -2142106158
+      bomb_Sprite_Sheet_31: 1796146579
+      bomb_Sprite_Sheet_32: -668879248
+      bomb_Sprite_Sheet_33: 758516066
+      bomb_Sprite_Sheet_34: 765055433
+      bomb_Sprite_Sheet_35: -11104043
+      bomb_Sprite_Sheet_36: 271594882
+      bomb_Sprite_Sheet_37: 1155928253
+      bomb_Sprite_Sheet_38: -502504721
+      bomb_Sprite_Sheet_39: 1525529410
+      bomb_Sprite_Sheet_4: -626131338
+      bomb_Sprite_Sheet_40: -625609267
+      bomb_Sprite_Sheet_41: -915112573
+      bomb_Sprite_Sheet_42: 396151018
+      bomb_Sprite_Sheet_43: 136006445
+      bomb_Sprite_Sheet_44: 1695056302
+      bomb_Sprite_Sheet_5: -1473761107
+      bomb_Sprite_Sheet_6: -1083146646
+      bomb_Sprite_Sheet_7: -882394297
+      bomb_Sprite_Sheet_8: -825404549
+      bomb_Sprite_Sheet_9: -1601696468
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

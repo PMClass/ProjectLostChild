@@ -13,6 +13,6 @@ public class UIStartGame : MonoBehaviour
 
     public void StartNewGame()
     {
-        ScenesManager.instance.LoadNewGame();
+        GameManager.Instance.StartGame();
     }
 }

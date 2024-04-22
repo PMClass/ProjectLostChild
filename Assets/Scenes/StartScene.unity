@@ -152,6 +152,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c95e9cba30c7d24981cc17ef8bfca4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MenuScene:
+    asset: {fileID: 102900000, guid: 1e879e7b4d9fa5c42a7d0e49cef778f2, type: 3}
+    guid: 1e879e7b4d9fa5c42a7d0e49cef778f2
+  PauseScene:
+    asset: {fileID: 102900000, guid: 5f96ae537237ef047ab157e0eb4b26b3, type: 3}
+    guid: 5f96ae537237ef047ab157e0eb4b26b3
+  GameScene:
+    asset: {fileID: 102900000, guid: b2ed87969cf3a95499a60b5e6b585c02, type: 3}
+    guid: b2ed87969cf3a95499a60b5e6b585c02
 --- !u!4 &289606353
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 {
-    "name": "Pause",
+    "name": "PauseAction",
     "maps": [
         {
             "name": "Pause",
@@ -23,6 +23,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
+                    "action": "PauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f43af33f-f444-4246-baac-6b3f6a29a50f",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "PauseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false

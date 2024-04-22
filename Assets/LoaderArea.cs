@@ -6,12 +6,12 @@ public class LoaderArea : MonoBehaviour
 {
     public Transform target;
     public float xOffset = 5;
-    public Camera mainCamera = Camera.main;
+    public Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        mainCamera = Camera.main;
     }
 
     // Update is called once per frame

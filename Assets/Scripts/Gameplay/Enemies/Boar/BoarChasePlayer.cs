@@ -33,7 +33,7 @@ public class BoarChasePlayer : MonoBehaviour
 
     public PlayerController playerController;
 
-    public CapsuleCollider2D capsuleCollider;
+    public bool facingRight;
 
     private void Awake()
     {
@@ -43,8 +43,7 @@ public class BoarChasePlayer : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         state = State.Roaming;
         playerController = FindObjectOfType<PlayerController>();
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
-      
+        facingRight = false;
     }
 
     private void FixedUpdate()
@@ -61,6 +60,10 @@ public class BoarChasePlayer : MonoBehaviour
                     if (Vector2.Distance(transform.position, patrolPoints[0].position) < 0.2f)
                     {
                         patrolDestination = 1;
+                        if (!facingRight)
+                        {
+                            Flip();
+                        }
 
                     }
                 }
@@ -71,6 +74,10 @@ public class BoarChasePlayer : MonoBehaviour
                     if (Vector2.Distance(transform.position, patrolPoints[1].position) < 0.2f)
                     {
                         patrolDestination = 0;
+                        if (facingRight)
+                        {
+                            Flip();
+                        }
 
                     }
                 }
@@ -100,17 +107,26 @@ public class BoarChasePlayer : MonoBehaviour
                 }
 
                 // If the player is on the left side of the boar, go left
-                if (transform.position.x > playerTransform.position.x)
+                if (transform.position.x > playerTransform.position.x )
                 {
                     transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-
-
+                    if (facingRight)
+                    {
+                        Flip();
+                    }
+                  
                 }
 
                 // If the player is on the right side of the boar, chase right
                 if (transform.position.x < playerTransform.position.x)
                 {
                     transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+                    if (!facingRight)
+                    {
+                        Flip();
+                    }
+                   
+                    
                 }
 
                 if(Vector2.Distance(transform.position, playerTransform.position) < hitDistance)
@@ -148,6 +164,14 @@ public class BoarChasePlayer : MonoBehaviour
     
     }
 
+    private void Flip()
+    {
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
+        facingRight = !facingRight;
+    }
+
     IEnumerator Attack()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -155,15 +179,17 @@ public class BoarChasePlayer : MonoBehaviour
 
     }
 
-    private void AttackPlayer()
-    {
-       
-    }
+ 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if(collision.gameObject.tag == "Player")
+        {
+            playerController.AddFrameForce(new(10, 10), true);
+        }
     }
-    
+
+   
+
 
 }

@@ -25,7 +25,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
     [SerializeField]
     private float offset;
     private float zAxisAdd;
-    private int direction;
+    public int direction;
 
     public PlayerController playerController;
     public float xForce;
@@ -33,6 +33,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
 
     public float maxHitTime;
     private float hitTime;
+    public bool IsGoingLeft;
 
     
     public Transform target;
@@ -59,8 +60,15 @@ public class SlimeCrawlerMovement : MonoBehaviour
 
     private void Movement()
     {
-      
-        slimeRb.velocity = transform.right * moveSpeed;
+        if(IsGoingLeft == true)
+        {
+            slimeRb.velocity = -transform.right * moveSpeed;
+        }
+
+        if(IsGoingLeft == false)
+        {
+            slimeRb.velocity = transform.right * moveSpeed;
+        }
     }
 
     private void CheckOnGroundOrWall()

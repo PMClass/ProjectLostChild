@@ -239,8 +239,10 @@ public class ExplosiveEnemyScript : MonoBehaviour
             Physics2D.IgnoreLayerCollision(11, 11);
         }
 
-        
-
+        if (collision.gameObject.tag == "Companion")
+        {
+            Physics2D.IgnoreLayerCollision(11, 11);
+        }
     }
 
 

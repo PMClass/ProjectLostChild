@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7883236454902658997}
   - component: {fileID: 8663504834783626642}
   - component: {fileID: 2385390027377445982}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BombGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,9 +119,9 @@ GameObject:
   - component: {fileID: 4887631665619736091}
   - component: {fileID: 7898194808961697158}
   - component: {fileID: 8291830914653870079}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ExplosiveEnemy
-  m_TagString: Untagged
+  m_TagString: ExplosiveEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,7 +227,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   playerController: {fileID: 0}
   xForce: 20
-  yForce: 20
+  yForce: 13
+  maxHitTime: 0
 --- !u!61 &7898194808961697158
 BoxCollider2D:
   m_ObjectHideFlags: 0

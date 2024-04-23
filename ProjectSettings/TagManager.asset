@@ -9,6 +9,7 @@ TagManager:
   - LoadingArea
   - Slime
   - Companion
+  - ExplosiveEnemy
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Climbable
   - Ladders
   - CompInteract
-  - 
-  - 
+  - Enemy
+  - CompanionLayer
   - 
   - 
   - 

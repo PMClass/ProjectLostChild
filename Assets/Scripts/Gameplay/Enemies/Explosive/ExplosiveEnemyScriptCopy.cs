@@ -47,6 +47,8 @@ public class ExplosiveEnemyScript : MonoBehaviour
     public float xForce;
     public float yForce;
 
+    public float maxHitTime;
+    private float hitTime;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -116,6 +118,10 @@ public class ExplosiveEnemyScript : MonoBehaviour
             animator.SetBool("chasePlayer", false);          
             StartCoroutine(Explode());
         }
+
+        hitTime += Time.deltaTime;
+
+        Physics2D.IgnoreLayerCollision(11, 12);
     }
 
     void Flip()
@@ -158,8 +164,10 @@ public class ExplosiveEnemyScript : MonoBehaviour
         
         notExploding = false;
         movingTime += Time.deltaTime;
-           
-        if(transform.position.x > target.position.x)
+
+      
+        rb.mass = 10;
+        if (transform.position.x > target.position.x)
         {
             facingRight = false;
         }
@@ -173,7 +181,7 @@ public class ExplosiveEnemyScript : MonoBehaviour
             animator.SetTrigger("explode");
             for (int i = 0; i < explosiveTicks; i++)
             {
-               
+
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX;
                 movingTime = 0;
                 bombSprite.color = turnRed;     
@@ -210,5 +218,30 @@ public class ExplosiveEnemyScript : MonoBehaviour
 
     }
 
-   
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player" && hitTime >= maxHitTime)
+        {
+            if (facingRight)
+            {
+                playerController.AddFrameForce(new(5, 5), true);
+            }
+            else
+            {
+                playerController.AddFrameForce(new(-5, 5), true);
+            }
+
+            hitTime = 0;
+        }
+
+        if(collision.gameObject.tag == "ExplosiveEnemy")
+        {
+            Physics2D.IgnoreLayerCollision(11, 11);
+        }
+
+        
+
+    }
+
+
 }

@@ -16,7 +16,9 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region References
-    [SerializeField] private SceneReference MenuScene, PauseScene, GameScene;
+    [SerializeField] private SceneReference MenuScene, GameScene;
+    [SerializeField] private GameObject UIPausePrefab;
+    [SerializeField] private GameObject PlayerPrefab;
     #endregion
 
     #region Inspector Variables
@@ -27,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     private GMState currentState = GMState.LOAD;
     #endregion
 
-    #region Setup & Loop
+    #region Initial Setup & Loop
     PauseAction pauseCtrl;
 
     override public void Awake()
@@ -39,13 +41,53 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
-        //pauseCtrl.Pause.PauseMenu.performed += _ => TogglePause();
         StartMenu();
     }
     
-
-    // Update is called once per frame
     void Update()
+    {
+        // these update functions run during gameplay or pause
+        if (currentState is GMState.GAME or GMState.PAUSE)
+        {
+            CalculatePausePressed();
+        }
+    }
+    #endregion
+
+    #region Scene changes
+    public void StartMenu()
+    {
+        // disable pause control
+        pauseCtrl.Disable();
+        // this function will always load the main menu and set state to MENU
+        SceneManager.LoadScene(MenuScene.BuildIndex);
+        currentState = GMState.MENU;
+    }
+
+    public void StartGame()
+    {
+        // this function may be called to load the gameplay scene if the current state is not GAME or PAUSE
+        if (currentState != GMState.GAME && currentState != GMState.PAUSE)
+        {
+            StartCoroutine(SetupGameScene());
+        }
+    }
+    #endregion
+
+    #region Utilities
+    // Gameplay Setup Function
+    IEnumerator SetupGameScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameScene.Name, LoadSceneMode.Single);
+        while (!asyncLoad.isDone) yield return null;
+        Debug.Log("Game Scene loaded.");
+
+        currentState = GMState.GAME;
+        SetupPauseMenu();
+    }
+
+    #region Update Functions
+    void CalculatePausePressed()
     {
         if (pauseCtrl.Pause.PauseMenu.triggered)
         {
@@ -55,17 +97,28 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
 
-    #region Scene changes
-    GameObject _pauseUI;
-    Canvas _pauseCanvas;
-
-    public void StartMenu()
+    #region Pause Menu Functions
+    void SetupPauseMenu()
     {
-        // this function will always load the main menu and set state to MENU
-        SceneManager.LoadScene(MenuScene.BuildIndex);
-        currentState = GMState.MENU;
+        if (UIPausePrefab != null)
+        {
+            _pauseUI = Instantiate(UIPausePrefab);
+
+            if (_pauseUI.TryGetComponent<Canvas>(out _pauseCanvas))
+            {
+                Debug.Log("Pause menu loaded, enabling pause action.");
+                pauseCtrl.Enable();
+            }
+            else
+            {
+                Debug.LogWarning("No Canvas in Pause UI!");
+            }
+        }
+        else Debug.LogWarning("No Pause UI Prefab!");
     }
 
+    GameObject _pauseUI;
+    Canvas _pauseCanvas;
     public void TogglePause()
     {
         // this function will only run if the current state is GAME or PAUSE
@@ -83,62 +136,12 @@ public class GameManager : Singleton<GameManager>
         }
         else Debug.Log("Pause now? Um, no. Currently " + currentState.ToString());
     }
-
-    public void StartGame()
-    {
-        // this function may be called to load the gameplay scene if the current state is not GAME or PAUSE
-        if (currentState != GMState.GAME && currentState != GMState.PAUSE)
-        {
-            StartCoroutine(SetupGameScene());
-        }
-    }
     #endregion
 
-    #region Utilities
-    IEnumerator SetupGameScene()
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameScene.Name, LoadSceneMode.Single);
-        while (!asyncLoad.isDone) yield return null;
-        Debug.Log("Game Scene loaded.");
+    #region Player Management Functions
+    GameObject _currentPlayer;
 
-        currentState = GMState.GAME;
-        StartCoroutine(SetupPauseScene());
-    }
-    IEnumerator SetupPauseScene()
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(PauseScene.Name, LoadSceneMode.Additive);
-        while (!asyncLoad.isDone) yield return null;
-        Debug.Log("Pause UI Scene loaded. Now looking for pause ui...");
+    #endregion
 
-        var newScene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
-        GameObject[] SceneRoot = newScene.GetRootGameObjects();
-        Debug.Log("Okay so... SceneRoot has " + SceneRoot.Length + " objects.");
-        foreach (var obj in SceneRoot)
-        {
-            Debug.Log("we've got " + obj.name);
-            if (obj.name == "Canvas-Pause")
-            {
-                _pauseUI = obj;
-                break;
-            }
-        }
-
-        if (_pauseUI == null)
-        {
-            Debug.LogWarning("No GameObject named Canvas-Pause!");
-        }
-        else
-        {
-            if (_pauseUI.TryGetComponent<Canvas>(out _pauseCanvas))
-            {
-                Debug.Log("Pause menu loaded, enabling pause action.");
-                pauseCtrl.Enable();
-            }
-            else
-            {
-                Debug.LogWarning("No Canvas in Pause UI!");
-            }
-        }
-    }
     #endregion
 }

@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class MainMenuButton : MonoBehaviour
 {
-   
     public void MainMenu()
     {
-        ScenesManager.instance.LoadMainMenu();
+        GameManager.Instance.StartMenu();
     }
    
 }

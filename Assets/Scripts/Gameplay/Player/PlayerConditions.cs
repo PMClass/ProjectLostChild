@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerConditions : MonoBehaviour
 {
+    #region References
     private PlayerController _playerCtrl;
 
     // --- Serialized Private Variables
@@ -20,15 +21,18 @@ public class PlayerConditions : MonoBehaviour
 
     // --- Just Private Variables
     private Vector2 InitialPos { get; set; }
-    
-    // --- Inspector Variables
+    #endregion
+
+    #region Interface
     // RecoverDelay controls
     [field: SerializeField] public float RecoverDelay { get; private set; } = 2f;
     [field: SerializeField] public float HeightHurtMin = 4f;
     [field: SerializeField] public float HeightDeathMin = 6f;
+    
     // Numerical Health Value
     [field: SerializeField] public bool UseNumericHealth { get; private set; } = true;
     [field: SerializeField] public float PlayerHealth { get; private set; } = 3f;
+    #endregion
 
     private void Awake()
     {
@@ -36,7 +40,7 @@ public class PlayerConditions : MonoBehaviour
         
         if (!TryGetComponent(out _playerCtrl))
         {
-            Debug.LogWarning("There is no PlayerController, PlayerConditions will not function!");
+            Debug.LogWarning("No PlayerController, PlayerConditions will not function!");
         }
     }
 
@@ -84,7 +88,6 @@ public class PlayerConditions : MonoBehaviour
                 CurrentCheckpoint = check;
                 Debug.Log("New checkpoint set.");
             }
-            else Debug.Log("Checkpoint is the same!!");
         }
         
     }

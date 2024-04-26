@@ -1,8 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Eflatun.SceneReference;
-using System.Collections.Generic;
-using System.Threading;
 using System.Collections;
 
 public class GameManager : Singleton<GameManager>
@@ -16,22 +14,19 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region References
+    private GMState currentState = GMState.LOAD;
+    private PauseAction pauseCtrl;
+
     [SerializeField] private SceneReference MenuScene, GameScene;
     [SerializeField] private GameObject UIPausePrefab;
     [SerializeField] private GameObject PlayerPrefab;
     #endregion
 
-    #region Inspector Variables
-    //
-    #endregion
-
-    #region Private Variables
-    private GMState currentState = GMState.LOAD;
+    #region Interface
+    [SerializeField] public float RespawnDelay = 3.0f;
     #endregion
 
     #region Initial Setup & Loop
-    PauseAction pauseCtrl;
-
     override public void Awake()
     {
         // still call the base class (Singleton) awake function--before running anything in the override.
@@ -50,6 +45,10 @@ public class GameManager : Singleton<GameManager>
         if (currentState is GMState.GAME or GMState.PAUSE)
         {
             CalculatePausePressed();
+            if (currentState is GMState.GAME)
+            {
+                CalculatePlayer();
+            }
         }
     }
     #endregion
@@ -84,18 +83,8 @@ public class GameManager : Singleton<GameManager>
 
         currentState = GMState.GAME;
         SetupPauseMenu();
+        SetupPlayer();
     }
-
-    #region Update Functions
-    void CalculatePausePressed()
-    {
-        if (pauseCtrl.Pause.PauseMenu.triggered)
-        {
-            Debug.Log("Pause button pressed!");
-            TogglePause();
-        }
-    }
-    #endregion
 
     #region Pause Menu Functions
     void SetupPauseMenu()
@@ -109,10 +98,7 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log("Pause menu loaded, enabling pause action.");
                 pauseCtrl.Enable();
             }
-            else
-            {
-                Debug.LogWarning("No Canvas in Pause UI!");
-            }
+            else Debug.LogWarning("No Canvas in Pause UI!");
         }
         else Debug.LogWarning("No Pause UI Prefab!");
     }
@@ -136,11 +122,83 @@ public class GameManager : Singleton<GameManager>
         }
         else Debug.Log("Pause now? Um, no. Currently " + currentState.ToString());
     }
+
+    void CalculatePausePressed()
+    {
+        if (pauseCtrl.Pause.PauseMenu.triggered)
+        {
+            Debug.Log("Pause button pressed!");
+            TogglePause();
+        }
+    }
     #endregion
 
     #region Player Management Functions
     GameObject _currentPlayer;
+    PlayerConditions _currentConditions;
 
+    void SetupPlayer()
+    {
+        if (PlayerPrefab != null)
+        {
+            Transform _spawnTransform = FindSpawnPoint();
+            if (_spawnTransform != null)
+            {
+                _currentPlayer = Instantiate(PlayerPrefab, _spawnTransform); //instantiate with transform
+                if (_currentPlayer.TryGetComponent<PlayerConditions>(out _currentConditions))
+                {
+                    _currentConditions.PlayerSetCheckpoint(_spawnTransform);
+                }
+                else Debug.LogWarning("No PlayerConditions in Player!");
+            }
+            else Debug.LogWarning("No checkpoints!");
+            
+        }
+        else Debug.LogWarning("No Player Prefab!");
+    }
+
+    Transform FindSpawnPoint()
+    {
+        Transform _priorityTransform = null;
+        int highestPriority = -1;
+
+        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        foreach (var checkpoint in checkpoints)
+        {
+            if (checkpoint.TryGetComponent<CheckpointData>(out var data))
+            {
+                int _currentPriority = data.GetPriority();
+                if (_currentPriority > highestPriority)
+                {
+                    highestPriority = _currentPriority;
+                    _priorityTransform = checkpoint.transform;
+                }
+            }
+        }
+        
+        return _priorityTransform;
+    }
+
+    bool respawnStarted = false;
+    void CalculatePlayer()
+    {
+        if (_currentConditions != null)
+        {
+            if (_currentConditions.GetPlayerDead() && !respawnStarted)
+            {
+                StartCoroutine(SpawnTimer());
+            }
+        }
+    }
+
+    IEnumerator SpawnTimer()
+    {
+        Debug.Log("Begin respawn timer");
+        respawnStarted = true;
+        yield return new WaitForSeconds(RespawnDelay);
+        _currentConditions.PlayerSpawn();
+        respawnStarted = false;
+    }
     #endregion
 
     #endregion

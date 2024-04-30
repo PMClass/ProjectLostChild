@@ -36,6 +36,7 @@ public class PlayerConditions : MonoBehaviour
     public AudioClip deathAudioClip;
     public AudioClip fallingAudioClip;
     public AudioClip longFallDamageAudioClip;
+    public AudioClip regularHit;
 
     private void Awake()
     {
@@ -124,6 +125,7 @@ public class PlayerConditions : MonoBehaviour
                 // Only give hurt if recovery is possible
                 if (CanRecover)
                 {
+                    damageAudioPlayer.PlayOneShot(regularHit);
                     CurrentHealth -= 1f;
 
                     Debug.Log("I have " + CurrentHealth + " health left!");

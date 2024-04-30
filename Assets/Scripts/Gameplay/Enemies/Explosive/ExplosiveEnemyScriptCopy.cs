@@ -7,10 +7,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
+[RequireComponent(typeof(AudioSource))]
 
 public class ExplosiveEnemyScript : MonoBehaviour
 {
-    
+    AudioSource explodingEnemy;
+    public AudioClip BOOM;
     private Transform target;
     public float speed;
     private float direction;
@@ -201,6 +203,7 @@ public class ExplosiveEnemyScript : MonoBehaviour
             yield return new WaitForSeconds(0.75f);
             bombSprite.color = turnRed;
             Destroy(gameObject);
+            explodingEnemy.PlayOneShot(BOOM);
         }
        
 

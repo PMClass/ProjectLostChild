@@ -2,6 +2,8 @@ using System.Collections;
 using TarodevController;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class PlayerConditions : MonoBehaviour
 {
     private PlayerController _playerCtrl;
@@ -30,6 +32,12 @@ public class PlayerConditions : MonoBehaviour
     [field: SerializeField] public bool UseNumericHealth { get; private set; } = true;
     [field: SerializeField] public float PlayerHealth { get; private set; } = 3f;
 
+    AudioSource damageAudioPlayer;
+    public AudioClip deathAudioClip;
+    public AudioClip fallingAudioClip;
+    public AudioClip longFallDamageAudioClip;
+    public AudioClip regularHit;
+
     private void Awake()
     {
         InitialPos = transform.position;
@@ -43,6 +51,7 @@ public class PlayerConditions : MonoBehaviour
     void Start()
     {
         PlayerSpawn();
+        damageAudioPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -59,6 +68,8 @@ public class PlayerConditions : MonoBehaviour
         PlayerDead = true;
         PlayerHurt = true;
         if (UseNumericHealth) CurrentHealth = 0f;
+        damageAudioPlayer.PlayOneShot(deathAudioClip);
+
     }
     [ContextMenu("Respawn Player")]
     public void PlayerSpawn()
@@ -114,6 +125,7 @@ public class PlayerConditions : MonoBehaviour
                 // Only give hurt if recovery is possible
                 if (CanRecover)
                 {
+                    damageAudioPlayer.PlayOneShot(regularHit);
                     CurrentHealth -= 1f;
 
                     Debug.Log("I have " + CurrentHealth + " health left!");
@@ -159,11 +171,14 @@ public class PlayerConditions : MonoBehaviour
 
     public void PlayerCheckFall()
     {
+        damageAudioPlayer.PlayOneShot(fallingAudioClip);
         if (!PlayerDead)
         {
             float _height = _playerCtrl.FallHeight;
             if (_height >= HeightDeathMin) { PlayerDie(); }
-            else if (_height >= HeightHurtMin) { PlayerGiveHurt(); }
+            else if (_height >= HeightHurtMin) { PlayerGiveHurt();
+                damageAudioPlayer.PlayOneShot(longFallDamageAudioClip);
+            }
         }
     }
 

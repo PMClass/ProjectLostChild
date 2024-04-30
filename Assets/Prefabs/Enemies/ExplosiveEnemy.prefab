@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94138dc8cc4377b42a6c906286299b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BOOM: {fileID: 8300000, guid: bb5736e3780769542b9481a0abdcb372, type: 3}
   speed: 1.15
   chaseDistance: 5
   stopChasingDistance: 10

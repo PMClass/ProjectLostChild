@@ -16,11 +16,12 @@ public class BoarChasePlayer : MonoBehaviour
   
 
     public Transform playerTransform;
-  
+    public Transform hitDistanceCheck;
     public float chaseDistance;
     public float hitDistance;
     public Rigidbody2D rb;
-    
+
+    public Animator anim;
 
     public enum State
     {
@@ -35,6 +36,8 @@ public class BoarChasePlayer : MonoBehaviour
 
     public bool facingRight;
 
+
+
     private void Awake()
     {
        
@@ -44,6 +47,7 @@ public class BoarChasePlayer : MonoBehaviour
         state = State.Roaming;
         playerController = FindObjectOfType<PlayerController>();
         facingRight = false;
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -129,7 +133,7 @@ public class BoarChasePlayer : MonoBehaviour
                     
                 }
 
-                if(Vector2.Distance(transform.position, playerTransform.position) < hitDistance)
+                if(Vector2.Distance(hitDistanceCheck.position, playerTransform.position) < hitDistance)
                 {
                     state = State.Attacking;
                 }
@@ -174,6 +178,7 @@ public class BoarChasePlayer : MonoBehaviour
 
     IEnumerator Attack()
     {
+        anim.SetTrigger("canAttack");
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return new WaitForSeconds(1);
 
@@ -189,7 +194,13 @@ public class BoarChasePlayer : MonoBehaviour
         }
     }
 
-   
+
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(hitDistanceCheck.position, playerTransform.position);
+    }
 
 
 }

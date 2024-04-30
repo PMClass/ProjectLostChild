@@ -294,6 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1132683499}
   - component: {fileID: 1132683500}
+  - component: {fileID: 1132683501}
   m_Layer: 0
   m_Name: BoarGFX
   m_TagString: Untagged
@@ -368,6 +369,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1132683501
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132683498}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 89859e7ec57c7be4e9aab8cf8aa1d4f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1458913042
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,9 +706,11 @@ MonoBehaviour:
   - {fileID: 492759197}
   - {fileID: 1628505630}
   playerTransform: {fileID: 1760825482}
+  hitDistanceCheck: {fileID: 2120258765}
   chaseDistance: 6.28
-  hitDistance: 2
+  hitDistance: 1
   rb: {fileID: 0}
+  anim: {fileID: 0}
   state: 0
   playerController: {fileID: 0}
   facingRight: 0
@@ -706,6 +730,7 @@ Transform:
   - {fileID: 1132683499}
   - {fileID: 1458913043}
   - {fileID: 1745061060}
+  - {fileID: 2120258765}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1844113456
@@ -792,6 +817,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+--- !u!1 &2120258764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2120258765}
+  m_Layer: 0
+  m_Name: HitDistanceCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2120258765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120258764}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.07, y: -0.11, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1844113454}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

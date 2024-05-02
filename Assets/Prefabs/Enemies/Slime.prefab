@@ -359,6 +359,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   offset: 0.33
+  direction: 0
+  playerController: {fileID: 0}
+  xForce: 0
+  yForce: 0
+  maxHitTime: 0
+  IsGoingLeft: 0
+  target: {fileID: 0}
   animator: {fileID: 0}
 --- !u!1 &7897020001159707875
 GameObject:
@@ -433,7 +440,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -441,7 +448,7 @@ SpriteRenderer:
   m_Size: {x: 0.39, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8316643015303819121

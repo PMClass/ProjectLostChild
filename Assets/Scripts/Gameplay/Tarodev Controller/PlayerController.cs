@@ -335,7 +335,7 @@ namespace TarodevController
             }
 
             // this function runs before ToggleGrounded
-            if (!_grounded) GetFallHeight();
+            if (!_grounded && !ClimbingLadder) GetFallHeight();
 
             if (isGroundedThisFrame && !_grounded) ToggleGrounded(true);
             else if (!isGroundedThisFrame && _grounded) ToggleGrounded(false);
@@ -877,11 +877,14 @@ namespace TarodevController
                     _rb.gravityScale = 0;
 
                     var goalVelocity = Vector2.zero;
+                    if (!isCompanionControlled)
+                    {
                     goalVelocity.y = _frameInput.Move.y * (_frameInput.Move.y > 0 ? Stats.LadderClimbSpeed : Stats.LadderSlideSpeed);
+                    }
 
                     // Horizontal
                     float goalX;
-                    if (Stats.SnapToLadders && _frameInput.Move.x == 0)
+                    if (Stats.SnapToLadders && (_frameInput.Move.x == 0 || isCompanionControlled))
                     {
                         var targetX = _ladderHit.transform.position.x;
                         goalX = Mathf.SmoothDamp(_framePosition.x, targetX, ref _ladderSnapVel, Stats.LadderSnapTime);

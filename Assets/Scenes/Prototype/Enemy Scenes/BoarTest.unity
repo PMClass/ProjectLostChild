@@ -622,7 +622,7 @@ Transform:
   m_GameObject: {fileID: 1745061059}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.038, y: -0.05, z: 0}
+  m_LocalPosition: {x: -0.03, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -661,7 +661,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.08, y: -0.03}
-  m_Size: {x: 1.15, y: 1.29}
+  m_Size: {x: 1.11, y: 0.97}
   m_Direction: 1
 --- !u!4 &1760825482 stripped
 Transform:
@@ -698,8 +698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb36265f38d4a28499b633a11e53cf1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  minSpeed: 1
+  moveSpeed: 1.14
+  roamingSpeed: 1
   maxSpeed: 2.5
   patrolDestination: 0
   patrolPoints:
@@ -708,12 +708,13 @@ MonoBehaviour:
   playerTransform: {fileID: 1760825482}
   hitDistanceCheck: {fileID: 2120258765}
   chaseDistance: 6.28
-  hitDistance: 1
+  hitDistance: 0.8
   rb: {fileID: 0}
   anim: {fileID: 0}
-  state: 0
   playerController: {fileID: 0}
   facingRight: 0
+  canMove: 0
+  state: 0
 --- !u!4 &1844113454
 Transform:
   m_ObjectHideFlags: 0
@@ -723,7 +724,7 @@ Transform:
   m_GameObject: {fileID: 1844113451}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.25, y: -2.15, z: 0}
+  m_LocalPosition: {x: 4.25, y: -2.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

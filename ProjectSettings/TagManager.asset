@@ -8,6 +8,10 @@ TagManager:
   - Interactable
   - LoadingArea
   - Slime
+  - Companion
+  - ExplosiveEnemy
+  - BoarHead
+  - BoarBody
   layers:
   - Default
   - TransparentFX
@@ -20,8 +24,8 @@ TagManager:
   - Climbable
   - Ladders
   - CompInteract
-  - 
-  - 
+  - Enemy
+  - CompanionLayer
   - 
   - 
   - 

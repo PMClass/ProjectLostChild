@@ -1,3 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using TarodevController;
+using TreeEditor;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditor.Timeline;
 using UnityEngine;
 
 public class SlimeCrawlerMovement : MonoBehaviour
@@ -17,35 +25,50 @@ public class SlimeCrawlerMovement : MonoBehaviour
     [SerializeField]
     private float offset;
     private float zAxisAdd;
-    private int direction;
+    public int direction;
 
+    public PlayerController playerController;
+    public float xForce;
+    public float yForce;
+
+    public float maxHitTime;
+    private float hitTime;
+    public bool IsGoingLeft;
+
+    
+    public Transform target;
     [SerializeField] private Animator animator;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         slimeRb = GetComponent<Rigidbody2D>();
         hasTurn = false;
+        playerController = FindObjectOfType<PlayerController>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         direction = 1;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 
     private void FixedUpdate()
     {
         CheckOnGroundOrWall();
         Movement();
+        hitTime += Time.deltaTime;
     }
 
 
     private void Movement()
     {
-        
-        slimeRb.velocity = transform.right * moveSpeed;
+        if(IsGoingLeft == true)
+        {
+            slimeRb.velocity = -transform.right * moveSpeed;
+        }
+
+        if(IsGoingLeft == false)
+        {
+            slimeRb.velocity = transform.right * moveSpeed;
+        }
     }
 
     private void CheckOnGroundOrWall()
@@ -57,6 +80,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
         {
             if (hasTurn == false)
             {
+              
                 zAxisAdd -= 90;
                 transform.eulerAngles = new Vector3(0, 0, zAxisAdd);
                 if (direction == 1)
@@ -135,5 +159,22 @@ public class SlimeCrawlerMovement : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(groundPositonChecker.position, new Vector2(groundPositonChecker.position.x, groundPositonChecker.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallPositionChecker.position, new Vector2(wallPositionChecker.position.x + wallCheckDistance, wallPositionChecker.position.y));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player" && hitTime >= maxHitTime)
+        {
+            if (target.position.x < transform.position.x)
+            {
+                playerController.AddFrameForce(new(-xForce, yForce), true);
+            }
+            if(target.position.x >= transform.position.x)
+            {
+                playerController.AddFrameForce(new(xForce, yForce), true);
+            }
+
+            hitTime = 0;
+        }
     }
 }

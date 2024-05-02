@@ -297,6 +297,10 @@ MonoBehaviour:
   HeightDeathMin: 8
   <UseNumericHealth>k__BackingField: 1
   <PlayerHealth>k__BackingField: 3
+  deathAudioClip: {fileID: 0}
+  fallingAudioClip: {fileID: 0}
+  longFallDamageAudioClip: {fileID: 0}
+  regularHit: {fileID: 0}
 --- !u!114 &5829226864064178834
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -136,12 +136,28 @@ PrefabInstance:
       value: Static Ground (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 21.048828
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8184123
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.931276
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 113.5086
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5552917
+      value: 31.23
+=======
+      value: 26.461277
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.494708
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -180,6 +196,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+--- !u!1001 &49135032
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 77.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 32.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158633941285749935, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676525561904594169, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
+      propertyPath: m_Name
+      value: Player Spawn Placeholder
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c5a50bb83cfe3446875e008612363c4, type: 3}
 --- !u!1001 &91849628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194,19 +267,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.827379
+      value: 9.275703
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2496
+      value: 1.8128604
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.65
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 95.46
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.95
+      value: 27.31
+=======
+      value: 17.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.0999994
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -245,7 +326,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
---- !u!1001 &109230532
+--- !u!1001 &335218103
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -255,19 +336,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_Name
-      value: Static Ground
+      value: Static Ground (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.8118925
+      value: 29.072641
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8184123
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.8261
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 110.0083
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.2267954
+      value: 44.34
+=======
+      value: 15.3561
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.823204
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -306,7 +399,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
---- !u!1001 &291063963
+--- !u!1001 &340372693
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -316,15 +409,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_Name
-      value: Static Ground (4)
+      value: Static Ground (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 21.048828
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8184123
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.020834
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 113.84
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9879754
+      value: 36.56
+=======
+      value: 26.550835
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.062024
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -373,11 +482,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.16357
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 108.98
       objectReference: {fileID: 0}
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.73704
+      value: 23.28
+=======
+      value: 23.693571
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3129587
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -420,6 +537,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c797fe73efd376489b210480dab578f, type: 3}
+--- !u!1001 &582478126
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_Name
+      value: Empty Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901680359522380940, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_Color.a
+      value: 0.27058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.3478866
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0413612
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.x
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 99.09
+=======
+      value: 26.1
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 21.3
+=======
+      value: 2.46
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
 --- !u!1001 &705421029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -434,11 +632,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7642329357053289961, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.614836
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 112.39
+=======
+      value: 17.624933
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7642329357053289961, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.908745
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 30
+=======
+      value: 2.4347658
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7642329357053289961, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -487,11 +693,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2805186541951911058, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.094933
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 96.68
+=======
+      value: 26.491129
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 2805186541951911058, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.615233
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 24.84
+=======
+      value: 2.0466833
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 2805186541951911058, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -547,73 +761,28 @@ PrefabInstance:
       value: Static Ground (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 27.96113
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -9.003316
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
---- !u!1001 &850434919
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
-      propertyPath: m_Name
-      value: Static Ground (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.x
-      value: 14.067925
+      value: 20.835546
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9796685
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.685598
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 112.6369
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.86270094
+      value: 22.5967
+=======
+      value: 24.2156
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.912701
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -666,19 +835,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.827379
+      value: 7.4756794
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2496
+      value: 1.278501
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.65
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 95.26
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.099999905
+      value: 41.5541
+=======
+      value: 17.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.15
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -731,15 +908,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.613719
+      value: 8.210642
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0340179
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.559998
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 123.52
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.8841
+      value: 26.2264
+=======
+      value: 31.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.1659
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -792,11 +981,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7642329357053289961, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.684456
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 108.65
       objectReference: {fileID: 0}
     - target: {fileID: 7642329357053289961, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5436759
+      value: 43.11
+=======
+      value: 22.214457
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642329357053289961, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.593676
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7642329357053289961, guid: 094426e7c033f044487eaed29c2847ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -845,11 +1042,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.991865
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 116.67
       objectReference: {fileID: 0}
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.689496
+      value: 37.82
+=======
+      value: 27.521866
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.360503
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -892,6 +1097,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c797fe73efd376489b210480dab578f, type: 3}
+--- !u!1001 &1296418311
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_Name
+      value: Static Ground (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 16.607975
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8184123
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 132.3295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 31.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
 --- !u!1001 &1305233152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -902,11 +1172,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7042014071000800324, guid: e4d44ac944a40e442b368b1b2de05c98, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.90166
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 120.93
       objectReference: {fileID: 0}
     - target: {fileID: 7042014071000800324, guid: e4d44ac944a40e442b368b1b2de05c98, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.24000001
+      value: 38.51
+=======
+      value: 30.431662
+      objectReference: {fileID: 0}
+    - target: {fileID: 7042014071000800324, guid: e4d44ac944a40e442b368b1b2de05c98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.809999
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7042014071000800324, guid: e4d44ac944a40e442b368b1b2de05c98, type: 3}
       propertyPath: m_LocalPosition.z
@@ -962,12 +1240,24 @@ PrefabInstance:
       value: Button Triggered Gate (Start On) Placeholder
       objectReference: {fileID: 0}
     - target: {fileID: 7775535253925432947, guid: b4d8e6311ea8f8343b97b2d39f82adbd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.3556492
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775535253925432947, guid: b4d8e6311ea8f8343b97b2d39f82adbd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.70756
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 119.26
       objectReference: {fileID: 0}
     - target: {fileID: 7775535253925432947, guid: b4d8e6311ea8f8343b97b2d39f82adbd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.241781
+      value: 33.8845
+=======
+      value: 29.23756
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775535253925432947, guid: b4d8e6311ea8f8343b97b2d39f82adbd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.808219
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7775535253925432947, guid: b4d8e6311ea8f8343b97b2d39f82adbd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1020,15 +1310,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.1056266
+      value: 5.9454117
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2657964
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.65
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 123.75
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5899999
+      value: 40.4299
+=======
+      value: 31.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.46
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1081,15 +1383,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.9321475
+      value: 17.891235
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4509248
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.8261
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 85.5548
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.614997
+      value: 31.17
+=======
+      value: 15.3561
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.4350033
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1128,6 +1442,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+=======
 --- !u!1 &1590234286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1590234287
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1214,12 +1530,13 @@ Transform:
   m_GameObject: {fileID: 1590234286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.8, y: -4.1, z: -10}
+  m_LocalPosition: {x: 22.33, y: 6.95, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
 --- !u!1001 &1618043543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1230,11 +1547,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.35497
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 112.97
       objectReference: {fileID: 0}
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.708037
+      value: 23.45
+=======
+      value: 28.884972
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3419619
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7226102035821524980, guid: 4c797fe73efd376489b210480dab578f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1287,11 +1612,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2805186541951911058, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.921091
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 120.03
       objectReference: {fileID: 0}
     - target: {fileID: 2805186541951911058, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.9957514
+      value: 30
+=======
+      value: 30.451092
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805186541951911058, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.054248
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 2805186541951911058, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1334,6 +1667,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7e2a5edc62432043ab72fb0fb7f436f, type: 3}
+--- !u!1001 &2066138009
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 406379806813558072, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_Name
+      value: Static Ground (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 19.418966
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4509248
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 86.1885
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 37.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235780345430968617, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 093e48bd95c61e7429bab50abd528b88, type: 3}
 --- !u!1001 &4059780112377991842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1344,15 +1742,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2217893888016467161, guid: 41d29ccb0120c0543b854f2e37486d57, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5.65451
+      value: 6.573368
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217893888016467161, guid: 41d29ccb0120c0543b854f2e37486d57, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.761737
       objectReference: {fileID: 0}
     - target: {fileID: 2217893888016467161, guid: 41d29ccb0120c0543b854f2e37486d57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.5943
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 99.6
       objectReference: {fileID: 0}
     - target: {fileID: 2217893888016467161, guid: 41d29ccb0120c0543b854f2e37486d57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.8339996
+      value: 31.1596
+=======
+      value: 20.1243
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217893888016467161, guid: 41d29ccb0120c0543b854f2e37486d57, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.2159996
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 2217893888016467161, guid: 41d29ccb0120c0543b854f2e37486d57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1409,11 +1819,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8174584652512177863, guid: 81a93d90fc922434ebbfa5ef5b4ea650, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.7109
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 8174584652512177863, guid: 81a93d90fc922434ebbfa5ef5b4ea650, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.9012
+      value: 34.24
+=======
+      value: 24.2409
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174584652512177863, guid: 81a93d90fc922434ebbfa5ef5b4ea650, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.1488
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 8174584652512177863, guid: 81a93d90fc922434ebbfa5ef5b4ea650, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1466,11 +1884,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8183817299754215800, guid: 4bebdd96063f909418e2ac87b26e0ee9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.8
+<<<<<<< Updated upstream:Assets/Scenes/Levels/LevelLayout1 3.unity
+      value: 121.99
       objectReference: {fileID: 0}
     - target: {fileID: 8183817299754215800, guid: 4bebdd96063f909418e2ac87b26e0ee9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.0765
+      value: 23.57
+=======
+      value: 30.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8183817299754215800, guid: 4bebdd96063f909418e2ac87b26e0ee9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9735003
+>>>>>>> Stashed changes:Assets/Scenes/LevelLayout1 3.unity
       objectReference: {fileID: 0}
     - target: {fileID: 8183817299754215800, guid: 4bebdd96063f909418e2ac87b26e0ee9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1513,12 +1939,13 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1590234289}
-  - {fileID: 109230532}
   - {fileID: 1564749671}
+  - {fileID: 2066138009}
   - {fileID: 803758565}
   - {fileID: 3396260}
-  - {fileID: 291063963}
+  - {fileID: 1296418311}
+  - {fileID: 340372693}
+  - {fileID: 335218103}
   - {fileID: 1484080490}
   - {fileID: 1305233152}
   - {fileID: 866409463}
@@ -1528,7 +1955,6 @@ SceneRoots:
   - {fileID: 4258054614961558324}
   - {fileID: 7438673599359246092}
   - {fileID: 1840411791}
-  - {fileID: 850434919}
   - {fileID: 1497251597}
   - {fileID: 968833862}
   - {fileID: 351888522}
@@ -1536,3 +1962,5 @@ SceneRoots:
   - {fileID: 1291158158}
   - {fileID: 1226612453}
   - {fileID: 705421029}
+  - {fileID: 582478126}
+  - {fileID: 49135032}

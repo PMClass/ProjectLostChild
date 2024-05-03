@@ -18,6 +18,7 @@ public class CompanionController : MonoBehaviour
     #region Private Serialized
     //[SerializeField] private GameObject InteractableTouched;
     [SerializeField] private IObjInteractable InteractableControlled;
+    [SerializeField] private float MaxDistanceFromPlayer = 10f;
     #endregion
 
     #region Setup
@@ -60,9 +61,17 @@ public class CompanionController : MonoBehaviour
 
                     if (monoBehaviour is IObjInteractable)
                     {
-                        InteractableControlled = tempInteractable;
-                        InControl = true;
                         InteractableObject = InteractableTouched;
+
+                        // check if this object can be controlled
+                        // if not, just call its Interact() function.
+                        if (tempInteractable.Controllable())
+                        {
+                            InteractableControlled = tempInteractable;
+                            InControl = true;
+                        }
+                        else tempInteractable.Interact();
+                        
                         break;
                     }
                 }
@@ -81,22 +90,31 @@ public class CompanionController : MonoBehaviour
     {
         if (InControl && HasControllableObj())
         {
+            // send vel to Interact function
             InteractableControlled.Interact(vel);
             _coRigid.MovePosition(InteractableObject.transform.position);
         }
         else
         {
+            // add force using vel when there is player control
             if (!noInput) _coRigid.AddForce(vel, ForceMode2D.Impulse);
             else
             {
+                // if the CoSensor is touching an interactable, reposition to its center
                 var InteractableObj = _coSense.GetInteractable();
                 if (InteractableObj != null)
                 {
                     _coRigid.MovePosition(InteractableObj.transform.position);
                 }
-                _coRigid.velocity = new(0, 0);
+                // set velocity to zero
+                _coRigid.velocity = Vector2.zero;
 
             }
         }
+    }
+
+    void DistanceCheck()
+    {
+
     }
 }

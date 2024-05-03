@@ -22,7 +22,7 @@ namespace TarodevController
 
         private CompanionController _coCtrl;
 
-        private bool isCompanionControlled;
+        //private bool isCompanionControlled;
 
         #endregion
 
@@ -46,6 +46,7 @@ namespace TarodevController
         public Vector2 Velocity { get; private set; }
         public int WallDirection { get; private set; }
         public bool ClimbingLadder { get; private set; }
+        public bool CompanionControl { get; private set; }
 
         [field: SerializeField] public float FallHeight { get; private set; } = 0f;
         [field: SerializeField] public float JumpHeightReduction { get; private set; } = 0.2f;
@@ -148,7 +149,7 @@ namespace TarodevController
 
             //CalculateWalls();
             CalculateLadders();
-            if (!isCompanionControlled) CalculateJump();
+            if (!CompanionControl) CalculateJump();
             //CalculateDash();
 
             CalculateExternalModifiers();
@@ -190,7 +191,7 @@ namespace TarodevController
             // Get PlayerConditions
             _playerC = GetComponent<PlayerConditions>();
             
-            isCompanionControlled = false;
+            CompanionControl = false;
 
             _wallDetectionBounds = new Bounds(
                 new Vector3(0, _character.Height / 2),
@@ -242,7 +243,7 @@ namespace TarodevController
             if (_frameInput.SwitchToggle)
             {
                 Debug.Log("we are switching");
-                isCompanionControlled = !isCompanionControlled;
+                CompanionControl = !CompanionControl;
             }
         }
 
@@ -743,7 +744,7 @@ namespace TarodevController
                 - i am crouching, and
                 - i am no longer touching ground
                 then i should try uncrouching (force uncrouch because i am not on ground)*/
-            if (!Crouching && ((CrouchPressed && !isCompanionControlled) || IsHurt) && _grounded)
+            if (!Crouching && ((CrouchPressed && !CompanionControl) || IsHurt) && _grounded)
                 ToggleCrouching(true);
             else if (Crouching && !_grounded) ToggleCrouching(false);
 
@@ -877,14 +878,14 @@ namespace TarodevController
                     _rb.gravityScale = 0;
 
                     var goalVelocity = Vector2.zero;
-                    if (!isCompanionControlled)
+                    if (!CompanionControl)
                     {
                     goalVelocity.y = _frameInput.Move.y * (_frameInput.Move.y > 0 ? Stats.LadderClimbSpeed : Stats.LadderSlideSpeed);
                     }
 
                     // Horizontal
                     float goalX;
-                    if (Stats.SnapToLadders && (_frameInput.Move.x == 0 || isCompanionControlled))
+                    if (Stats.SnapToLadders && (_frameInput.Move.x == 0 || CompanionControl))
                     {
                         var targetX = _ladderHit.transform.position.x;
                         goalX = Mathf.SmoothDamp(_framePosition.x, targetX, ref _ladderSnapVel, Stats.LadderSnapTime);
@@ -914,7 +915,7 @@ namespace TarodevController
 
                 var step = _hasInputThisFrame ? Stats.Acceleration : Stats.Friction;
 
-                var xDir = (_hasInputThisFrame && !isCompanionControlled ? _frameDirection : Velocity.normalized);
+                var xDir = (_hasInputThisFrame && !CompanionControl ? _frameDirection : Velocity.normalized);
 
                 // Quicker direction change
                 if (Vector3.Dot(_trimmedFrameVelocity, _frameDirection) < 0) step *= Stats.DirectionCorrectionMultiplier;
@@ -978,7 +979,7 @@ namespace TarodevController
         #region CompanionCall
         private void CalculateCMovement()
         {
-            if (isCompanionControlled)
+            if (CompanionControl)
             {
                 _coCtrl.MoveCompanion(_frameInput.Move, !_hasAnyMovement);
             } else _coCtrl.MoveCompanion(new(0,0), !_hasAnyMovement);
@@ -987,7 +988,7 @@ namespace TarodevController
 
         private void CalculateCInteract()
         {
-            if (isCompanionControlled && _jumpToConsume)
+            if (CompanionControl && _jumpToConsume)
             {
                 _coCtrl.ToggleControlInteractable();
             }
@@ -997,14 +998,9 @@ namespace TarodevController
 
         #region GameFunctions
 
-        public void HurtKnockback() // function to call when an enemy hurts the player
-        {
-            AddFrameForce(new(0f, -30f), true);
-        }
-
         public void ResetStates() // it just sets IsCompanionControlled to false
         {
-            isCompanionControlled = false;
+            CompanionControl = false;
             FallHeight = 0;
             _oldY = transform.position.y;
         }
@@ -1123,6 +1119,7 @@ namespace TarodevController
         public Vector2 Velocity { get; }
         public int WallDirection { get; }
         public bool ClimbingLadder { get; }
+        public bool CompanionControl { get; }
 
         // External force
         public void AddFrameForce(Vector2 force, bool resetVelocity = false);

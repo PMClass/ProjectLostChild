@@ -57,7 +57,7 @@ namespace TarodevController
 
         private void Update()
         {
-            if (_player == null) return;
+            if (_player == null || Time.timeScale == 0) return;
 
             var xInput = _player.Input.x;
 
@@ -228,7 +228,7 @@ namespace TarodevController
 
         private void HandleSpriteFlip(float xInput)
         {
-            if (_player.Input.x != 0) _sprite.flipX = xInput < 0;
+            if (_player.Input.x != 0 && !_player.CompanionControl) _sprite.flipX = xInput < 0;
         }
 
         #endregion

@@ -139,8 +139,6 @@ public class PlayerConditions : MonoBehaviour
                     // If player has at least 1 health, this function call starts the recovery timer
                     if (CurrentHealth > 0)
                     {
-                        _playerCtrl.HurtKnockback();
-
                         // Begin RecoverTimer
 
                         StartCoroutine(RecoverTimer());
@@ -161,8 +159,6 @@ public class PlayerConditions : MonoBehaviour
                 {
                     PlayerHurt = true;
                     CanRecover = false;
-
-                    _playerCtrl.HurtKnockback();
 
                     // Begin RecoverTimer
 

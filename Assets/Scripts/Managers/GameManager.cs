@@ -2,6 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using Eflatun.SceneReference;
 using System.Collections;
+using TarodevController;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -59,6 +60,8 @@ public class GameManager : Singleton<GameManager>
     {
         // disable pause control
         pauseCtrl.Disable();
+        // reset time scale to 1
+        Time.timeScale = 1.0f;
         // this function will always load the main menu and set state to MENU
         SceneManager.LoadScene(MenuScene.BuildIndex);
         currentState = GMState.MENU;
@@ -74,7 +77,7 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
 
-    #region Utilities
+    #region Setup Functions
     // Gameplay Setup Function
     IEnumerator SetupGameScene()
     {
@@ -86,6 +89,7 @@ public class GameManager : Singleton<GameManager>
         SetupPauseMenu();
         SetupPlayer();
     }
+    #endregion
 
     #region Pause Menu Functions
     void SetupPauseMenu()
@@ -114,12 +118,16 @@ public class GameManager : Singleton<GameManager>
             Debug.Log("Unpausing the game!");
             currentState = GMState.GAME;
             _pauseCanvas.enabled = false;
+            Time.timeScale = 1.0f;
+            _currentController.TogglePlayer(true);
         }
         else if (currentState == GMState.GAME)
         {
             Debug.Log("Pausing the game!");
             currentState = GMState.PAUSE;
             _pauseCanvas.enabled = true;
+            Time.timeScale = 0f;
+            _currentController.TogglePlayer(false);
         }
         else Debug.Log("Pause now? Um, no. Currently " + currentState.ToString());
     }
@@ -137,6 +145,7 @@ public class GameManager : Singleton<GameManager>
     #region Player Management Functions
     GameObject _currentPlayer;
     PlayerConditions _currentConditions;
+    PlayerController _currentController;
 
     void SetupPlayer()
     {
@@ -145,7 +154,12 @@ public class GameManager : Singleton<GameManager>
             Transform _spawnTransform = FindSpawnPoint();
             if (_spawnTransform != null)
             {
-                _currentPlayer = Instantiate(PlayerPrefab, _spawnTransform); //instantiate with transform
+                _currentPlayer = Instantiate(PlayerPrefab, _spawnTransform.position, _spawnTransform.rotation); //instantiate with transform
+                if (_currentPlayer.TryGetComponent<PlayerController>(out _currentController))
+                {
+                    _currentController.TogglePlayer(true);
+                }
+                
                 if (_currentPlayer.TryGetComponent<PlayerConditions>(out _currentConditions))
                 {
                     _currentConditions.PlayerSetCheckpoint(_spawnTransform);
@@ -200,7 +214,5 @@ public class GameManager : Singleton<GameManager>
         _currentConditions.PlayerSpawn();
         respawnStarted = false;
     }
-    #endregion
-
     #endregion
 }

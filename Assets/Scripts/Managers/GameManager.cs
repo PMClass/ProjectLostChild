@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private SceneReference MenuScene, GameScene;
     [SerializeField] private GameObject UIPausePrefab;
     [SerializeField] private GameObject PlayerPrefab;
+    
     #endregion
 
     #region Interface

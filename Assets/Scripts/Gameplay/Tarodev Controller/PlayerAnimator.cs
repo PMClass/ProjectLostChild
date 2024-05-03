@@ -106,12 +106,13 @@ namespace TarodevController
                 var squishFactorY = Mathf.Lerp(_squishMinMaxY.curveMax.Evaluate(t), _squishMinMaxY.curveMin.Evaluate(t), point);
                 var squishFactorX = Mathf.Lerp(_squishMinMaxX.curveMax.Evaluate(t), _squishMinMaxX.curveMin.Evaluate(t), point);
                 _sprite.size = new Vector3(_defaultSpriteSize.x * squishFactorX, _defaultSpriteSize.y * squishFactorY);
-
+                
                 yield return null;
             }
 
             _sprite.size = _defaultSpriteSize;
             _isSquishing = false;
+            
         }
 
         private void CancelSquish()
@@ -270,18 +271,22 @@ namespace TarodevController
             {
                 _source.PlayOneShot(_slideClips[Random.Range(0, _slideClips.Length)], Mathf.InverseLerp(0, 5, Mathf.Abs(_player.Velocity.x)));
                 _crouching = true;
+                _anim.SetBool(CrouchKey, true);
                 CancelSquish();
             }
             else if (_crouching && !_player.Crouching)
             {
+                _anim.SetBool(CrouchKey, false);
                 _crouching = false;
             }
 
             if (!_isSquishing)
             {
                 var percentage = _character.CrouchingHeight / _character.Height;
+               
                 _sprite.size = Vector2.SmoothDamp(_sprite.size, new Vector2(1, _crouching ? _character.Height * percentage : _character.Height), ref _currentCrouchSizeVelocity, 0.03f);
             }
+         
         }
 
         #endregion
@@ -418,7 +423,7 @@ namespace TarodevController
         private static readonly int GroundedKey = Animator.StringToHash("Grounded");
         private static readonly int IdleSpeedKey = Animator.StringToHash("IdleSpeed");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
-
+        private static readonly int CrouchKey = Animator.StringToHash("Crouch");
         #endregion
     }
 }

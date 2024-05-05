@@ -3,16 +3,16 @@ using UnityEngine.UI;
 
 public class UIStartGame : MonoBehaviour
 {
-    [SerializeField] Button _startGame;
-
-    void Start()
+    
+    private void Update()
     {
-        _startGame.onClick.AddListener(StartNewGame);
-        
+        if(Input.anyKeyDown) StartNewGame();
     }
 
     public void StartNewGame()
-    {
+    {       
         GameManager.Instance.StartGame();
     }
+
+
 }

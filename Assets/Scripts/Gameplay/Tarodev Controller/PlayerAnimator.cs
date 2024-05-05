@@ -286,8 +286,8 @@ namespace TarodevController
                
                 _sprite.size = Vector2.SmoothDamp(_sprite.size, new Vector2(1, _crouching ? _character.Height * percentage : _character.Height), ref _currentCrouchSizeVelocity, 0.03f);
             }
-         
-        }
+                                   
+        } 
 
         #endregion
 

@@ -50,7 +50,10 @@ namespace TarodevController
 
         [field: SerializeField] public float FallHeight { get; private set; } = 0f;
         [field: SerializeField] public float JumpHeightReduction { get; private set; } = 0.2f;
+        
         public GameObject CompanionPrefab;
+
+        public String CurrentLevel {  get; private set; }
 
         public void AddFrameForce(Vector2 force, bool resetVelocity = false)
         {
@@ -1029,6 +1032,11 @@ namespace TarodevController
         {
             if (other.TryGetComponent(out ISpeedModifier modifier)) _modifiers.Add(modifier);
             else if (other.TryGetComponent(out IPhysicsMover mover) && !mover.RequireGrounding) _activatedMovers.Add(mover);
+
+            if (other.gameObject.CompareTag("LoadingArea"))
+            {
+                CurrentLevel = other.gameObject.name;
+            }
 
             // do the checkpoint checkup check <(._.<)
             if (!IsDead)

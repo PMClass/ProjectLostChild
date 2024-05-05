@@ -161,6 +161,12 @@ MonoBehaviour:
   UIPausePrefab: {fileID: 3492234602821053778, guid: 825afd01bd8bb29479a16f296eb27068, type: 3}
   PlayerPrefab: {fileID: 7273550153823935342, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
   RespawnDelay: 3
+  Levels:
+  - {fileID: 95980214648999648, guid: 4794cba0f3a13f44ba4554b1c2d8f3a8, type: 3}
+  - {fileID: 4060454608778384381, guid: e917d71a51da70f46a1577e28032ae53, type: 3}
+  - {fileID: 6316475403571850516, guid: 05e594fcfa1053b4db5f7a058e1b29ea, type: 3}
+  - {fileID: 2750135296356801057, guid: f1ed1144b95a783469ab3274aadb0a6a, type: 3}
+  - {fileID: 2326132945842387149, guid: fffc7eef56a3adb4f882c1f511f3bd50, type: 3}
 --- !u!4 &289606353
 Transform:
   m_ObjectHideFlags: 0

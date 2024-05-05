@@ -3,6 +3,7 @@ using UnityEngine;
 using Eflatun.SceneReference;
 using System.Collections;
 using TarodevController;
+using System.Collections.Generic;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -21,11 +22,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private SceneReference MenuScene, GameScene;
     [SerializeField] private GameObject UIPausePrefab;
     [SerializeField] private GameObject PlayerPrefab;
-    
     #endregion
 
     #region Interface
     [SerializeField] public float RespawnDelay = 3.0f;
+    [SerializeField] public List<GameObject> Levels;
     #endregion
 
     #region Initial Setup & Loop
@@ -86,8 +87,18 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Game Scene loaded.");
 
         currentState = GMState.GAME;
+        SetupLevelManager();
         SetupPauseMenu();
         SetupPlayer();
+    }
+    #endregion
+
+    #region Level Manager Functions
+    LevelManager levelManager;
+    void SetupLevelManager()
+    {
+        levelManager = gameObject.AddComponent<LevelManager>();
+        levelManager.Load("Level00");
     }
     #endregion
 
@@ -192,6 +203,15 @@ public class GameManager : Singleton<GameManager>
         }
         
         return _priorityTransform;
+    }
+
+    public string GetCurrentLocation()
+    {
+        if (_currentController != null)
+        {
+            return _currentController.CurrentLevel;
+        }
+        return null;
     }
 
     bool respawnStarted = false;

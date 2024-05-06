@@ -105,7 +105,7 @@ public class GameManager : Singleton<GameManager>
         SetupPauseMenu();
         SetupPlayer();
 
-        while (!HasCompanion()) yield return null;
+        while (!(HasPlayer() && HasCompanion())) yield return null;
         cameraManager.LoadVirtualCamera();
 
     }
@@ -194,6 +194,12 @@ public class GameManager : Singleton<GameManager>
             
         }
         else Debug.LogWarning("No Player Prefab!");
+    }
+
+    bool HasPlayer()
+    {
+        if (CurrentPlayer != null) return true;
+        return false;
     }
 
     bool HasCompanion()

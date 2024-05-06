@@ -190,6 +190,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8273b4784d5694da3e4d204afd342b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <PlayerWeight>k__BackingField: 1
+  <CompanionWeight>k__BackingField: 1
+  <PlayerRadius>k__BackingField: 3
+  <CompanionRadius>k__BackingField: 3
 --- !u!1 &310060169
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +208,7 @@ GameObject:
   - component: {fileID: 310060171}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

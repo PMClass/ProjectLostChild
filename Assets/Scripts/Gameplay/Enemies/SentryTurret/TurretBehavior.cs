@@ -10,7 +10,7 @@ public class TurretBehavior : MonoBehaviour
 
     bool Detected = false;
 
-    Vector2 Direction;
+    Vector3 Direction;
 
     public GameObject AlarmLight;
 
@@ -26,18 +26,20 @@ public class TurretBehavior : MonoBehaviour
 
     float nextTimeToFire = 0;
 
+    float lockPos = 0;
     void Start()
     {
-
+       
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 targetPos = Target.position;
-
-        Direction = targetPos - (Vector2)transform.position;
-
+        Vector3 targetPos = Target.position;
+   
+        Direction = targetPos - transform.position;
+        
         RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range);
 
         if (rayInfo)
@@ -47,7 +49,7 @@ public class TurretBehavior : MonoBehaviour
                 if (Detected == false)
                 {
                     Detected = true;
-                    AlarmLight.GetComponent<SpriteRenderer>().color = Color.red;
+                  
                 }
             }
 
@@ -62,24 +64,36 @@ public class TurretBehavior : MonoBehaviour
 
             if (Detected)
             {
+                AlarmLight.GetComponent<SpriteRenderer>().color = Color.red;
                 Gun.transform.up = Direction;
-                if(Time.time > nextTimeToFire)
+                if (Time.time > nextTimeToFire)
                 {
                     nextTimeToFire = Time.time + 1 / FireRate;
                     shoot();
                 }
+           
+               
             }
         }
 
-        void shoot()
-        {
-            GameObject BulletIns = Instantiate(Bullet, ShootPoint.position, Quaternion.identity);
-            BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
-        }
+        
 
-        void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawWireSphere(transform.position, Range);
-        }
+       
+
+       
     }
+
+    void shoot()
+    {
+        GameObject BulletIns = Instantiate(Bullet, ShootPoint.position, Quaternion.identity);
+        BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
+    }
+
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.transform.position, Range);
+    }
+
 }

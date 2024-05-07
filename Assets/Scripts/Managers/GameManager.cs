@@ -94,25 +94,33 @@ public class GameManager : Singleton<GameManager>
         else
         {
             Debug.LogWarning("One of the other managers is missing from the GameManager object.");
-            enabled = false;
+            //enabled = false;
         }
     }
     
     // Gameplay Setup
     IEnumerator SetupGameScene()
     {
+        // wait for the scene
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameScene.Name, LoadSceneMode.Single);
         while (!asyncLoad.isDone) yield return null;
         Debug.Log("Game Scene loaded.");
 
-        CurrentState = GMState.GAME;
-        
-        SetupPauseMenu();
+        // initialize the player
         SetupPlayer();
 
-        while (!(HasPlayer() && HasCompanion())) yield return null;
+        // wait for Companion to initialize from player
+        while (!HasCompanion()) yield return null;
+
+        // initialize the virtual camera
         cameraManager.LoadVirtualCamera();
 
+        // initialize the pause menu
+        SetupPauseMenu();
+
+        // signal other objects that setup is complete
+        CurrentState = GMState.GAME;
+        Debug.Log("Setup done, now in GAME.");
     }
     #endregion
 

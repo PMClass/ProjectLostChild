@@ -160,6 +160,7 @@ MonoBehaviour:
     asset: {fileID: 102900000, guid: b2ed87969cf3a95499a60b5e6b585c02, type: 3}
     guid: b2ed87969cf3a95499a60b5e6b585c02
   UIPausePrefab: {fileID: 3492234602821053778, guid: 825afd01bd8bb29479a16f296eb27068, type: 3}
+  UIHealthBarPrefab: {fileID: 5663250993909407070, guid: 02710424da40e7c4b9c671436153d621, type: 3}
   PlayerPrefab: {fileID: 7273550153823935342, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
   RespawnDelay: 3
   Levels:

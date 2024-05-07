@@ -17,7 +17,7 @@ public class PlayerConditions : MonoBehaviour
     [field: SerializeField] private bool CanRecover { get; set; }
     [field: SerializeField] private bool PlayerDead { get; set; }
     // Numerical Health Value
-    [field: SerializeField] private float CurrentHealth { get; set; }
+    [field: SerializeField] public float CurrentHealth { get; set; }
     // Player's current checkpoint
     [field: SerializeField] private Transform CurrentCheckpoint { get; set; }
 

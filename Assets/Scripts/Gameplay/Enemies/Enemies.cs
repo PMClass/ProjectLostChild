@@ -21,11 +21,11 @@ public abstract class Enemy : MonoBehaviour
 {
 
     public PlayerController playerCTRL;
-    public bool canHit;
+   
 
     private void Awake()
     {
-        canHit = true;
+        playerCTRL = FindObjectOfType<PlayerController>();
     }
 
     private void Update()
@@ -33,27 +33,15 @@ public abstract class Enemy : MonoBehaviour
         
     }
 
-    public virtual void HitPlayer(int xRange, int yRange, float hitDelay)
+    public virtual void HitPlayer(int xRange, int yRange)
     {
-        if (canHit)
-        {
-            StartCoroutine(AttackTime(xRange, yRange, hitDelay));
-        }
-        else
-        {
-            return;
-        }
+         
+        playerCTRL.AddFrameForce(new(xRange, yRange), true);
+     
     }
 
 
-    IEnumerator AttackTime(int x, int y, float hitDelay)
-    {
-        playerCTRL.AddFrameForce(new(x, y), true);
-        yield return new WaitForSeconds(hitDelay);
-        canHit = false;
-        yield return new WaitForSeconds(hitDelay);
-        canHit = true;
-    }
+   
 
     /* public virtual void Initialize(int speed, int direction, Vector3 position)
      {

@@ -6,7 +6,7 @@ using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BoarChasePlayer : Enemy
+public class BoarChasePlayer : MonoBehaviour
 {
     
     [SerializeField] private float moveSpeed;
@@ -38,9 +38,10 @@ public class BoarChasePlayer : Enemy
 
     public State state;
 
-   
+    public float hitMaxTime = 3;
+    public float nextHitTime = 0;
 
-
+    PlayerConditions playerConditions;
 
     private void Awake()
     { 
@@ -50,15 +51,18 @@ public class BoarChasePlayer : Enemy
         rb = GetComponent<Rigidbody2D>();
         playerController = FindObjectOfType<PlayerController>();
         anim = GetComponentInChildren<Animator>();         
-       
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         facingRight = false;
         canMove = true;
-      
+        playerConditions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConditions>();
         state = State.Roaming;
     }
 
     private void FixedUpdate()
     {
+
+
+        nextHitTime += Time.deltaTime;
 
         switch (state)
         {
@@ -160,10 +164,16 @@ public class BoarChasePlayer : Enemy
                 }
                 break;
             case State.Attacking:
+
                 
+                if (nextHitTime > hitMaxTime)
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezeAll;
                     StartCoroutine(Attack());
-                
-                    break;
+                    nextHitTime = 0;
+                }
+         
+                break;
 
 
         }    
@@ -183,7 +193,7 @@ public class BoarChasePlayer : Enemy
     {
         
         anim.SetBool("canAttack", true);
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        
         yield return new WaitForSeconds(2f);
         
         anim.SetBool("canAttack", false);
@@ -196,13 +206,14 @@ public class BoarChasePlayer : Enemy
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && state == State.Attacking)
         {
-            if (canHit)
+            playerController.AddFrameForce(new(8, 8), true);
+            playerConditions.CurrentHealth--;
+            if (playerConditions.CurrentHealth == 0)
             {
-                HitPlayer(2, 2, 2);
+                playerConditions.PlayerDie();
             }
-
            
         }
     }

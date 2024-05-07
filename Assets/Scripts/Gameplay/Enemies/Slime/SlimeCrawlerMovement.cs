@@ -28,6 +28,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
     public int direction;
 
     public PlayerController playerController;
+    public PlayerConditions playerConditions;
     public float xForce;
     public float yForce;
 
@@ -40,11 +41,13 @@ public class SlimeCrawlerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     void Start()
     {
+       
         animator = GetComponentInChildren<Animator>();
         slimeRb = GetComponent<Rigidbody2D>();
         hasTurn = false;
         playerController = FindObjectOfType<PlayerController>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        playerConditions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConditions>();
         direction = 1;
     }
 
@@ -154,7 +157,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(groundPositonChecker.position, new Vector2(groundPositonChecker.position.x, groundPositonChecker.position.y - groundCheckDistance));
@@ -173,6 +176,13 @@ public class SlimeCrawlerMovement : MonoBehaviour
             {
                 playerController.AddFrameForce(new(xForce, yForce), true);
             }
+
+            playerConditions.CurrentHealth--;
+            if(playerConditions.CurrentHealth <= 0)
+            {
+                playerConditions.PlayerDie();
+            }
+            
 
             hitTime = 0;
         }

@@ -4,5 +4,14 @@ using UnityEngine;
 
 public class LoadPoint : MonoBehaviour
 {
-    public string LevelName;
+    public enum LoadPointDir
+    {
+        NORTH,
+        SOUTH,
+        WEST,
+        EAST
+    }
+    
+    public int LevelIndex;
+    public LoadPointDir Direction;
 }

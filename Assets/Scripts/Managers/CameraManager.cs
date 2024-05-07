@@ -21,10 +21,12 @@ public class CameraManager : MonoBehaviour
     [field: SerializeField] public float CompanionRadius { get; private set; } = 3.0f;
     #endregion
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         gameManager = GameManager.Instance;
+    }
+    void Start()
+    {
         cam = Camera.main;
         if (cam != null)
         {

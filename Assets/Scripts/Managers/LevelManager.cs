@@ -2,17 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static LoadPoint;
+
 public class LevelManager : MonoBehaviour
 {
     #region References
     GameManager gameManager;
-    
-    private List<GameObject> Active = new();
+
+    private List<GameObject> loaded = new();
+    private List<GameObject> active = new();
     #endregion
 
     #region Interface
-    [SerializeField] private List<GameObject> Levels;
-    [SerializeField] private int MaxLevels = 4;
+    [SerializeField] private int MaxLevels = 10;
+    [SerializeField] public string LevelPrefix { get; private set; } = "Level";
+
+    public void PreloadLevels(int offset)
+    {
+        for (int i = offset; i < MaxLevels; i++)
+        {
+            GameObject preloaded = Resources.Load<GameObject>("Levels/" + LevelPrefix + i);
+            if (preloaded != null)
+            {
+                loaded.Add(preloaded);
+            }
+        }
+    }
     #endregion
 
     private void Awake()
@@ -23,24 +38,22 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Levels = gameManager.Levels;
-        if (Levels.Count == 0)
-        {
-            Debug.Log("oh, there aren't anything to load :(");
-            enabled = false;
-        }
+
     }
 
     string oldLocation = null;
     string currentLocation = null;
     void Update()
     {
-        currentLocation = gameManager.GetCurrentLocation();
-        if (currentLocation != oldLocation)
+        if (gameManager.CurrentState == GameManager.GMState.GAME)
         {
-            Debug.Log("Loading new levels");
-            Load(currentLocation);
-            oldLocation = currentLocation;
+            currentLocation = gameManager.GetCurrentLocation();
+            if (currentLocation != oldLocation)
+            {
+                Debug.Log("Placing new levels");
+                PlaceCluster(currentLocation);
+                oldLocation = currentLocation;
+            }
         }
     }
 
@@ -48,23 +61,24 @@ public class LevelManager : MonoBehaviour
     {
         foreach (GameObject g in toUpdate)
         {
-            if (!Active.Contains(g))
+            if (!active.Contains(g))
             {
-                Active.Add(g);
+                active.Add(g);
             }
         }
     }
 
-    public void Load(string location)
+    public void PlaceCluster(string location)
     {
         GameObject currentLevel;
         List<GameObject> newActive = new();
 
+        /*
         GameObject existing = GetExistingLevel(location);
         if (existing != null)
             currentLevel = existing;
         else
-            currentLevel = LoadLevel(location, Vector2.zero);
+            currentLevel = PlaceLevel(location, Vector2.zero);
         
         if (currentLevel != null)
         {
@@ -76,7 +90,7 @@ public class LevelManager : MonoBehaviour
                 {
                     if (loadPoint.LevelName.Length > 0)
                     {
-                        GameObject connected = LoadLevel(loadPoint.LevelName, loadPoint.gameObject.transform.position);
+                        GameObject connected = PlaceLevel(loadPoint.LevelName, loadPoint.gameObject.transform.position);
                         newActive.Add(connected);
                     }
                     else Debug.Log("Blank load point");
@@ -85,46 +99,59 @@ public class LevelManager : MonoBehaviour
                 UpdateActive(newActive);
             }
         }
+        */
     }
 
-    private GameObject GetExistingLevel(string level)
+    private GameObject PlaceLevel(int levelToPlace, int levelToConnect, LoadPointDir dir, bool relocate)
     {
-        if (Active.Count > 0)
+        GameObject toPlace = GetActive(levelToPlace);
+        if (toPlace == null)
         {
-            foreach (GameObject obj in Active)
+            GameObject _load = GetLoaded(levelToPlace);
+            if (_load == null) return null;
+            
+            toPlace = Instantiate(_load);
+        }
+
+        if (levelToConnect == -1 || active.Count == 0)
+        {
+            toPlace.transform.position = Vector2.zero;
+        }
+        else
+        {
+            GameObject toConnect = GetActive(levelToConnect);
+            if (toConnect == null) return null;
+
+            // find opposite LoadPoint transform of levelToPlace
+            // find LoadPoint transform dir of levelToConnect
+        }
+
+        return toPlace;
+    }
+
+    private GameObject GetLoaded(int level)
+    {
+        if (loaded != null & loaded.Count > 0)
+        {
+            foreach (GameObject l in loaded)
             {
-                if (obj.name == level) return obj;
+                string toMatch = LevelPrefix + level;
+                if (l.name == toMatch && l != null)
+                    return l;
             }
         }
         return null;
     }
 
-    private GameObject LoadLevel(string level, Vector3 pos)
+    private GameObject GetActive(int level)
     {
-        Levels = gameManager.Levels;
-
-        GameObject existing = GetExistingLevel(level);
-        if (existing != null)
+        if (active != null & active.Count > 0)
         {
-            existing.transform.position = pos;
-            Debug.Log("Found existing level");
-            return existing;
-        }
-
-        if (Levels == null)
-        {
-            Debug.Log("yeah, we're screwed.");
-        }
-        foreach (GameObject obj in Levels)
-        {
-            if (obj.name == level)
+            foreach (GameObject l in active)
             {
-                string prefab = "Prefabs/Levels/" + obj.name;
-                //GameObject newLevel = Instantiate(Resources.Load<GameObject>(prefab), pos, Quaternion.identity);
-                GameObject newLevel = Instantiate(obj,pos,Quaternion.identity);
-                newLevel.name = level;
-                Debug.Log("Found new level");
-                return newLevel;
+                string toMatch = LevelPrefix + level;
+                if (l.name == toMatch && l != null)
+                    return l;
             }
         }
         return null;

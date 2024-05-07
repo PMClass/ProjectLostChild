@@ -16,10 +16,8 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region References
-    private GMState currentState = GMState.LOAD;
+    
     private PauseAction pauseCtrl;
-
-    CameraManager cameraManager;
 
     [SerializeField] private SceneReference MenuScene, GameScene;
     [SerializeField] private GameObject UIPausePrefab;
@@ -27,8 +25,8 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Interface
+    [SerializeField] public GMState CurrentState { get; private set; } = GMState.LOAD;
     [SerializeField] public float RespawnDelay = 3.0f;
-    [SerializeField] public List<GameObject> Levels;
     #endregion
 
     #region Initial Setup & Loop
@@ -48,10 +46,10 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         // these update functions run during gameplay or pause
-        if (currentState is GMState.GAME or GMState.PAUSE)
+        if (CurrentState is GMState.GAME or GMState.PAUSE)
         {
             CalculatePausePressed();
-            if (currentState is GMState.GAME)
+            if (CurrentState is GMState.GAME)
             {
                 CalculatePlayer();
             }
@@ -71,13 +69,13 @@ public class GameManager : Singleton<GameManager>
 
         // this function will always load the main menu and set state to MENU
         SceneManager.LoadScene(MenuScene.BuildIndex);
-        currentState = GMState.MENU;
+        CurrentState = GMState.MENU;
     }
 
     public void StartGame()
     {
         // this function may be called to load the gameplay scene if the current state is not GAME or PAUSE
-        if (currentState != GMState.GAME && currentState != GMState.PAUSE)
+        if (CurrentState != GMState.GAME && CurrentState != GMState.PAUSE)
         {
             StartCoroutine(SetupGameScene());
         }
@@ -88,9 +86,14 @@ public class GameManager : Singleton<GameManager>
     // LoadScene Setup
     void SetupGameManager()
     {
-        if (!TryGetComponent<CameraManager>(out cameraManager))
+        if (FindCameraManager() && FindLevelManager())
         {
-            Debug.LogWarning("No CameraManager!");
+            Debug.Log("Calling the LevelManager to load levels...");
+            levelManager.PreloadLevels(0);
+        }
+        else
+        {
+            Debug.LogWarning("One of the other managers is missing from the GameManager object.");
             enabled = false;
         }
     }
@@ -102,8 +105,8 @@ public class GameManager : Singleton<GameManager>
         while (!asyncLoad.isDone) yield return null;
         Debug.Log("Game Scene loaded.");
 
-        currentState = GMState.GAME;
-        SetupLevelManager();
+        CurrentState = GMState.GAME;
+        
         SetupPauseMenu();
         SetupPlayer();
 
@@ -113,12 +116,29 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
 
+    #region Camera Manager Functions
+    CameraManager cameraManager;
+    bool FindCameraManager()
+    {
+        if (!TryGetComponent<CameraManager>(out cameraManager))
+        {
+            Debug.LogWarning("No CameraManager!");
+            return false;
+        }
+        return true;
+    }
+    #endregion
+
     #region Level Manager Functions
     LevelManager levelManager;
-    void SetupLevelManager()
+    bool FindLevelManager()
     {
-        levelManager = gameObject.AddComponent<LevelManager>();
-        levelManager.Load("Level00");
+        if (!TryGetComponent<LevelManager>(out levelManager))
+        {
+            Debug.LogWarning("No LevelManager!");
+            return false;
+        }
+        return true;
     }
     #endregion
 
@@ -144,23 +164,23 @@ public class GameManager : Singleton<GameManager>
     public void TogglePause()
     {
         // this function will only run if the current state is GAME or PAUSE
-        if (currentState == GMState.PAUSE)
+        if (CurrentState == GMState.PAUSE)
         {
             Debug.Log("Unpausing the game!");
-            currentState = GMState.GAME;
+            CurrentState = GMState.GAME;
             _pauseCanvas.enabled = false;
             Time.timeScale = 1.0f;
             _currentController.TogglePlayer(true);
         }
-        else if (currentState == GMState.GAME)
+        else if (CurrentState == GMState.GAME)
         {
             Debug.Log("Pausing the game!");
-            currentState = GMState.PAUSE;
+            CurrentState = GMState.PAUSE;
             _pauseCanvas.enabled = true;
             Time.timeScale = 0f;
             _currentController.TogglePlayer(false);
         }
-        else Debug.Log("Pause now? Um, no. Currently " + currentState.ToString());
+        else Debug.Log("Pause now? Um, no. Currently " + CurrentState.ToString());
     }
 
     void CalculatePausePressed()

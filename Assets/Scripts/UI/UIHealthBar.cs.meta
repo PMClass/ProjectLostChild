@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-guid: 2c95e9cba30c7d24981cc17ef8bfca4e
+guid: 76e71b53fb987bc4a9cac905d20a0778
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - UIPausePrefab: {instanceID: 0}
-  - UIHealthBarPrefab: {instanceID: 0}
-  - PlayerPrefab: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

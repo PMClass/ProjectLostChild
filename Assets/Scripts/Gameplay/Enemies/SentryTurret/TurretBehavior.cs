@@ -27,6 +27,11 @@ public class TurretBehavior : MonoBehaviour
     float nextTimeToFire = 0;
 
     float lockPos = 0;
+
+    private void Awake()
+    {
+        Target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
     void Start()
     {
        
@@ -36,9 +41,9 @@ public class TurretBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 targetPos = Target.position;
+        Vector2 targetPos = Target.position;
    
-        Direction = targetPos - transform.position;
+        Direction = targetPos - (Vector2)transform.position;
         
         RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range);
 
@@ -48,8 +53,9 @@ public class TurretBehavior : MonoBehaviour
             {
                 if (Detected == false)
                 {
+                    AlarmLight.GetComponent<SpriteRenderer>().color = Color.red;
                     Detected = true;
-                  
+                    Debug.Log("Being detected");
                 }
             }
 
@@ -64,7 +70,7 @@ public class TurretBehavior : MonoBehaviour
 
             if (Detected)
             {
-                AlarmLight.GetComponent<SpriteRenderer>().color = Color.red;
+               
                 Gun.transform.up = Direction;
                 if (Time.time > nextTimeToFire)
                 {

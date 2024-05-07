@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private SceneReference MenuScene, GameScene;
     [SerializeField] private GameObject UIPausePrefab;
+    [SerializeField] private GameObject UIHealthBarPrefab;
     [SerializeField] private GameObject PlayerPrefab;
     
     #endregion
@@ -100,7 +101,9 @@ public class GameManager : Singleton<GameManager>
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameScene.Name, LoadSceneMode.Single);
         while (!asyncLoad.isDone) yield return null;
         Debug.Log("Game Scene loaded.");
-
+        GameObject _healthBarUI = Instantiate(UIHealthBarPrefab);
+        _healthBarUI.TryGetComponent<Canvas>(out _healthCanvas);
+        _healthCanvas.enabled = true;
         currentState = GMState.GAME;
         SetupPauseMenu();
         SetupPlayer();
@@ -109,6 +112,8 @@ public class GameManager : Singleton<GameManager>
         cameraManager.LoadVirtualCamera();
 
     }
+
+    Canvas _healthCanvas;
     #endregion
 
     #region Pause Menu Functions

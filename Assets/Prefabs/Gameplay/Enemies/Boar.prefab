@@ -49,8 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb36265f38d4a28499b633a11e53cf1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCTRL: {fileID: 0}
-  canHit: 0
   moveSpeed: 1.14
   roamingSpeed: 1
   maxSpeed: 2.5
@@ -68,6 +66,8 @@ MonoBehaviour:
   facingRight: 0
   canMove: 0
   state: 0
+  hitMaxTime: 3
+  nextHitTime: 0
 --- !u!50 &1182480246079989188
 Rigidbody2D:
   serializedVersion: 4
@@ -268,7 +268,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.82, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.42
 --- !u!114 &2320467369415587764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,9 +281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d7f1da799b8b34aa3e5915b8317f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  xForce: 20
-  yForce: 20
+  playerController: {fileID: 5829226864064178834, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+  xForce: 15
+  yForce: 15
 --- !u!1 &3313725987149775833
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class ExplosiveEnemyScript : MonoBehaviour
 {
     AudioSource explodingEnemy;
     public AudioClip BOOM;
-    private Transform target;
+    public Transform target;
     public float speed;
     private float direction;
     float distToPlayer;
@@ -45,23 +45,33 @@ public class ExplosiveEnemyScript : MonoBehaviour
     public Animator animator;
 
     public PlayerController playerController;
+    public PlayerConditions playerConditions;
 
     public float xForce;
     public float yForce;
 
     public float maxHitTime;
     private float hitTime;
+
+
+    private void Awake()
+    {
+
+    }
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        
         bombSprite = GetComponentInChildren<SpriteRenderer>();
         originalColor = bombSprite.color;
-        canExplode = false;     
+        canExplode = false;
 
-        playerController = FindObjectOfType<PlayerController>();
 
+        target = GameObject.FindAnyObjectByType<PlayerController>().transform;
+        playerController = GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>();
+        playerConditions = GameObject.FindAnyObjectByType<PlayerConditions>().GetComponent<PlayerConditions>();
     }
     void FixedUpdate()
     {
@@ -203,7 +213,7 @@ public class ExplosiveEnemyScript : MonoBehaviour
             yield return new WaitForSeconds(0.75f);
             bombSprite.color = turnRed;
             Destroy(gameObject);
-            explodingEnemy.PlayOneShot(BOOM);
+           // explodingEnemy.PlayOneShot(BOOM);
         }
        
 
@@ -235,6 +245,14 @@ public class ExplosiveEnemyScript : MonoBehaviour
             }
 
             hitTime = 0;
+
+            playerConditions.CurrentHealth--;
+
+            if(playerConditions.CurrentHealth <= 0)
+            {
+                playerConditions.PlayerDie();
+            }
+
         }
 
         if(collision.gameObject.tag == "ExplosiveEnemy")

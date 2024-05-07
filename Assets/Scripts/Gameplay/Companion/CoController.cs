@@ -101,6 +101,8 @@ public class CompanionController : MonoBehaviour
         }
     }
 
+    public GameObject GetCompanionObject() { return _coObject; }
+    
     public bool HasControllableObj() => InteractableControlled != null;
 
     public void MoveCompanion(Vector2 vel, bool noInput)

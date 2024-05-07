@@ -19,6 +19,8 @@ public class GameManager : Singleton<GameManager>
     private GMState currentState = GMState.LOAD;
     private PauseAction pauseCtrl;
 
+    CameraManager cameraManager;
+
     [SerializeField] private SceneReference MenuScene, GameScene;
     [SerializeField] private GameObject UIPausePrefab;
     [SerializeField] private GameObject PlayerPrefab;
@@ -39,6 +41,7 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
+        SetupGameManager();
         StartMenu();
     }
     
@@ -63,6 +66,9 @@ public class GameManager : Singleton<GameManager>
         pauseCtrl.Disable();
         // reset time scale to 1
         Time.timeScale = 1.0f;
+        // clean up virtual camera
+        cameraManager.UnloadVirtualCamera();
+
         // this function will always load the main menu and set state to MENU
         SceneManager.LoadScene(MenuScene.BuildIndex);
         currentState = GMState.MENU;
@@ -79,7 +85,17 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Setup Functions
-    // Gameplay Setup Function
+    // LoadScene Setup
+    void SetupGameManager()
+    {
+        if (!TryGetComponent<CameraManager>(out cameraManager))
+        {
+            Debug.LogWarning("No CameraManager!");
+            enabled = false;
+        }
+    }
+    
+    // Gameplay Setup
     IEnumerator SetupGameScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameScene.Name, LoadSceneMode.Single);
@@ -90,6 +106,10 @@ public class GameManager : Singleton<GameManager>
         SetupLevelManager();
         SetupPauseMenu();
         SetupPlayer();
+
+        while (!(HasPlayer() && HasCompanion())) yield return null;
+        cameraManager.LoadVirtualCamera();
+
     }
     #endregion
 
@@ -154,9 +174,12 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Player Management Functions
-    GameObject _currentPlayer;
-    PlayerConditions _currentConditions;
+    [SerializeField] public GameObject CurrentPlayer { get; private set; }
+    [SerializeField] public PlayerConditions CurrentConditions { get; private set; }
     PlayerController _currentController;
+
+    [SerializeField] public GameObject CurrentCompanion { get; private set; }
+    CompanionController _currentCC;
 
     void SetupPlayer()
     {
@@ -165,15 +188,16 @@ public class GameManager : Singleton<GameManager>
             Transform _spawnTransform = FindSpawnPoint();
             if (_spawnTransform != null)
             {
-                _currentPlayer = Instantiate(PlayerPrefab, _spawnTransform.position, _spawnTransform.rotation); //instantiate with transform
-                if (_currentPlayer.TryGetComponent<PlayerController>(out _currentController))
+                CurrentPlayer = Instantiate(PlayerPrefab, _spawnTransform.position, _spawnTransform.rotation); //instantiate with transform
+                if (CurrentPlayer.TryGetComponent<PlayerController>(out _currentController))
                 {
                     _currentController.TogglePlayer(true);
                 }
                 
-                if (_currentPlayer.TryGetComponent<PlayerConditions>(out _currentConditions))
+                if (CurrentPlayer.TryGetComponent<PlayerConditions>(out PlayerConditions conditions))
                 {
-                    _currentConditions.PlayerSetCheckpoint(_spawnTransform);
+                    CurrentConditions = conditions;
+                    CurrentConditions.PlayerSetCheckpoint(_spawnTransform);
                 }
                 else Debug.LogWarning("No PlayerConditions in Player!");
             }
@@ -181,6 +205,21 @@ public class GameManager : Singleton<GameManager>
             
         }
         else Debug.LogWarning("No Player Prefab!");
+    }
+
+    bool HasPlayer()
+    {
+        if (CurrentPlayer != null) return true;
+        return false;
+    }
+
+    bool HasCompanion()
+    {
+        if (!CurrentPlayer.TryGetComponent<CompanionController>(out _currentCC)) return false;
+        CurrentCompanion = _currentCC.GetCompanionObject();
+        if (CurrentCompanion == null) return false;
+        Debug.Log("there is a companion object!");
+        return true;
     }
 
     Transform FindSpawnPoint()
@@ -217,9 +256,9 @@ public class GameManager : Singleton<GameManager>
     bool respawnStarted = false;
     void CalculatePlayer()
     {
-        if (_currentConditions != null)
+        if (CurrentConditions != null)
         {
-            if (_currentConditions.GetPlayerDead() && !respawnStarted)
+            if (CurrentConditions.GetPlayerDead() && !respawnStarted)
             {
                 StartCoroutine(SpawnTimer());
             }
@@ -231,7 +270,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Begin respawn timer");
         respawnStarted = true;
         yield return new WaitForSeconds(RespawnDelay);
-        _currentConditions.PlayerSpawn();
+        CurrentConditions.PlayerSpawn();
         respawnStarted = false;
     }
     #endregion

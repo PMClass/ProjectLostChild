@@ -6,7 +6,7 @@ using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BoarChasePlayer : MonoBehaviour
+public class BoarChasePlayer : Enemy
 {
     
     [SerializeField] private float moveSpeed;
@@ -28,6 +28,7 @@ public class BoarChasePlayer : MonoBehaviour
 
     public bool facingRight;
     public bool canMove;
+
     public enum State
     {
         Roaming,
@@ -52,7 +53,7 @@ public class BoarChasePlayer : MonoBehaviour
        
         facingRight = false;
         canMove = true;
-
+      
         state = State.Roaming;
     }
 
@@ -159,12 +160,9 @@ public class BoarChasePlayer : MonoBehaviour
                 }
                 break;
             case State.Attacking:
-
                 
-                    
                     StartCoroutine(Attack());
                 
-
                     break;
 
 
@@ -183,9 +181,11 @@ public class BoarChasePlayer : MonoBehaviour
 
     IEnumerator Attack()
     {
+        
         anim.SetBool("canAttack", true);
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return new WaitForSeconds(2f);
+        
         anim.SetBool("canAttack", false);
         canMove = true;
         state = State.ChasingPlayer;
@@ -198,7 +198,12 @@ public class BoarChasePlayer : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            playerController.AddFrameForce(new(10, 10), true);
+            if (canHit)
+            {
+                HitPlayer(2, 2, 2);
+            }
+
+           
         }
     }
 

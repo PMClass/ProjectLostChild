@@ -187,7 +187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542271270610676090, guid: 28de048ffbc5ed748b1eaea3711fab8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.92
+      value: -3.39
       objectReference: {fileID: 0}
     - target: {fileID: 4542271270610676090, guid: 28de048ffbc5ed748b1eaea3711fab8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2659,6 +2659,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 617016810852657990, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+      propertyPath: m_Size.x
+      value: 0.60999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 617016810852657990, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+      propertyPath: m_Size.y
+      value: 2.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 617016810852657990, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.175
+      objectReference: {fileID: 0}
     - target: {fileID: 2182944402560485661, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.53
@@ -2699,9 +2711,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6688623416311364394, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4728503
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688623416311364394, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5656893
+      objectReference: {fileID: 0}
     - target: {fileID: 7273550153823935342, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424740026899984247, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424740026899984247, guid: 2259b84376174a84eac01f060f31b4c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

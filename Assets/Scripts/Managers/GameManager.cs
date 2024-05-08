@@ -106,6 +106,9 @@ public class GameManager : Singleton<GameManager>
         while (!asyncLoad.isDone) yield return null;
         Debug.Log("Game Scene loaded.");
 
+        // load first level
+        levelManager.PlaceCluster(0);
+
         // initialize the player
         SetupPlayer();
 

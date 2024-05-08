@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 using static LoadPoint;
@@ -47,86 +49,116 @@ public class LevelManager : MonoBehaviour
     {
         if (gameManager.CurrentState == GameManager.GMState.GAME)
         {
-            currentLocation = gameManager.GetCurrentLocation();
-            if (currentLocation != oldLocation)
+            if (active.Count > 0)
             {
-                Debug.Log("Placing new levels");
-                PlaceCluster(currentLocation);
-                oldLocation = currentLocation;
-            }
-        }
-    }
-
-    private void UpdateActive(List<GameObject>toUpdate)
-    {
-        foreach (GameObject g in toUpdate)
-        {
-            if (!active.Contains(g))
-            {
-                active.Add(g);
-            }
-        }
-    }
-
-    public void PlaceCluster(string location)
-    {
-        GameObject currentLevel;
-        List<GameObject> newActive = new();
-
-        /*
-        GameObject existing = GetExistingLevel(location);
-        if (existing != null)
-            currentLevel = existing;
-        else
-            currentLevel = PlaceLevel(location, Vector2.zero);
-        
-        if (currentLevel != null)
-        {
-            newActive.Add(currentLevel);
-            LoadPoint[] loadPoints = currentLevel.GetComponentsInChildren<LoadPoint>();
-            if (loadPoints.Length > 0)
-            {
-                foreach (LoadPoint loadPoint in loadPoints)
+                currentLocation = gameManager.GetCurrentLocation();
+                if (currentLocation != oldLocation)
                 {
-                    if (loadPoint.LevelName.Length > 0)
-                    {
-                        GameObject connected = PlaceLevel(loadPoint.LevelName, loadPoint.gameObject.transform.position);
-                        newActive.Add(connected);
-                    }
-                    else Debug.Log("Blank load point");
+                    Debug.Log("Placing new levels");
+                    PlaceCluster(GetIndexFromName(currentLocation));
+                    oldLocation = currentLocation;
                 }
-
-                UpdateActive(newActive);
             }
         }
-        */
+    }
+
+    private int GetIndexFromName(string name)
+    {
+        string _filtered = Regex.Match(name, @"\d+").Value;
+        try
+        {
+            int _number = Int32.Parse(_filtered);
+            return _number;
+        }
+        catch
+        {
+            return -1;
+        }
+    }
+
+    public void ClearActive()
+    {
+        active.Clear();
+    }
+
+    public void PlaceCluster(int index)
+    {
+        GameObject centreLevel = GetActive(index);
+        if (centreLevel == null)
+        {
+            centreLevel = PlaceLevel(index, -1, LoadPointDir.NORTH, true);
+            active.Add(centreLevel);
+        }
+
+        LoadPoint[] points = centreLevel.GetComponentsInChildren<LoadPoint>();
+        if (points.Length > 0)
+        {
+            foreach (LoadPoint point in points)
+            {
+                LoadPointDir opposite = LoadPoint.GetOpposite(point.Direction);
+                GameObject _newLevel = PlaceLevel(point.LevelIndex, index, opposite, true);
+                if (_newLevel != null)
+                    active.Add(_newLevel);
+            }
+        }
     }
 
     private GameObject PlaceLevel(int levelToPlace, int levelToConnect, LoadPointDir dir, bool relocate)
     {
-        GameObject toPlace = GetActive(levelToPlace);
-        if (toPlace == null)
+        GameObject _toPlace = GetActive(levelToPlace);
+        if (_toPlace == null)
         {
             GameObject _load = GetLoaded(levelToPlace);
             if (_load == null) return null;
             
-            toPlace = Instantiate(_load);
+            _toPlace = Instantiate(_load);
         }
 
         if (levelToConnect == -1 || active.Count == 0)
         {
-            toPlace.transform.position = Vector2.zero;
+            // This is the first level in the world, so place it at origin
+            _toPlace.transform.position = Vector2.zero;
         }
         else
         {
-            GameObject toConnect = GetActive(levelToConnect);
-            if (toConnect == null) return null;
+            // Get active level for connect
+            GameObject _toConnect = GetActive(levelToConnect);
+            if (_toConnect == null) return _toPlace;
+
+            // Get opposite direction of parameter dir
+            LoadPointDir _opposite = LoadPoint.GetOpposite(dir);
+
+            // Get load point of place level
+            LoadPoint placePoint = GetLoadPoint(_toPlace, dir);
+            // Get load point of connect level
+            LoadPoint connectPoint = GetLoadPoint(_toConnect, _opposite);
+
+            if (placePoint != null && connectPoint != null)
+            {
+                Transform _destination = connectPoint.gameObject.transform;
+                Transform _offset = connectPoint.gameObject.transform;
+
+                Vector3 _finalPos = _destination.position - _offset.localPosition;
+
+                _toPlace.transform.position = _finalPos;
+            }
 
             // find opposite LoadPoint transform of levelToPlace
             // find LoadPoint transform dir of levelToConnect
         }
 
-        return toPlace;
+        return _toPlace;
+    }
+
+    private LoadPoint GetLoadPoint(GameObject root, LoadPointDir dir)
+    {
+        LoadPoint[] points = root.GetComponentsInChildren<LoadPoint>();
+        if (points.Length == 0) return null;
+        foreach (LoadPoint point in points)
+        {
+            if (point.Direction == dir) return point;
+        }
+        return null;
     }
 
     private GameObject GetLoaded(int level)

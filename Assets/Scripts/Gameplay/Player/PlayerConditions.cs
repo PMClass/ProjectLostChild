@@ -22,7 +22,7 @@ public class PlayerConditions : MonoBehaviour
     [field: SerializeField] private Transform CurrentCheckpoint { get; set; }
 
     // --- Just Private Variables
-    private Vector2 InitialPos { get; set; }
+    private Vector2 checkPos;
     #endregion
 
     #region Interface
@@ -44,7 +44,7 @@ public class PlayerConditions : MonoBehaviour
 
     private void Awake()
     {
-        InitialPos = transform.position;
+        checkPos = transform.position;
         
         if (!TryGetComponent(out _playerCtrl))
         {
@@ -82,7 +82,7 @@ public class PlayerConditions : MonoBehaviour
         PlayerHurt = false;
         PlayerDead = false;
 
-        Vector2 toRespawn = (CurrentCheckpoint != null) ? CurrentCheckpoint.position : InitialPos;
+        Vector2 toRespawn = (CurrentCheckpoint != null) ? CurrentCheckpoint.position : checkPos;
 
         _playerCtrl.RepositionImmediately(toRespawn, true);
         _playerCtrl.ResetStates();
@@ -97,6 +97,7 @@ public class PlayerConditions : MonoBehaviour
             if (check != CurrentCheckpoint)
             {
                 CurrentCheckpoint = check;
+                checkPos = CurrentCheckpoint.transform.position;
                 Debug.Log("New checkpoint set.");
             }
         }

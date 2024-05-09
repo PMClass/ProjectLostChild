@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class TurretBehavior : MonoBehaviour
 {
+
+    AudioSource turret;
+    public AudioClip turretFire;
+    public AudioClip turretDetecting;
+
     public float Range;
 
     public Transform Target;
@@ -64,6 +71,7 @@ public class TurretBehavior : MonoBehaviour
                 if (Detected == false)
                 {
                     AlarmLight.GetComponent<SpriteRenderer>().color = Color.red;
+                    turret.PlayOneShot(turretDetecting);
                     Detected = true;
                     Debug.Log("Being detected");
                 }
@@ -85,6 +93,7 @@ public class TurretBehavior : MonoBehaviour
                 if (Time.time > nextTimeToFire)
                 {
                     nextTimeToFire = Time.time + 1 / FireRate;
+                    turret.PlayOneShot(turretFire);
                     shoot();
                 }
            

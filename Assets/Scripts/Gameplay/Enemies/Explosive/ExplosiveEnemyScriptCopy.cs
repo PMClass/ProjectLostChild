@@ -13,6 +13,7 @@ public class ExplosiveEnemyScript : MonoBehaviour
 {
     AudioSource explodingEnemy;
     public AudioClip BOOM;
+    public AudioClip lockdownSound;
     public Transform target;
     public float speed;
     private float direction;
@@ -220,13 +221,13 @@ public class ExplosiveEnemyScript : MonoBehaviour
         }
         if (canExplode)
         {
-          
+            explodingEnemy.PlayOneShot(lockdownSound);
             bombSprite.color = turnRed;
             Explosion();
             yield return new WaitForSeconds(0.75f);
             bombSprite.color = turnRed;
             Destroy(gameObject);
-           // explodingEnemy.PlayOneShot(BOOM);
+            explodingEnemy.PlayOneShot(BOOM);
         }
        
 

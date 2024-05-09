@@ -6,9 +6,12 @@ using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class BoarChasePlayer : MonoBehaviour
 {
-    
+    AudioSource boarSounds;
+    public AudioClip boarImpact;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float roamingSpeed;
     [SerializeField] private float maxSpeed;
@@ -230,6 +233,7 @@ public class BoarChasePlayer : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player" && state == State.Attacking)
         {
+            boarSounds.PlayOneShot(boarImpact);
             playerController.AddFrameForce(new(8, 8), true);
             playerConditions.PlayerGiveHurt();
            

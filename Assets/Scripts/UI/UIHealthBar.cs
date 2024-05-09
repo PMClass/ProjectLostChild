@@ -8,13 +8,29 @@ public class UIHealthBar : MonoBehaviour
     PlayerConditions playerConditions;
     public Image healthBar;
 
-    
-    
+    GameManager gm;
+    GameObject playerChar;
     private void Awake()
     {
-
-        playerConditions = GameObject.FindObjectOfType<PlayerConditions>();
+        gm = GameManager.Instance;
     }
+
+    public IEnumerator Start()
+    {
+        enabled = false;
+
+        while(gm.CurrentState != GameManager.GMState.GAME)
+        {
+            yield return null;
+        }
+
+
+        playerChar = gm.CurrentPlayer;
+
+        playerConditions = playerChar.GetComponent<PlayerConditions>();
+        enabled = true;
+    }
+
 
     // Update is called once per frame
     void Update()

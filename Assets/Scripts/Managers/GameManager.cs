@@ -4,6 +4,7 @@ using Eflatun.SceneReference;
 using System.Collections;
 using TarodevController;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -22,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private SceneReference MenuScene, GameScene;
     [SerializeField] private GameObject UIPausePrefab;
     [SerializeField] private GameObject PlayerPrefab;
+    [SerializeField] private GameObject UIHealthBar;
     #endregion
 
     #region Interface
@@ -120,6 +122,23 @@ public class GameManager : Singleton<GameManager>
 
         // initialize the pause menu
         SetupPauseMenu();
+
+        // initialize health bar
+
+        GameObject _uiHealthBar;
+        Canvas _healthCanvas;
+        if(UIHealthBar != null)
+        {
+            _uiHealthBar = Instantiate(UIHealthBar);
+
+            if (_uiHealthBar.TryGetComponent<Canvas>(out _healthCanvas))
+            {
+                _healthCanvas.enabled = true;
+            }
+        }
+
+
+   
 
         // signal other objects that setup is complete
         CurrentState = GMState.GAME;

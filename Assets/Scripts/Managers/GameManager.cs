@@ -181,7 +181,7 @@ public class GameManager : Singleton<GameManager>
             CurrentState = GMState.GAME;
             _pauseCanvas.enabled = false;
             Time.timeScale = 1.0f;
-            _currentController.TogglePlayer(true);
+            CurrentController.TogglePlayer(true);
         }
         else if (CurrentState == GMState.GAME)
         {
@@ -189,7 +189,7 @@ public class GameManager : Singleton<GameManager>
             CurrentState = GMState.PAUSE;
             _pauseCanvas.enabled = true;
             Time.timeScale = 0f;
-            _currentController.TogglePlayer(false);
+            CurrentController.TogglePlayer(false);
         }
         else Debug.Log("Pause now? Um, no. Currently " + CurrentState.ToString());
     }
@@ -207,7 +207,7 @@ public class GameManager : Singleton<GameManager>
     #region Player Management Functions
     [SerializeField] public GameObject CurrentPlayer { get; private set; }
     [SerializeField] public PlayerConditions CurrentConditions { get; private set; }
-    PlayerController _currentController;
+    [SerializeField] public PlayerController CurrentController { get; private set; }
 
     [SerializeField] public GameObject CurrentCompanion { get; private set; }
     CompanionController _currentCC;
@@ -220,9 +220,10 @@ public class GameManager : Singleton<GameManager>
             if (_spawnTransform != null)
             {
                 CurrentPlayer = Instantiate(PlayerPrefab, _spawnTransform.position, _spawnTransform.rotation); //instantiate with transform
-                if (CurrentPlayer.TryGetComponent<PlayerController>(out _currentController))
+                if (CurrentPlayer.TryGetComponent<PlayerController>(out PlayerController control))
                 {
-                    _currentController.TogglePlayer(true);
+                    CurrentController = control;
+                    CurrentController.TogglePlayer(true);
                 }
                 
                 if (CurrentPlayer.TryGetComponent<PlayerConditions>(out PlayerConditions conditions))
@@ -277,9 +278,9 @@ public class GameManager : Singleton<GameManager>
 
     public string GetCurrentLocation()
     {
-        if (_currentController != null)
+        if (CurrentController != null)
         {
-            return _currentController.CurrentLevel;
+            return CurrentController.CurrentLevel;
         }
         return null;
     }

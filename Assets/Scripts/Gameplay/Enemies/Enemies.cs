@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TarodevController;
 using UnityEngine;
+using UnityHFSM;
 
-
-
+/*
 public class Enemy<T> where T : Enemy
 {
     public GameObject GameObject;
@@ -16,27 +16,66 @@ public class Enemy<T> where T : Enemy
         scriptComponent = GameObject.AddComponent<T>(); 
     }
 }
+*/
 
 public abstract class Enemy : MonoBehaviour
 {
+    #region References
+    protected GameManager gm;
 
-    public PlayerController playerCTRL;
-   
+    protected GameObject playerChar;
+    protected Transform playerTransform;
+    protected PlayerController playerControl;
+    protected PlayerConditions playerConditions;
 
-    private void Awake()
+    protected Rigidbody2D rb;
+    #endregion
+
+    #region States
+    protected StateMachine sm = new StateMachine();
+    #endregion
+
+    #region Setup
+    public virtual IEnumerator Start()
     {
-        playerCTRL = FindObjectOfType<PlayerController>();
+        // get gamemanager
+        gm = GameManager.Instance;
+
+        // disable first
+        enabled = false;
+
+        // wait for game manager
+        while (gm.CurrentState != GameManager.GMState.GAME)
+        {
+            yield return null;
+        }
+
+        // get references to player objects
+        playerChar = gm.CurrentPlayer;
+        playerTransform = playerChar.transform;
+        playerControl = gm.CurrentController;
+
+        // define state machine
+        DefineStates();
+        DefineTransitions();
+        sm.Init();
+
+        enabled = true;
     }
 
-    private void Update()
+    protected abstract void DefineStates();
+    protected abstract void DefineTransitions();
+    #endregion
+
+    protected virtual void Update()
     {
-        
+        sm.OnLogic();
     }
 
     public virtual void HitPlayer(int xRange, int yRange)
     {
          
-        playerCTRL.AddFrameForce(new(xRange, yRange), true);
+        playerControl.AddFrameForce(new(xRange, yRange), true);
      
     }
 

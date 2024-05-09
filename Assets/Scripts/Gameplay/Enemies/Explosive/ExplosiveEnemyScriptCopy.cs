@@ -53,14 +53,24 @@ public class ExplosiveEnemyScript : MonoBehaviour
     public float maxHitTime;
     private float hitTime;
 
-
+    GameManager gm;
+    GameObject playerChar;
     private void Awake()
     {
-
+        gm = GameManager.Instance;
     }
 
-    void Start()
+     
+     IEnumerator Start()
     {
+        enabled = false;
+
+        while(gm.CurrentState != GameManager.GMState.GAME)
+        {
+            yield return null;
+        }
+
+
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         
@@ -68,10 +78,12 @@ public class ExplosiveEnemyScript : MonoBehaviour
         originalColor = bombSprite.color;
         canExplode = false;
 
+        playerChar = gm.CurrentPlayer;
+        target = playerChar.transform;
+        playerController = playerChar.GetComponent<PlayerController>();
+        playerConditions = playerChar.GetComponent<PlayerConditions>();
 
-        target = GameObject.FindAnyObjectByType<PlayerController>().transform;
-        playerController = GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>();
-        playerConditions = GameObject.FindAnyObjectByType<PlayerConditions>().GetComponent<PlayerConditions>();
+        enabled = true;
     }
     void FixedUpdate()
     {
@@ -153,17 +165,18 @@ public class ExplosiveEnemyScript : MonoBehaviour
         {
            // Vector2 direction = obj.transform.position - transform.position;
 
-            if(obj.tag == "Player")
+            if(obj.CompareTag("Player"))
             {
                 if (facingRight)
                 {
                     playerController.AddFrameForce(new(xForce, yForce), true);
-                 
+                    playerConditions.PlayerGiveHurt();
                 }
 
                 else
                 {
                     playerController.AddFrameForce(new(-xForce, yForce), true);
+                    playerConditions.PlayerGiveHurt();
                 }
               
             }
@@ -246,12 +259,7 @@ public class ExplosiveEnemyScript : MonoBehaviour
 
             hitTime = 0;
 
-            playerConditions.CurrentHealth--;
-
-            if(playerConditions.CurrentHealth <= 0)
-            {
-                playerConditions.PlayerDie();
-            }
+            playerConditions.PlayerGiveHurt();
 
         }
 

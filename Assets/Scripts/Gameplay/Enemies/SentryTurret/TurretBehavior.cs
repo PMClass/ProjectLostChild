@@ -26,15 +26,25 @@ public class TurretBehavior : MonoBehaviour
 
     float nextTimeToFire = 0;
 
-    float lockPos = 0;
-
+    public GameManager gm;
+    public GameObject playerChar;
     private void Awake()
     {
-        Target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        gm = GameManager.Instance;
+    
     }
-    void Start()
+    IEnumerator Start()
     {
-       
+        enabled = false;
+
+        while(gm.CurrentState != GameManager.GMState.GAME)
+        {
+            yield return null;
+        }
+
+        playerChar = gm.CurrentPlayer;
+        Target = playerChar.transform;
+        enabled = true;
         
     }
 

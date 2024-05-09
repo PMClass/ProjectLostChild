@@ -24,7 +24,7 @@ public class BoarChasePlayer : MonoBehaviour
 
     public Rigidbody2D rb;
     public Animator anim;
-    public PlayerController playerController;
+    
 
     public bool facingRight;
     public bool canMove;
@@ -41,21 +41,43 @@ public class BoarChasePlayer : MonoBehaviour
     public float hitMaxTime = 3;
     public float nextHitTime = 0;
 
-    PlayerConditions playerConditions;
-
+    public PlayerConditions playerConditions;
+    public PlayerController playerController;
+    public GameManager gm;
+    public GameObject playerChar;
     private void Awake()
-    { 
+    {
+        gm = GameManager.Instance;
+        
 
-         moveSpeed = roamingSpeed;
+       
+    }
+
+    public IEnumerator Start()
+    {
+        enabled = false;
+
+        while(gm.CurrentState != GameManager.GMState.GAME)
+        {
+            yield return null;
+        }
+
+        moveSpeed = roamingSpeed;
 
         rb = GetComponent<Rigidbody2D>();
-        playerController = FindObjectOfType<PlayerController>();
-        anim = GetComponentInChildren<Animator>();         
-        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        anim = GetComponentInChildren<Animator>();
+
         facingRight = false;
         canMove = true;
-        playerConditions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConditions>();
+
         state = State.Roaming;
+
+        playerChar = gm.CurrentPlayer;
+        playerController = playerChar.GetComponent<PlayerController>();
+        playerTransform = playerChar.transform;
+        playerConditions = playerChar.GetComponent<PlayerConditions>();
+
+        enabled = true;
     }
 
     private void FixedUpdate()
@@ -209,11 +231,7 @@ public class BoarChasePlayer : MonoBehaviour
         if(collision.gameObject.tag == "Player" && state == State.Attacking)
         {
             playerController.AddFrameForce(new(8, 8), true);
-            playerConditions.CurrentHealth--;
-            if (playerConditions.CurrentHealth == 0)
-            {
-                playerConditions.PlayerDie();
-            }
+            playerConditions.PlayerGiveHurt();
            
         }
     }

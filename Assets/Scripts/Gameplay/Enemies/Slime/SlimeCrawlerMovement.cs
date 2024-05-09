@@ -27,8 +27,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
     private float zAxisAdd;
     public int direction;
 
-    public PlayerController playerController;
-    public PlayerConditions playerConditions;
+    
     public float xForce;
     public float yForce;
 
@@ -36,19 +35,45 @@ public class SlimeCrawlerMovement : MonoBehaviour
     private float hitTime;
     public bool IsGoingLeft;
 
-    
-    public Transform target;
+   
     [SerializeField] private Animator animator;
-    void Start()
+
+    public PlayerController playerController;
+    public PlayerConditions playerConditions;
+
+    public Transform target;
+
+    public GameManager gm;
+    public GameObject playerChar;
+    
+
+    private void Awake()
     {
-       
+        gm = GameManager.Instance;
+    }
+    
+    IEnumerator Start()
+    {
+        enabled = false;
+
+        while(gm.CurrentState != GameManager.GMState.GAME)
+        {
+            yield return null;
+        }
+
         animator = GetComponentInChildren<Animator>();
         slimeRb = GetComponent<Rigidbody2D>();
         hasTurn = false;
-        playerController = FindObjectOfType<PlayerController>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        playerConditions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConditions>();
+
+        playerChar = gm.CurrentPlayer;
+        playerController = playerChar.GetComponent<PlayerController>();
+        target = playerChar.transform;
+        playerConditions = playerChar.GetComponent<PlayerConditions>();
+
+
         direction = 1;
+
+        enabled = true;
     }
 
 
@@ -177,12 +202,7 @@ public class SlimeCrawlerMovement : MonoBehaviour
                 playerController.AddFrameForce(new(xForce, yForce), true);
             }
 
-            playerConditions.CurrentHealth--;
-            if(playerConditions.CurrentHealth <= 0)
-            {
-                playerConditions.PlayerDie();
-            }
-            
+           
 
             hitTime = 0;
         }

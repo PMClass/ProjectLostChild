@@ -26,4 +26,12 @@ public class LoadPoint : MonoBehaviour
     
     public int LevelIndex;
     public LoadPointDir Direction;
+
+    private void Awake()
+    {
+        if (TryGetComponent<SpriteRenderer>(out SpriteRenderer sprite))
+        {
+            sprite.enabled = false;
+        }
+    }
 }

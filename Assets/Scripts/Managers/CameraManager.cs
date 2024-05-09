@@ -23,10 +23,11 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = GameManager.Instance;
+        
     }
     void Start()
     {
+        gameManager = GameManager.Instance;
         cam = Camera.main;
         if (cam != null)
         {

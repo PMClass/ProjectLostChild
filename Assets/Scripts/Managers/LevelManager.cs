@@ -34,13 +34,13 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = GameManager.Instance;
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager = GameManager.Instance;
     }
 
     string oldLocation = null;
@@ -112,6 +112,7 @@ public class LevelManager : MonoBehaviour
             if (_load == null) return null;
             
             _toPlace = Instantiate(_load);
+            _toPlace.name = _load.name;
         }
 
         if (levelToConnect == -1 || active.Count == 0)
@@ -136,7 +137,7 @@ public class LevelManager : MonoBehaviour
             if (placePoint != null && connectPoint != null)
             {
                 Transform _destination = connectPoint.gameObject.transform;
-                Transform _offset = connectPoint.gameObject.transform;
+                Transform _offset = placePoint.gameObject.transform;
 
                 Vector3 _finalPos = _destination.position - _offset.localPosition;
 

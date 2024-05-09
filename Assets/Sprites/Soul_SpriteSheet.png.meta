@@ -93,6 +93,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -226,7 +239,7 @@ TextureImporter:
       name: Soul_SpriteSheet_10
       rect:
         serializedVersion: 2
-        x: 531
+        x: 530
         y: 504
         width: 239
         height: 81
@@ -239,6 +252,132 @@ TextureImporter:
       bones: []
       spriteID: 039255e9c12ce6241b41f0286e5561a3
       internalID: -233688049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul_SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 833
+        width: 76
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc51078086761a24c9e34dec04547544
+      internalID: -1475770166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 833
+        width: 80
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a3b65d313cefc341ba909a90bda38f0
+      internalID: -6072200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul_SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 649
+        width: 27
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42da77208c8b7364f9bef560683cbe41
+      internalID: 1268462945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul_SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 650
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 245a11e2214bfd84ba453172950f0b0f
+      internalID: -1410899396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul_SpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 504
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb7870af0dfa01d41a5c0984bbdc72c9
+      internalID: -961570245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soul_SpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 503
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 126efe460645f2a4c893d8285b2b41dd
+      internalID: 469803580
       vertices: []
       indices: 
       edges: []

@@ -13,6 +13,7 @@ public class CompanionController : MonoBehaviour
     #region Private Members
     private bool InControl = false;
     private GameObject InteractableObject;
+    private Animator _coAnim;
     #endregion
 
     #region Private Serialized
@@ -121,6 +122,21 @@ public class CompanionController : MonoBehaviour
             if (!noInput)
             {
                 _coRigid.AddForce(vel, ForceMode2D.Impulse);
+                _coAnim = _coObject.GetComponentInChildren<Animator>();
+            
+                if(_coRigid.velocity.x < 0)
+                {
+                  
+                    _coAnim.SetBool("isMovingLeft", true);
+                    _coAnim.SetBool("isMovingRight", false);
+                }
+               
+                else if(_coRigid.velocity.x > 0)
+                {                  
+                   
+                    _coAnim.SetBool("isMovingRight", true);
+                    _coAnim.SetBool("isMovingLeft", false);
+                }
                 
             }
             else
@@ -141,6 +157,7 @@ public class CompanionController : MonoBehaviour
     private void FixedUpdate()
     {
         DistanceCheck();
+        Debug.Log(_coObject.transform.position.x);
     }
 
     bool tooFar;

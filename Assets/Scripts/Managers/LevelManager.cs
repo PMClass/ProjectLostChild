@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     #region Interface
-    [SerializeField] private int MaxLevels = 10;
+    [SerializeField] private int MaxLevels = 14;
     [SerializeField] public string LevelPrefix { get; private set; } = "Level";
 
     public void PreloadLevels(int offset)

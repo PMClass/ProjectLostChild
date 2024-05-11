@@ -5,8 +5,9 @@ public class CompanionController : MonoBehaviour
 {
     #region References
     private PlayerController _plObject;
+    private PlayerConditions _plConditions;
     private GameObject _coObject;
-    private Rigidbody2D _coRigid;
+    [SerializeField] public Rigidbody2D _coRigid { get; private set; }
     private CoSensor _coSense;
     #endregion
 
@@ -34,11 +35,16 @@ public class CompanionController : MonoBehaviour
                 _coObject = Instantiate(_plObject.CompanionPrefab, null);
                 _coObject.name = ("Companion");
 
-                if (!_coObject.TryGetComponent(out _coRigid))
+                if (!_coObject.TryGetComponent(out Rigidbody2D rigid))
                     Debug.LogWarning("No Rigidbody2D!");
+                else
+                _coRigid = rigid;
 
                 if (!_coObject.TryGetComponent(out _coSense))
                     Debug.LogWarning("No CoSensor!");
+
+                if (!TryGetComponent(out _plConditions))
+                    Debug.LogWarning("No PlayerConditions!");
 
                 Debug.Log("Companion object created!");
             } else Debug.LogWarning("No Companion Prefab!");
@@ -108,56 +114,64 @@ public class CompanionController : MonoBehaviour
 
     public void MoveCompanion(Vector2 vel, bool noInput)
     {
-        if (InControl && HasControllableObj())
+        if (!_plConditions.GetPlayerDead())
         {
-            _anchorJoint.enabled = false;
-            // send vel to Interact function
-            InteractableControlled.Interact(vel);
-            _coRigid.MovePosition(InteractableObject.transform.position);
-        }
-        else
-        {
-            _anchorJoint.enabled = true;
-            // add force using vel when there is player control
-            if (!noInput)
+            if (InControl && HasControllableObj())
             {
-                _coRigid.AddForce(vel, ForceMode2D.Impulse);
-                _coAnim = _coObject.GetComponentInChildren<Animator>();
-            
-                if(_coRigid.velocity.x < 0)
-                {
-                  
-                    _coAnim.SetBool("isMovingLeft", true);
-                    _coAnim.SetBool("isMovingRight", false);
-                }
-               
-                else if(_coRigid.velocity.x > 0)
-                {                  
-                   
-                    _coAnim.SetBool("isMovingRight", true);
-                    _coAnim.SetBool("isMovingLeft", false);
-                }
-                
+                _anchorJoint.enabled = false;
+                // send vel to Interact function
+                InteractableControlled.Interact(vel);
+                _coRigid.MovePosition(InteractableObject.transform.position);
             }
             else
             {
-                // if the CoSensor is touching an interactable, reposition to its center
-                var InteractableObj = _coSense.GetInteractable();
-                if (InteractableObj != null && !tooFar)
+                _anchorJoint.enabled = true;
+                // add force using vel when there is player control
+                if (!noInput)
                 {
-                    _coRigid.MovePosition(InteractableObj.transform.position);
-                }
-                // set velocity to zero
-                _coRigid.velocity = Vector2.zero;
+                    _coRigid.AddForce(vel, ForceMode2D.Impulse);
+                    _coAnim = _coObject.GetComponentInChildren<Animator>();
 
+                    if (_coRigid.velocity.x < 0)
+                    {
+
+                        _coAnim.SetBool("isMovingLeft", true);
+                        _coAnim.SetBool("isMovingRight", false);
+                    }
+
+                    else if (_coRigid.velocity.x > 0)
+                    {
+
+                        _coAnim.SetBool("isMovingRight", true);
+                        _coAnim.SetBool("isMovingLeft", false);
+                    }
+
+                }
+                else
+                {
+                    // if the CoSensor is touching an interactable, reposition to its center
+                    var InteractableObj = _coSense.GetInteractable();
+                    if (InteractableObj != null && !tooFar)
+                    {
+                        _coRigid.MovePosition(InteractableObj.transform.position);
+                    }
+                    // set velocity to zero
+                    _coRigid.velocity = Vector2.zero;
+
+                }
             }
         }
+        else _anchorJoint.enabled = false;
     }
 
     private void FixedUpdate()
     {
         DistanceCheck();
-        Debug.Log(_coObject.transform.position.x);
+        if (tooFar && HasControllableObj())
+        {
+            ToggleControlInteractable();
+        }
+        //Debug.Log(_coObject.transform.position.x);
     }
 
     bool tooFar;
@@ -166,7 +180,7 @@ public class CompanionController : MonoBehaviour
         _anchor.transform.position = transform.position;
         
         float _cDistance = Vector2.Distance(gameObject.transform.position, _coObject.transform.position);
-        float excess = _cDistance - MaxDistanceFromPlayer * 0.9f;
+        float excess = _cDistance - MaxDistanceFromPlayer * 1.2f;
         tooFar = excess > 0.0f;
     }
 }

@@ -1,11 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using TarodevController;
-using TreeEditor;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Timeline;
 using UnityEngine;
 
 public class SlimeCrawlerMovement : MonoBehaviour

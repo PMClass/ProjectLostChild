@@ -8,6 +8,7 @@ public class PlayerConditions : MonoBehaviour
 {
     #region References
     private PlayerController _playerCtrl;
+    private CompanionController _coCtrl;
 
     // --- Serialized Private Variables
     // PlayerHurt is used by PlayerController and controls jump disabling
@@ -50,6 +51,11 @@ public class PlayerConditions : MonoBehaviour
         {
             Debug.LogWarning("No PlayerController, PlayerConditions will not function!");
         }
+
+        if (!TryGetComponent(out _coCtrl))
+        {
+            Debug.LogWarning("OHNO! No companion controller!");
+        }
     }
 
     void Start()
@@ -61,19 +67,22 @@ public class PlayerConditions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (transform.position.y < -15f) PlayerDie();
     }
 
     // --- Game Functions
     [ContextMenu("Give Player Die")]
     public void PlayerDie()
     {
-        Debug.Log("ow, i am dead");
-        PlayerDead = true;
-        PlayerHurt = true;
-        if (UseNumericHealth) CurrentHealth = 0f;
-        damageAudioPlayer.PlayOneShot(deathAudioClip);
-
+        if (!PlayerDead)
+        {
+            Debug.Log("ow, i am dead");
+            PlayerDead = true;
+            PlayerHurt = true;
+            _playerCtrl.TogglePlayer(false);
+            if (UseNumericHealth) CurrentHealth = 0f;
+            damageAudioPlayer.PlayOneShot(deathAudioClip);
+        }
     }
     [ContextMenu("Respawn Player")]
     public void PlayerSpawn()
@@ -82,10 +91,15 @@ public class PlayerConditions : MonoBehaviour
         PlayerHurt = false;
         PlayerDead = false;
 
+        _playerCtrl.TogglePlayer(true);
+
         Vector2 toRespawn = (CurrentCheckpoint != null) ? CurrentCheckpoint.position : checkPos;
 
         _playerCtrl.RepositionImmediately(toRespawn, true);
         _playerCtrl.ResetStates();
+
+        _coCtrl._coRigid.MovePosition(toRespawn);
+        _coCtrl.GetCompanionObject().transform.position = toRespawn;
 
         if (UseNumericHealth) CurrentHealth = PlayerHealth;
     }

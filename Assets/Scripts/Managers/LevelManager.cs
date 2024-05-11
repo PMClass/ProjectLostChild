@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 using static LoadPoint;
@@ -183,7 +184,7 @@ public class LevelManager : MonoBehaviour
             foreach (GameObject l in active)
             {
                 string toMatch = LevelPrefix + level;
-                if (l.name == toMatch && l != null)
+                if (l != null && l.name == toMatch)
                     return l;
             }
         }

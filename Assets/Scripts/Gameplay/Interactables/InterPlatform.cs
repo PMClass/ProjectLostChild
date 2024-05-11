@@ -21,6 +21,7 @@ public class InteractablePlatform : PlatformBase, IObjInteractable
     protected override void Awake()
     {
         base.Awake();
+        PhysicsSimulator.Instance.RemovePlatform(this);
         _startPosition = Rb.position;
     }
 
@@ -48,5 +49,13 @@ public class InteractablePlatform : PlatformBase, IObjInteractable
             if (CanMoveX) _offset += new Vector2(data.x, 0);
             if (CanMoveY) _offset += new Vector2(0, data.y);
         }
+    }
+
+    public void EnablePlatform(bool enable)
+    {
+        if (enable)
+            PhysicsSimulator.Instance.AddPlatform(this);
+        else
+            PhysicsSimulator.Instance.RemovePlatform(this);
     }
 }

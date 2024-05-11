@@ -93,6 +93,12 @@ public class CompanionController : MonoBehaviour
                         {
                             InteractableControlled = tempInteractable;
                             InControl = true;
+
+                            if (tempInteractable is InteractablePlatform)
+                            {
+                                InteractablePlatform interactPlatform = tempInteractable as InteractablePlatform;
+                                interactPlatform.EnablePlatform(true);
+                            }
                         }
                         else tempInteractable.Interact();
                         
@@ -103,6 +109,12 @@ public class CompanionController : MonoBehaviour
         }
         else
         {
+            if (InteractableControlled is InteractablePlatform)
+            {
+                InteractablePlatform interactPlatform = InteractableControlled as InteractablePlatform;
+                interactPlatform.EnablePlatform(false);
+            }
+
             InteractableControlled = null;
             InControl = false;
         }

@@ -1,17 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using TarodevController;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(AudioSource))]
 
 public class ExplosiveEnemyScript : MonoBehaviour
 {
-    AudioSource explodingEnemy;
+    AudioSource bombAudio;
     public AudioClip BOOM;
     public AudioClip lockdownSound;
     public Transform target;
@@ -84,6 +79,11 @@ public class ExplosiveEnemyScript : MonoBehaviour
         playerController = playerChar.GetComponent<PlayerController>();
         playerConditions = playerChar.GetComponent<PlayerConditions>();
 
+        if (!TryGetComponent(out bombAudio))
+        {
+            bombAudio = gameObject.AddComponent<AudioSource>();
+        }
+
         enabled = true;
     }
     void FixedUpdate()
@@ -138,7 +138,7 @@ public class ExplosiveEnemyScript : MonoBehaviour
                 
         }
 
-        if (distToPlayer <= distanceToExplode)
+        if (distToPlayer <= distanceToExplode && notExploding)
         {
             animator.SetBool("chasePlayer", false);          
             StartCoroutine(Explode());
@@ -221,13 +221,13 @@ public class ExplosiveEnemyScript : MonoBehaviour
         }
         if (canExplode)
         {
-            explodingEnemy.PlayOneShot(lockdownSound);
+            bombAudio.PlayOneShot(lockdownSound);
             bombSprite.color = turnRed;
             Explosion();
             yield return new WaitForSeconds(0.75f);
             bombSprite.color = turnRed;
             Destroy(gameObject);
-            explodingEnemy.PlayOneShot(BOOM);
+            bombAudio.PlayOneShot(BOOM);
         }
        
 

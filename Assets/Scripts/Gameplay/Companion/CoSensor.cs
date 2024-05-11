@@ -3,18 +3,6 @@ using UnityEngine;
 public class CoSensor : MonoBehaviour
 {
     [SerializeField] private GameObject InteractableTouched;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public GameObject GetInteractable()
     {
@@ -39,7 +27,7 @@ public class CoSensor : MonoBehaviour
         GameObject collided = collision.gameObject;
         if (collided != null)
         {
-            if (collided.CompareTag("Interactable") && collided == InteractableTouched)
+            if (collided.CompareTag("Interactable") && !collision.isTrigger && !collision.CompareTag("LoadingArea") && collided == InteractableTouched)
             {
                 InteractableTouched = null;
             }
